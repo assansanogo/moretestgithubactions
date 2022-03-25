@@ -51,4 +51,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           myvar="${{github.event.inputs.time}}"
-          if [! -z "$my_var" ] ; then "echo  time is : ${{github.event.inputs.time}}"; else echo "the time was not set, defaulting to today's date"; fi
+          if [[! -z "$my_var" ]] ; then "echo  time is : ${{github.event.inputs.time}}"; else echo "the time was not set, defaulting to today's date"; fi
