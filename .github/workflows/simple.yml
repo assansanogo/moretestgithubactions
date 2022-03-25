@@ -22,9 +22,15 @@ on:
       time:
         required: True
         default: 'TODAY'
+        
       loglevel:
-        required: False
-        default: 'WARNING'
+        type: choice
+        required: True
+        description: Make a choice
+        options:
+        - INFO
+        - DEBUG
+        - MINIMAL
       
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -51,4 +57,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           my_var="${{github.event.inputs.time}}"
-          if [[ ! -z "$my_var" ]] ;then echo  "time is : $my_var"; else echo "the time was not set, defaulting to today's date"; fi
+          if [[ ! -z "$my_var" ]] && [[ "${{github.event.inputs.time}}"=="DEBUG" ]] ;then echo  "time is : $my_var"; else echo "the time was not set (either automatic pull or default params), defaulting to today's date"; fi
