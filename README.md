@@ -1,2 +1,2 @@
 # moretestgithubactions
-ci/CD
+CI/CD
