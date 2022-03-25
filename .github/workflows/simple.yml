@@ -57,4 +57,6 @@ jobs:
       - name: Run a multi-line script
         run: |
           my_var="${{github.event.inputs.time}}"
-          if [[ ! -z "$my_var" ]] && [[ "${{github.event.inputs.time}}"=="DEBUG" ]] ;then echo  "time is : $my_var"; else echo "the time was not set (either automatic pull or default params), defaulting to today's date"; fi
+          if [[ ! -z "$my_var" ]] && [[ "${{github.event.inputs.loglevel}}"=="DEBUG" ]] ;then echo  "level: ${{github.event.inputs.loglevel}} - time is : $my_var"; 
+          elif [[ ! -z "$my_var" ]] && [[ "${{github.event.inputs.loglevel}}"=="INFO" ]] ;time is : $my_var";
+          else echo "the time was not set (either automatic pull or default params), defaulting to today's date"; fi
