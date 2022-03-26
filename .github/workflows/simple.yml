@@ -5,7 +5,7 @@ env:
   time: 'TODAY'
   SENDER_EMAIL: 'assansanogo@gmail.com'
   DEST_EMAIL: 'assansanogo@gmail.com'
-  SENDGRID_API_KEY: ${{secrets.SENDGRID}}
+  SENDGRID_API_KEY: ${{ secrets.SENDGRID }}
   
 # Controls when the workflow will run
 on:
@@ -78,7 +78,7 @@ jobs:
           pip3 install sendgrid pdfkit glob2
           echo $(which wkhtmltopdf)
           
-          python3 ./streamliner.py ${{secrets.SENDGRID}} ${{env.SENDER_EMAIL}} ${{env.DEST_EMAIL}}
+          python3 ./streamliner.py ${{ secrets.SENDGRID }} ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
           
         
 
