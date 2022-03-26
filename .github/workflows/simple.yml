@@ -3,9 +3,7 @@
 name: Get results from day n-1 
 env:
   time: 'TODAY'
-  SENDER_EMAIL: 'assansanogo@gmail.com'
-  DEST_EMAIL: 'assansanogo@gmail.com'
-  SENDGRID_API_KEY: ${{ secrets.SENDGRID }}
+
   
 # Controls when the workflow will run
 on:
@@ -73,12 +71,19 @@ jobs:
           echo ${{secrets.SENDGRID}}
           
       - name: send email
+      
+        env:
+          SENDER_EMAIL: 'assansanogo@gmail.com'
+          DEST_EMAIL: 'assansanogo@gmail.com'
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID }}
+          
         run: |
           sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
           pip3 install sendgrid pdfkit glob2
           echo $(which wkhtmltopdf)
           
           python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
+
           
         
 
