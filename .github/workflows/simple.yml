@@ -20,14 +20,14 @@ on:
     
     inputs:
       time:
-        description: "Date for which you want results (day -1)"
+        description: "date: dd-mm-yyyy (d+1)"
         required: True
         default: 'TODAY'
         
       loglevel:
         type: choice
         required: True
-        description: Make a choice
+        description: Choose the debug level
         options:
         - INFO
         - DEBUG
@@ -47,8 +47,11 @@ jobs:
 
       # Runs a single command using the runners shell (hello world)
       - name: Run a simple one-line script
-        run: echo Hello, world!
-        
+        run: echo simple test to check that everything is alright
+      
+      # Runs a single command using the runners shell getting the date of yesterday
+      - name: get the date before yesterday
+        run: echo $(date --date='-1 day' "+%Y-%m-%d")        
         
       # Runs a single command using the runners shell (grab the input parameters)
       - name: grab input parameter
