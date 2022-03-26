@@ -1,5 +1,7 @@
 import os
+import glob2
 import base64
+import pdfkit
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
@@ -12,7 +14,11 @@ message = Mail(
     html_content='<strong>But it was sent from Python</strong>'
 )
 
-with open('report.pdf', 'rb') as f:
+report_csv = glob2.glob(os.path.join(os.path.getcwd(), "*.csv")
+pdfkit.from_file(report_csv,
+                 './report.pdf')
+
+with open('./report.pdf', 'rb') as f:
     data = f.read()
     f.close()
 encoded_file = base64.b64encode(data).decode()
