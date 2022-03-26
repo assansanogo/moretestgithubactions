@@ -59,7 +59,7 @@ jobs:
         run: |
           queried_date=$(date --date='-1 day' "+%m-%d-%Y")
           echo $queried_date
-          wget "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/01-01-2021.csv/${queried_date}.csv"
+          wget "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/${queried_date}.csv"
           echo $(ls ./${queried_date}.csv)
           cat ./${queried_date}.csv
 
