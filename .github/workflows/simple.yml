@@ -69,7 +69,7 @@ jobs:
           sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
           pip3 install sendgrid pdfkit glob2
           echo $(which wkhtmltopdf)
-          python3 ./streamliner.py --key ${{secrets.SENDGRID}} --sender ${{'SENDER_EMAIL'}} --dest ${{'DEST_EMAIL'}}
+          python3 ./streamliner.py ${{secrets.SENDGRID}} ${{'SENDER_EMAIL'}} ${{'DEST_EMAIL'}}
         env: 
           'SENDER_EMAIL': 'assansanogo@gmail.com'
           'DEST_EMAIL': 'assansanogo@gmail.com'
