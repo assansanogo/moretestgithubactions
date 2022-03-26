@@ -66,9 +66,9 @@ jobs:
       # step that sends the report by mail
       - name: send email
         run: |
-          apt-get update && apt-get install python3-pip
+          sudo apt-get update && apt-get install python3-pip
           pip3 install sendgrid
-          python3 streamliner.py
+          python3 ./streamliner.py
         env: 
           'SENDGRID_API_KEY': ${{secrets.SENDGRID}}
         
