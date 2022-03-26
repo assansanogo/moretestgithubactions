@@ -56,6 +56,9 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
+          git clone https://github.com/CSSEGISandData/COVID-19.git
+          cd csse_covid_19_data/csse_covid_19_daily_reports_us
+          echo $(ls *.csv | wc -l)
           my_var="${{github.event.inputs.time}}"
           if [[ ! -z "$my_var" ]] && [[ "${{github.event.inputs.loglevel}}"=="DEBUG" ]] ;then echo  "level: ${{github.event.inputs.loglevel}} - time is : $my_var"; 
           elif [[ ! -z "$my_var" ]] && [[ "${{github.event.inputs.loglevel}}"=="INFO" ]] ;then echo "time is : $my_var";
