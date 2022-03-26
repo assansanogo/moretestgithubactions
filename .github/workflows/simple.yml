@@ -67,7 +67,7 @@ jobs:
       - name: send email
         run: |
           sudo apt-get update && sudo apt-get install python3-pip
-          pip3 install sendgrid pdfkit
+          pip3 install sendgrid pdfkit glob2
           python3 ./streamliner.py
         env: 
           'SENDER_EMAIL': 'assansanogo@gmail.com'
