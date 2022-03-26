@@ -1,6 +1,6 @@
 # first workflow to help you get started with Actions
 
-name: CI
+name: Get results from day n-1 
 env:
   time: 'TODAY'
   
@@ -20,6 +20,7 @@ on:
     
     inputs:
       time:
+        description: "Date for which you want results (day -1)"
         required: True
         default: 'TODAY'
         
