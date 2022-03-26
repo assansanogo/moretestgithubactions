@@ -23,7 +23,7 @@ if __name__=='__main__':
 
     message = Mail(
         from_email=sys.argv[2],
-        to_emails='to@example.com',
+        to_emails=sys.argv[3],
         subject='Sending with Twilio SendGrid is Fun',
         html_content='<strong>and easy to do anywhere, even with Python</strong>'
     )
@@ -40,7 +40,7 @@ if __name__=='__main__':
         Disposition('attachment')
     )
     message.attachment = attachedFile
-
+    print(sys.argv[1])
     sg = SendGridAPIClient(sys.argv[1])
     response = sg.send(message)
     print(response.status_code, response.body, response.headers)
