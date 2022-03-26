@@ -70,6 +70,9 @@ jobs:
         run:  |
           echo ${{secrets.SENDGRID}}
           
+      - name: change bckground
+        run: echo -e "\e[31m\e[43m\e[1m"
+          
       - name: send email
       
         env:
