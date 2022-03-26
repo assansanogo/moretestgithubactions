@@ -67,9 +67,9 @@ jobs:
       - name: send email
       
         env: 
-          'SENDER_EMAIL': 'assansanogo@gmail.com'
-          'DEST_EMAIL': 'assansanogo@gmail.com'
-          'SENDGRID_API_KEY': ${{secrets.SENDGRID}}
+          SENDER_EMAIL: 'assansanogo@gmail.com'
+          DEST_EMAIL: 'assansanogo@gmail.com'
+          SENDGRID_API_KEY: ${{secrets.SENDGRID}}
           
         run: |
           sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
