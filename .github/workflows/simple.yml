@@ -67,15 +67,17 @@ jobs:
           cat ./${queried_date}.csv
           
       # step that sends the report by mail
-      - name: send email
       
-
-
+      - name: check secret
+        run:  |
+          echo ${{secrets.SENDGRID}}
+          
+      - name: send email
         run: |
           sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
           pip3 install sendgrid pdfkit glob2
           echo $(which wkhtmltopdf)
-          echo. ${{secrets.SENDGRID}}
+          
           python3 ./streamliner.py ${{secrets.SENDGRID}} ${{env.SENDER_EMAIL}} ${{env.DEST_EMAIL}}
           
         
