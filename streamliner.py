@@ -9,12 +9,7 @@ from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, File
 
 if __name__=='__main__':
     
-    message = Mail(
-        from_email=sys.argv[2],
-        to_emails=sys.argv[3],
-        subject='Sending clean data from Streamline datascience',
-        html_content='<strong>But it was sent from Python</strong>'
-    )
+
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
     report_csv = glob2.glob(os.path.join(os.getcwd(), "*.csv"))
@@ -31,14 +26,14 @@ if __name__=='__main__':
         {
         "to": [
             {
-            "email": "test@example.com"
+            "email": sys.argv[3]
             }
         ],
         "subject": "Sending with SendGrid is Fun"
         }
     ],
     "from": {
-        "email": "test@example.com"
+        "email": sys.argv[2]
     },
     "content": [
         {
@@ -57,6 +52,7 @@ if __name__=='__main__':
         }
         ]
     }
+    sg = sendgrid.SendGridAPIClient(sys.argv[1])
     response = sg.client.mail.send.post(request_body=data)
     print(response.status_code)
     print(response.body)
