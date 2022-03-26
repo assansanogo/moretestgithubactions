@@ -23,7 +23,7 @@ if __name__=='__main__':
 
     message = Mail(
         from_email=sys.argv[2],
-        to_emails=sys.argv[3],
+        to_emails=sys.argv[2],
         subject='Sending with Twilio SendGrid is Fun',
         html_content='<strong>and easy to do anywhere, even with Python</strong>'
     )
