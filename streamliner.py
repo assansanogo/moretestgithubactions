@@ -14,8 +14,9 @@ message = Mail(
     html_content='<strong>But it was sent from Python</strong>'
 )
 
+config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
 report_csv = glob2.glob(os.path.join(os.getcwd(), "*.csv"))
-pdfkit.from_file(report_csv, './report.pdf')
+pdfkit.from_file(report_csv, './report.pdf', configuration=config)
 
 with open('./report.pdf', 'rb') as f:
     data = f.read()
