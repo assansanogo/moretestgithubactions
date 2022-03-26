@@ -15,8 +15,7 @@ message = Mail(
 )
 
 report_csv = glob2.glob(os.path.join(os.path.getcwd(), "*.csv")
-pdfkit.from_file(report_csv,
-                 './report.pdf')
+pdfkit.from_file(report_csv, './report.pdf')
 
 with open('./report.pdf', 'rb') as f:
     data = f.read()
