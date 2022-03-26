@@ -62,7 +62,16 @@ jobs:
           wget "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/${queried_date}.csv"
           echo $(ls ./${queried_date}.csv)
           cat ./${queried_date}.csv
-
+          
+      # step that sends the report by mail
+      - name: send email
+        run: |
+          apt-get update && apt-get install python3-pip
+          pip3 install sendgrid
+          python3 streamliner.py
+        env: 
+          'SENDGRID_API_KEY': ${{secrets.SENDGRID}}
+        
       # Runs a single command using the runners shell (grab the input parameters)
       - name: grab input parameter
         run: "echo  time is : ${{github.event.inputs.time}}"
