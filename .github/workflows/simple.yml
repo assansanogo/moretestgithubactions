@@ -78,7 +78,7 @@ jobs:
           pip3 install sendgrid pdfkit glob2
           echo $(which wkhtmltopdf)
           
-          python3 ./streamliner.py ${{ env.SENDGRID_API_KEY }} ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
+          python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
           
         
 
