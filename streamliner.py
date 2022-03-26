@@ -28,7 +28,7 @@ if __name__=='__main__':
         html_content='<strong>and easy to do anywhere, even with Python</strong>'
     )
 
-    with open('./reportt.pdf', 'rb') as f:
+    with open('./report.pdf', 'rb') as f:
         data = f.read()
         f.close()
     encoded_file = base64.b64encode(data).decode()
