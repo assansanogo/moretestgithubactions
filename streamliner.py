@@ -24,8 +24,8 @@ if __name__=='__main__':
     message = Mail(
         from_email=sys.argv[2],
         to_emails=sys.argv[2],
-        subject='Sending with Twilio SendGrid is Fun',
-        html_content='<strong>and easy to do anywhere, even with Python</strong>'
+        subject='data report',
+        html_content='<strong>Data is processed as downloadable pdf - done by streamliner</strong>'
     )
 
     with open('./report.pdf', 'rb') as f:
@@ -35,7 +35,7 @@ if __name__=='__main__':
 
     attachedFile = Attachment(
         FileContent(encoded_file),
-        FileName('report.pdf'),
+        FileName('streamline - report.pdf'),
         FileType('application/pdf'),
         Disposition('attachment')
     )
