@@ -56,7 +56,7 @@ jobs:
       - name: get the date before yesterday
 
         run: |
-          queried_date=$(date --date='-1 day' "+%Y-%m-%d")
+          queried_date=$(date --date='-1 day' "+%d-%m-%Y")
           echo $queried_date
           wget "https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports_us/${queried_date}.csv"
           echo $(ls ./${queried_date}.csv)
