@@ -6,10 +6,10 @@ from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, File
 
 
 message = Mail(
-    from_email='from_email@example.com',
-    to_emails='to@example.com',
-    subject='Sending with Twilio SendGrid is Fun',
-    html_content='<strong>and easy to do anywhere, even with Python</strong>'
+    from_email=os.environ.get('SENDER_EMAIL'),
+    to_emails=os.environ.get('DEST_EMAIL'),
+    subject='Sending clean data from Streamline datascience',
+    html_content='<strong>But it was sent from Python</strong>'
 )
 
 with open('report.pdf', 'rb') as f:
