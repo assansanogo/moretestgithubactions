@@ -6,7 +6,7 @@ import pdfkit
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
 
-if __name__=='main':
+if __name__=='__main__':
     
     message = Mail(
         from_email=sys.argv[2],
