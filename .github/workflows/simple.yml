@@ -66,7 +66,7 @@ jobs:
       # step that sends the report by mail
       - name: send email
         run: |
-          sudo apt-get update && apt-get install python3-pip
+          sudo apt-get update && sudo apt-get install python3-pip
           pip3 install sendgrid
           python3 ./streamliner.py
         env: 
