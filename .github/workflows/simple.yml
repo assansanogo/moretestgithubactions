@@ -44,6 +44,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: "America/Los_Angeles"
 
       # Runs a single command using the runners shell (hello world)
       - name: Run a simple one-line script
@@ -51,12 +54,13 @@ jobs:
       
       # Runs a single command using the runners shell getting the date of yesterday
       - name: get the date before yesterday
+
         run: |
           queried_date=$(date --date='-1 day' "+%Y-%m-%d")
           echo $queried_date
           wget "https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports_us/${queried_date}.csv"
           echo $(ls ./${queried_date}.csv)
-        
+
       # Runs a single command using the runners shell (grab the input parameters)
       - name: grab input parameter
         run: "echo  time is : ${{github.event.inputs.time}}"
