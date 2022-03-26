@@ -9,7 +9,7 @@ from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, File
 
 if __name__=='__main__':
     
-
+    print(sys.argv[0])
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
     report_csv = glob2.glob(os.path.join(os.getcwd(), "*.csv"))
