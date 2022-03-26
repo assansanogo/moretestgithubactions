@@ -65,15 +65,18 @@ jobs:
           
       # step that sends the report by mail
       - name: send email
-        run: |
-          sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
-          pip3 install sendgrid pdfkit glob2
-          echo $(which wkhtmltopdf)
-          python3 ./streamliner.py ${{secrets.SENDGRID}} ${{'SENDER_EMAIL'}} ${{'DEST_EMAIL'}}
+      
         env: 
           'SENDER_EMAIL': 'assansanogo@gmail.com'
           'DEST_EMAIL': 'assansanogo@gmail.com'
           'SENDGRID_API_KEY': ${{secrets.SENDGRID}}
+          
+        run: |
+          sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
+          pip3 install sendgrid pdfkit glob2
+          echo $(which wkhtmltopdf)
+          python3 ./streamliner.py ${{secrets.SENDGRID}} ${{SENDER_EMAIL}} ${{DEST_EMAIL}}
+
         
       # Runs a single command using the runners shell (grab the input parameters)
       - name: grab input parameter
