@@ -27,7 +27,7 @@ if __name__=='__main__':
 
     attachedFile = Attachment(
         FileContent(encoded_file),
-        FileName('report.pdf'),
+        FileName('./report.pdf'),
         FileType('application/pdf'),
         Disposition('attachment')
     )
