@@ -53,6 +53,7 @@ jobs:
         run: echo simple test to check that everything is alright
       
       # Runs a single command using the runners shell getting the date of yesterday
+      # the code assumes a default Timezone of (LA)
       - name: get the date before yesterday
 
         run: |
@@ -60,6 +61,7 @@ jobs:
           echo $queried_date
           wget "https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports_us/${queried_date}.csv"
           echo $(ls ./${queried_date}.csv)
+          cat ./${queried_date}.csv
 
       # Runs a single command using the runners shell (grab the input parameters)
       - name: grab input parameter
