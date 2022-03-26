@@ -52,7 +52,7 @@ if __name__=='__main__':
         }
         ]
     }
-    sg = sendgrid.SendGridAPIClient(sys.argv[1])
+    sg = SendGridAPIClient(sys.argv[1])
     response = sg.client.mail.send.post(request_body=data)
     print(response.status_code)
     print(response.body)
