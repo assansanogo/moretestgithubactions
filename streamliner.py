@@ -12,14 +12,14 @@ message = Mail(
     html_content='<strong>and easy to do anywhere, even with Python</strong>'
 )
 
-with open('attachment.pdf', 'rb') as f:
+with open('report.pdf', 'rb') as f:
     data = f.read()
     f.close()
 encoded_file = base64.b64encode(data).decode()
 
 attachedFile = Attachment(
     FileContent(encoded_file),
-    FileName('attachment.pdf'),
+    FileName('report.pdf'),
     FileType('application/pdf'),
     Disposition('attachment')
 )
