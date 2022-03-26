@@ -14,7 +14,7 @@ message = Mail(
     html_content='<strong>But it was sent from Python</strong>'
 )
 
-report_csv = glob2.glob(os.path.join(os.path.getcwd(), "*.csv")
+report_csv = glob2.glob(os.path.join(os.path.getcwd(), "*.csv"))
 pdfkit.from_file(report_csv, './report.pdf')
 
 with open('./report.pdf', 'rb') as f:
