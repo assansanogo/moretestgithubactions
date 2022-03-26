@@ -2,7 +2,6 @@ import os
 import glob2
 import base64
 import pdfkit
-import
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
