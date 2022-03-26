@@ -67,9 +67,11 @@ jobs:
       - name: send email
         run: |
           sudo apt-get update && sudo apt-get install python3-pip
-          pip3 install sendgrid
+          pip3 install sendgrid pdfkit
           python3 ./streamliner.py
         env: 
+          'SENDER_EMAIL': 'assansanogo@gmail.com'
+          'DEST_EMAIL': 'assansanogo@gmail.com'
           'SENDGRID_API_KEY': ${{secrets.SENDGRID}}
         
       # Runs a single command using the runners shell (grab the input parameters)
