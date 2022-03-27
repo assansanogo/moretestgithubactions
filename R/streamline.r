@@ -44,7 +44,7 @@ create_full_link <- function(date='01-01-2021', aggregated= TRUE) {
   return(out)
 }
 
-download_link <-function(url){
+download_link <-function(url, aggregated= TRUE){
     
   #' Download Link function
   #'
@@ -60,11 +60,14 @@ download_link <-function(url){
   #' download_link('03-04-2021')
 
     out <- tryCatch({
-    download.file(url, destfile = basename(url),mode = "wb",quiet = FALSE)
+    out_name <- sub('\\.csv$', '', basename(url))
+    suffix = paste("_pre_aggregation_", aggregation, sep="")
+    dest_file_name = paste("temp/", out_name, suffix,".csv", sep="")
+    download.file(url, destfile = paste("temp/", out_name,suffix,".csv"), mode = "wb", quiet = FALSE)
   },
   error=function(cond) {
       
-    message ("There was an error whilme downloading,please check the path or the file availability")
+    message ("There was an error while downloading,please check the path or the file availability")
     message(cond)
     
     return(NA)
@@ -87,7 +90,7 @@ clean_us_data2 <- function(date, aggregated= TRUE){
   #' # Filter the dataset to US entries: "03-04-2021.csv"
   #' clean_us_data('03-04-2021.csv')
 
-  csv_filename <- paste(date, ".csv", sep="")
+  csv_filename <- paste("temp/", date, ".csv", sep="")
   df_r <- readr::read_csv(csv_filename)
 
   if (aggregated){

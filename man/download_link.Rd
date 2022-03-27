@@ -4,7 +4,7 @@
 \alias{download_link}
 \title{Download Link function}
 \usage{
-download_link(url)
+download_link(url, aggregated = TRUE)
 }
 \arguments{
 \item{url}{}
