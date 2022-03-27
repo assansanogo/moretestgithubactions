@@ -71,7 +71,7 @@ download_link <-function(url){
   return(out)
 }
 
-clean_us_data <- function(csv_file, aggregated= TRUE){
+clean_us_data2 <- function(csv_file, aggregated= TRUE){
     
   #' Clean_us_data
   #'
