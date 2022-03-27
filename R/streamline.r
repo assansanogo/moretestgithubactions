@@ -72,7 +72,7 @@ download_link <-function(url){
   return(out)
 }
 
-clean_us_data2 <- function(csv_file, aggregated= TRUE){
+clean_us_data2 <- function(date, aggregated= TRUE){
     
   #' Clean_us_data
   #'
@@ -87,8 +87,8 @@ clean_us_data2 <- function(csv_file, aggregated= TRUE){
   #' # Filter the dataset to US entries: "03-04-2021.csv"
   #' clean_us_data('03-04-2021.csv')
 
-
-  df_r <- readr::read_csv(csv_file)
+  csv_filename <- paste(date, ".csv")
+  df_r <- readr::read_csv(csv_filename)
 
   if (aggregated){
     if ("Testing_Rate" %in% colnames(df_r)){

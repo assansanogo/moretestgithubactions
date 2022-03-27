@@ -4,7 +4,7 @@
 \alias{clean_us_data2}
 \title{Clean_us_data}
 \usage{
-clean_us_data2(csv_file, aggregated = TRUE)
+clean_us_data2(date, aggregated = TRUE)
 }
 \arguments{
 \item{csv_file}{}

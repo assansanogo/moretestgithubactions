@@ -14,7 +14,7 @@ if (length(args)!=2) {
   date_queried <- args[1]
   aggregation <- args[2]
 }
-neo_link <- myfirstpackage::create_link(date_queried, aggregated=aggregation)
+neo_link <- myfirstpackage::create_full_link(date_queried, aggregated=aggregation)
 myfirstpackage::download_link(neo_link)
 cleaned <- myfirstpackage::clean_us_data2(date_queried)
 }
