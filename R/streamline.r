@@ -38,7 +38,7 @@ create_out_name_based_on_date<- function(date, aggregated=TRUE){
 
 
   suffix = paste("_pre_aggregation_", aggregated, sep="")
-  csv_filename = paste("./temp/", date, suffix,".csv", sep="")
+  dest_file_name = paste("./temp/", date, suffix,".csv", sep="")
   return(dest_file_name)
 }
 
