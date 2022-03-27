@@ -87,7 +87,7 @@ clean_us_data2 <- function(date, aggregated= TRUE){
   #' # Filter the dataset to US entries: "03-04-2021.csv"
   #' clean_us_data('03-04-2021.csv')
 
-  csv_filename <- paste(date, ".csv")
+  csv_filename <- paste(date, ".csv", sep="")
   df_r <- readr::read_csv(csv_filename)
 
   if (aggregated){
