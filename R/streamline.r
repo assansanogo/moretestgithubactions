@@ -81,7 +81,7 @@ clean_us_data2 <- function(date, aggregated= TRUE){
   #'
   #' clean J.H website to limit correct data in the US 
   #' 
-  #' @param csv_file
+  #' @param date
   #'
   #' @return None
   #' @export
@@ -91,7 +91,7 @@ clean_us_data2 <- function(date, aggregated= TRUE){
   #' clean_us_data('03-04-2021.csv')
 
   suffix = paste("_pre_aggregation_", aggregation, sep="")
-  csv_file_name = paste("./temp/", date, suffix,".csv", sep="")
+  csv_filename = paste("./temp/", date, suffix,".csv", sep="")
 
   df_r <- readr::read_csv(csv_filename)
 

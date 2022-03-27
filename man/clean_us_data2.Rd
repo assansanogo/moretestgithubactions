@@ -7,7 +7,7 @@
 clean_us_data2(date, aggregated = TRUE)
 }
 \arguments{
-\item{csv_file}{}
+\item{date}{}
 }
 \value{
 None
