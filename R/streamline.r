@@ -87,19 +87,21 @@ clean_us_data <- function(csv_file, aggregated= TRUE){
   #' clean_us_data('03-04-2021.csv')
 
 
-  df_r <- tidyverse::read_csv(csv_file)
+  df_r <- readr::read_csv(csv_file)
 
   if (aggregated){
     if ("Testing_Rate" %in% colnames(df_r)){
-      df_r <- df_r %>% tidyverse::filter(!is.na('Testing_Rate')) %>% filter(Province_State !="Diamond Princess") %>% filter(Province_State !="Grand Princess") %>% filter(Country_Region == "US" )
+      df_r <- filter(df_r, !is.na('Testing_Rate'))
+      df_r <- filter(df_r, Province_State != "Diamond Princess") 
+      df_r <- filter(df_r, Province_State != "Grand Princess") 
+      df_r <- filter(df_r, Country_Region == "US" )
     return(df_r)
     }
     else {
-    df_r <- df_r %>% 
-                tidyverse::filter(Province_State != "Recovered")  %>% 
-                tidyverse::filter(Province_State != "Diamond Princess")  %>%
-                tidyverse::filter(Province_State != "Grand Princess")  %>%
-                tidyverse::filter(Country_Region == "US" )
+    df_r <- filter(df_r, Province_State != "Recovered")
+            filter(df_r, Province_State != "Diamond Princess")  %>%
+            filter(df_r, Province_State != "Grand Princess")  %>%
+            filter(df_r, Country_Region == "US" )
     return(df_r)
     }
   }
