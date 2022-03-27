@@ -24,19 +24,19 @@ if __name__=='__main__':
         html_content='<strong>Data is processed as downloadable pdf - done by streamliner</strong>'
     )
 
-    with open('./report.pdf', 'rb') as f:
-        data = f.read()
-        f.close()
-    encoded_file = base64.b64encode(data).decode()
+    # with open('./report.pdf', 'rb') as f:
+    #     data = f.read()
+    #     f.close()
+    # encoded_file = base64.b64encode(data).decode()
 
-    attachedFile = Attachment(
-        FileContent(encoded_file),
-        FileName('streamline - report.pdf'),
-        FileType('application/pdf'),
-        Disposition('attachment')
-    )
-    message.attachment = attachedFile
-    print(sys.argv[1])
-    #sg = SendGridAPIClient(sys.argv[1])
-    #response = sg.send(message)
-    #print(response.status_code, response.body, response.headers)
+    # attachedFile = Attachment(
+    #     FileContent(encoded_file),
+    #     FileName('streamline - report.pdf'),
+    #     FileType('application/pdf'),
+    #     Disposition('attachment')
+    # )
+    # message.attachment = attachedFile
+    # print(sys.argv[1])
+    # #sg = SendGridAPIClient(sys.argv[1])
+    # #response = sg.send(message)
+    # #print(response.status_code, response.body, response.headers)
