@@ -1,5 +1,5 @@
 
-create_link <- function(date='01-01-2021', aggregated= TRUE) {
+create_full_link <- function(date='01-01-2021', aggregated= TRUE) {
   
   #' Create Link function
   #'
@@ -25,6 +25,7 @@ create_link <- function(date='01-01-2021', aggregated= TRUE) {
 
   out <- tryCatch({
     temp_C <- paste(root, date, sep = "" )
+    temp_C <- paste(temp_C, ".csv", sep = "" )
   },
   error=function(cond) {
     message(paste("the link you created is incorrect", date))
