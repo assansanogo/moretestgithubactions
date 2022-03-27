@@ -2,4 +2,6 @@
 
 export(clean_us_data2)
 export(create_full_link)
+export(create_out_name_based_on_date)
+export(create_out_name_based_on_url)
 export(download_link)

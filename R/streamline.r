@@ -1,4 +1,48 @@
 
+create_out_name_based_on_url<- function(url, aggregated=TRUE){
+
+  #' Create filename based on url
+  #'
+  #' create the out_folder format 
+  #' 
+  #' @param date
+  #'
+  #' @return None
+  #' @export
+  #'
+  #' @examples
+  #' # save a file: create_out_name_based_on_url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/03-04-2021.csv")
+  #'  
+    
+    
+  out_name <- sub('\\.csv$', '', basename(url))
+  suffix = paste("_pre_aggregation_", aggregated, sep="")
+  dest_file_name = paste("./temp/", out_name, suffix,".csv", sep="")
+  return(dest_file_name)
+}
+
+create_out_name_based_on_date<- function(date, aggregated=TRUE){
+
+  #' Create filename based on date
+  #'
+  #' create the out_folder format 
+  #' 
+  #' @param date
+  #'
+  #' @return None
+  #' @export
+  #'
+  #' @examples
+  #' # save a file: create_out_name_based_on_date("03-04-2021")
+  #'  
+
+
+  suffix = paste("_pre_aggregation_", aggregated, sep="")
+  csv_filename = paste("./temp/", date, suffix,".csv", sep="")
+  return(dest_file_name)
+}
+
+
 create_full_link <- function(date='01-01-2021', aggregated= TRUE) {
   
   #' Create Link function
@@ -60,9 +104,10 @@ download_link <-function(url, aggregated= TRUE){
   #' download_link('03-04-2021')
 
     out <- tryCatch({
-    out_name <- sub('\\.csv$', '', basename(url))
-    suffix = paste("_pre_aggregation_", aggregation, sep="")
-    dest_file_name = paste("./temp/", out_name, suffix,".csv", sep="")
+    #out_name <- sub('\\.csv$', '', basename(url))
+    #suffix = paste("_pre_aggregation_", aggregation, sep="")
+    #dest_file_name = paste("./temp/", out_name, suffix,".csv", sep="")
+    dest_file_name <- create_out_name_url(url)
     download.file(url, destfile = dest_file_name, mode = "wb", quiet = FALSE)
   },
   error=function(cond) {
@@ -90,9 +135,11 @@ clean_us_data2 <- function(date, aggregated= TRUE){
   #' # Filter the dataset to US entries: "03-04-2021.csv"
   #' clean_us_data('03-04-2021.csv')
 
-  suffix = paste("_pre_aggregation_", aggregation, sep="")
-  csv_filename = paste("./temp/", date, suffix,".csv", sep="")
-
+  #suffix = paste("_pre_aggregation_", aggregation, sep="")
+  #csv_filename = paste("./temp/", date, suffix,".csv", sep="")
+  
+  
+  csv_filename = create_out_name_based_on_date(date,aggregated)
   df_r <- readr::read_csv(csv_filename)
 
   if (aggregated){
