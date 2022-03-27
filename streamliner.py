@@ -13,12 +13,8 @@ if __name__=='__main__':
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
     report_csv = glob2.glob(os.path.join(os.getcwd(), "*.csv"))
-    pdfkit.from_file(report_csv, './report.pdf', configuration=config)
+    #pdfkit.from_file(report_csv, './report.pdf', configuration=config)
 
-    with open('./report.pdf', 'rb') as f:
-        data = f.read()
-        f.close()
-    encoded_file = base64.b64encode(data).decode()
 
 
     message = Mail(
