@@ -87,7 +87,7 @@ clean_us_data <- function(csv_file, aggregated= TRUE){
   #' clean_us_data('03-04-2021.csv')
 
 
-  df_r <- read_csv(csv_file)
+  df_r <- tidyverse::read_csv(csv_file)
 
   if (aggregated){
     if ("Testing_Rate" %in% colnames(df_r)){
