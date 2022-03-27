@@ -92,17 +92,17 @@ clean_us_data2 <- function(date, aggregated= TRUE){
 
   if (aggregated){
     if ("Testing_Rate" %in% colnames(df_r)){
-      df_r <- filter(df_r, !is.na('Testing_Rate'))
-      df_r <- filter(df_r, Province_State != "Diamond Princess") 
-      df_r <- filter(df_r, Province_State != "Grand Princess") 
-      df_r <- filter(df_r, Country_Region == "US" )
+      df_r <- dplyr::filter(df_r, !is.na('Testing_Rate'))
+      df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess") 
+      df_r <- dplyr::filter(df_r, Province_State != "Grand Princess") 
+      df_r <- dplyr::filter(df_r, Country_Region == "US" )
     return(df_r)
     }
     else {
-    df_r <- filter(df_r, Province_State != "Recovered")
-            filter(df_r, Province_State != "Diamond Princess")  %>%
-            filter(df_r, Province_State != "Grand Princess")  %>%
-            filter(df_r, Country_Region == "US" )
+      df_r <- dplyr::filter(df_r, Province_State != "Recovered")
+      df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
+      df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
+      df_r <- dplyr::filter(df_r, Country_Region == "US" )
     return(df_r)
     }
   }
