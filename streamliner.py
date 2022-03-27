@@ -41,6 +41,6 @@ if __name__=='__main__':
     )
     message.attachment = attachedFile
     print(sys.argv[1])
-    sg = SendGridAPIClient(sys.argv[1])
-    response = sg.send(message)
-    print(response.status_code, response.body, response.headers)
+    #sg = SendGridAPIClient(sys.argv[1])
+    #response = sg.send(message)
+    #print(response.status_code, response.body, response.headers)
