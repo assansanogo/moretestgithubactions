@@ -62,8 +62,8 @@ download_link <-function(url, aggregated= TRUE){
     out <- tryCatch({
     out_name <- sub('\\.csv$', '', basename(url))
     suffix = paste("_pre_aggregation_", aggregation, sep="")
-    dest_file_name = paste("temp/", out_name, suffix,".csv", sep="")
-    download.file(url, destfile = paste("temp/", out_name,suffix,".csv", sep=""), mode = "wb", quiet = FALSE)
+    dest_file_name = paste("./temp/", out_name, suffix,".csv", sep="")
+    download.file(url, destfile = dest_file_name, mode = "wb", quiet = FALSE)
   },
   error=function(cond) {
       
@@ -91,7 +91,7 @@ clean_us_data2 <- function(date, aggregated= TRUE){
   #' clean_us_data('03-04-2021.csv')
 
   suffix = paste("_pre_aggregation_", aggregation, sep="")
-  csv_file_name = paste("temp/", date, suffix,".csv", sep="")
+  csv_file_name = paste("./temp/", date, suffix,".csv", sep="")
 
   df_r <- readr::read_csv(csv_filename)
 
