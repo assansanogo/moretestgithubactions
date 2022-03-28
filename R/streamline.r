@@ -145,6 +145,7 @@ util_JH_general_clean <- function(dataframe, country){
   tidyr::separate(Province_State, c("Province_State", NA), sep = ",") %>%
   tidyr::separate(Province_State, c("Province_State", NA), sep = " County") %>%
   dplyr::mutate(Province_State = stringr::str_to_title(Province_State)) %>%
+  print(dataframe)
   return(dataframe)
 }
 
@@ -215,7 +216,7 @@ util_clean_no_aggregation <- function(csv_file, country){
 
               df_r <- df_r %>% dplyr::rename(`Country_Region` = `Country/Region`, `Province_State` = `Province/State`) 
               df_r <- util_JH_general_clean(df_r,country) 
-              df_r <- df_r%>%
+              
 
               return(df_r)
       })
@@ -274,7 +275,7 @@ JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
   
   csv_filename = create_out_name_based_on_date(date,aggregated)
   df_r <- readr::read_csv(csv_filename)
-  print(df_r)
+  
   if (aggregated){
     return(util_clean_aggregation(df_r,country))
     }
