@@ -34,42 +34,42 @@ myfirstpackage::download_link(neo_link,
                               aggregated=aggregation)
 
 
-# step 3: clean the data
+# #step 3: clean the data
 cleaned <- myfirstpackage::JH_clean_data(date_minus_1,
                                       country="US",
                                       aggregated=aggregation)
-print(cleaned)
-
-# step 4:
-#summarized <- JH_confirmed_death_summarize(cleaned,aggregated=aggregation)
-#print(summarized)
-
-
-
-
-
-
-
-
-# step 5: output the data + save locally (optional)
-# save
-out <- cleaned[, c("Province_State", "Country_Region", "Confirmed")]
-outname <- paste("out/", 
-                date_minus_1,
-                "_pre_aggregation_",
-                aggregation,
-                ".csv",
-                sep="")
-
-readr::write_csv(out, 
-                file=outname)
-
-# display the results
-print(out, n = nrow(out))
-
-# give the file availability
-message(paste(emo::ji("ok"), 
-              "the file is available (locally) under: ", 
-              outname))
+# print(cleaned)
 }
+# #step 4:
+# summarized <- JH_confirmed_death_summarize(cleaned,aggregated=aggregation)
+# print(summarized)
+
+# }
+
+
+
+
+
+
+# # step 5: output the data + save locally (optional)
+# # save
+# out <- cleaned[, c("Province_State", "Country_Region", "Confirmed")]
+# outname <- paste("out/", 
+#                 date_minus_1,
+#                 "_pre_aggregation_",
+#                 aggregation,
+#                 ".csv",
+#                 sep="")
+
+# readr::write_csv(out, 
+#                 file=outname)
+
+# # display the results
+# print(out, n = nrow(out))
+
+# # give the file availability
+# message(paste(emo::ji("ok"), 
+#               "the file is available (locally) under: ", 
+#               outname))
+# }
 
