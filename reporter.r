@@ -24,12 +24,13 @@ if (length(args)!=2) {
 
 # step 1: link creation
 neo_link <- myfirstpackage::create_full_link(date_minus_1, aggregated=aggregation)
+print(neo_link)
 
 # step 2: download the data
 myfirstpackage::download_link(neo_link)
 
 # step 3: clean the data
-cleaned <- myfirstpackage::clean_us_data2(date_minus_1)
+cleaned <- myfirstpackage::clean_us_data2(date_minus_1, aggregated=aggregation)
 out <- cleaned[, c("Province_State", "Country_Region", "Confirmed")]
 
 # step 4: output the data + save locally (optional)

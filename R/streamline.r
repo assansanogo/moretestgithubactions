@@ -106,11 +106,15 @@ download_link <-function(url, aggregated= TRUE){
   #' download_link('03-04-2021')
 
     out <- tryCatch({
-    dest_file_name <- create_out_name_url(url)
-    download.file(url, destfile = dest_file_name, mode = "wb", quiet = FALSE)
+    dest_file_name <- create_out_name_based_on_url(url)
+    download.file(url, 
+                  destfile = dest_file_name, 
+                  mode = "wb", quiet = FALSE)
   },
   error=function(cond) {
-    message ("There was an error while downloading,please check the path or the file availability")
+    message ("There was an error while downloading,
+    please check the path or the file availability")
+    
     message(cond)  
     return(NA)
   })
