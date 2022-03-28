@@ -182,7 +182,7 @@ util_clean_no_aggregation <- function(csv_file, country){
 
   # change separator to be ";"
   df_r <- readr::read_csv(csv_file)
-  readr::write.csv2(df_r, 
+        write.csv2(df_r, 
                   file=csv_file)
   # use df_r
   df_r <- readr::read_csv(csv_file, sep=";")
