@@ -265,13 +265,13 @@ util_clean_aggregation <- function(csv_file, country){
   df_r <- readr::read_csv(csv_file)
   print("from util clean aggreg")
   print(df_r)
-  df_r <- util_JH_general_clean(df_r, country)
+  # df_r <- util_JH_general_clean(df_r, country)
   
 
-  df_r <- dplyr::filter(df_r, Province_State != "Recovered")
-  df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
-  df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
-  df_r <- dplyr::filter(df_r, Country_Region == country )
+  # df_r <- dplyr::filter(df_r, Province_State != "Recovered")
+  # df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
+  # df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
+  # df_r <- dplyr::filter(df_r, Country_Region == country )
   return(df_r)
 }
 
@@ -298,6 +298,7 @@ JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
   df_r <- readr::read_csv(csv_filename)
   
   if (aggregated){
+    print("aggreg clause")
     return(util_clean_aggregation(df_r,country))
     }
   else {
