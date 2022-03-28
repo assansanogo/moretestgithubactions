@@ -125,7 +125,6 @@ download_link <-function(url, aggregated=FALSE){
   return(out)
 }
 
-
 util_JH_general_clean <- function(dataframe, country){
 
   #' general cleaner for JH
@@ -326,13 +325,13 @@ util_confirmed_death_summarize_state <- function(dataframe) {
   # In case there are k>1 entry per county
   # need to sum values for the same county
 
-  group_by(Province_State) %>%
+  dplyr::group_by(Province_State) %>%
   dplyr::summarize(total_confirmed_state = sum(Confirmed, na.rm = FALSE),
                   total_deaths_state = sum(Deaths, na.rm = FALSE)) %>%
 
   # we can then group by State averaging Deaths & Confirmed cases
   # & averaging per county
-  group_by(Province_State) %>%
+  dplyr::group_by(Province_State) %>%
   dplyr::summarize(avg_confirmed_state = mean(total_confirmed_state, na.rm = FALSE),
   avg_deaths_state = mean(total_deaths_state, na.rm = FALSE))
 
@@ -359,15 +358,15 @@ util_confirmed_death_summarize_county <- function(dataframe) {
   # In case there are k>1 entry per county
   # need to sum values for the same county
 
-  group_by(Admin2, Province_State) %>%
+  dplyr::group_by(Admin2, Province_State) %>%
   dplyr::summarize(total_confirmed_county = sum(Confirmed, na.rm = FALSE),
                   total_deaths_county = sum(Deaths, na.rm = FALSE)) %>%
 
   # we can then group by State averaging Deaths & Confirmed cases
   # & averaging per county
-  group_by(Province_State) %>%
-  summarize(avg_confirmed_state = mean(total_confirmed_county, na.rm = FALSE),
-  avg_deaths_state = mean(total_deaths_county, na.rm = FALSE))
+  dplyr::group_by(Province_State) %>%
+  dplyr::summarize(avg_confirmed_state = mean(total_confirmed_county, na.rm = FALSE),
+                  avg_deaths_state = mean(total_deaths_county, na.rm = FALSE))
 
   return(summarized_dataframe)
 }

@@ -40,12 +40,12 @@ cleaned <- myfirstpackage::JH_clean_data(date_minus_1,
                                       aggregated=aggregation)
 
 # print(cleaned)
-}
-# #step 4:
-# summarized <- JH_confirmed_death_summarize(cleaned,aggregated=aggregation)
-# print(summarized)
 
-# }
+#step 4:
+summarized <- JH_confirmed_death_summarize(cleaned,aggregated=aggregation)
+print(summarized)
+
+}
 
 
 
