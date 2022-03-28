@@ -180,15 +180,19 @@ util_clean_no_aggregation <- function(csv_file, country){
   #' # Clean the dataset : "03-04-2021.csv"
   #' clean_no_aggregation('03-04-2021.csv')
 
-
+  # change separator
   df_r <- readr::read_csv(csv_file)
+  readr::write_csv(df_r, 
+                  file=csv_file,
+                  sep=";")
+  # use df_r
+  df_r <- readr::read_csv(csv_file, sep=";")
 
   # if the format does not comprises (Confirmed or Deaths) -> early stop
   if (!("Deaths" %in% colnames(df_r)) | 
       !("Confirmed" %in% colnames(df_r))){   
         stop("the Confirmed cases and Deaths columns are absent from the data", call.=FALSE)
       }
-
 
   # if the format comprises (Province_State, Country region, Admin2) -> Data refinement
   # filter numeric data
