@@ -106,7 +106,7 @@ download_link <-function(url, aggregated= TRUE){
   #' download_link('03-04-2021')
 
     out <- tryCatch({
-    dest_file_name <- create_out_name_based_on_url(url)
+    dest_file_name <- create_out_name_based_on_url(url, aggregated)
     download.file(url, 
                   destfile = dest_file_name, 
                   mode = "wb", quiet = FALSE)
