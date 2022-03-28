@@ -126,7 +126,6 @@ download_link <-function(url, aggregated=FALSE){
 }
 
 
-
 util_JH_general_clean <- function(dataframe, country){
 
   #' general cleaner for JH
@@ -265,6 +264,7 @@ util_clean_aggregation <- function(csv_file, country){
 
   df_r <- readr::read_csv(csv_file)
   df_r <- util_JH_general_clean(df_r, country)
+  print(df_r)
 
   df_r <- dplyr::filter(df_r, Province_State != "Recovered")
   df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
@@ -292,6 +292,7 @@ JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
 
   
   csv_filename = create_out_name_based_on_date(date,aggregated)
+  print(csv_filename)
   df_r <- readr::read_csv(csv_filename)
   
   if (aggregated){
