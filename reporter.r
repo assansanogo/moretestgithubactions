@@ -33,7 +33,7 @@ print(neo_link)
 myfirstpackage::download_link(neo_link, 
                               aggregated=aggregation)
 
-
+print("problematic step")
 # #step 3: clean the data
 cleaned <- myfirstpackage::JH_clean_data(date_minus_1,
                                       country="US",

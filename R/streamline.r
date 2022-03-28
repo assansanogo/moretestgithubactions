@@ -160,7 +160,7 @@ util_JH_general_clean <- function(dataframe, country){
   # clean Province_ State
   tidyr::separate(Province_State, c("Province_State", NA), sep = ",") %>%
   tidyr::separate(Province_State, c("Province_State", NA), sep = " County") %>%
-  dplyr::mutate(Province_State = stringr::str_to_title(Province_State)) %>%
+  dplyr::mutate(Province_State = stringr::str_to_title(Province_State))
   print(dataframe)
   return(dataframe)
 }
