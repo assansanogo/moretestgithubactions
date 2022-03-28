@@ -4,7 +4,7 @@
 \alias{create_full_link}
 \title{Create Link function}
 \usage{
-create_full_link(date = "01-01-2021", aggregated = TRUE)
+create_full_link(date = "01-01-2021", aggregated = FALSE)
 }
 \arguments{
 \item{date.}{queried date for analysis}

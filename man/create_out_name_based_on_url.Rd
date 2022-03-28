@@ -4,7 +4,7 @@
 \alias{create_out_name_based_on_url}
 \title{Create filename based on url}
 \usage{
-create_out_name_based_on_url(url, aggregated = TRUE)
+create_out_name_based_on_url(url, aggregated = FALSE)
 }
 \arguments{
 \item{url}{dataset url (from which is extracted the output filename)}

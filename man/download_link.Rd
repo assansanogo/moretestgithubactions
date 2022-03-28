@@ -4,7 +4,7 @@
 \alias{download_link}
 \title{Download Link function}
 \usage{
-download_link(url, aggregated = TRUE)
+download_link(url, aggregated = FALSE)
 }
 \arguments{
 \item{url}{dataset url}

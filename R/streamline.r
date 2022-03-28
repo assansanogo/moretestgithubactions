@@ -1,5 +1,5 @@
 
-create_out_name_based_on_url<- function(url, aggregated=TRUE){
+create_out_name_based_on_url<- function(url, aggregated=FALSE){
 
   #' Create filename based on url
   #'
@@ -22,7 +22,7 @@ create_out_name_based_on_url<- function(url, aggregated=TRUE){
   return(dest_file_name)
 }
 
-create_out_name_based_on_date<- function(date='01-01-2021', aggregated=TRUE){
+create_out_name_based_on_date<- function(date='01-01-2021', aggregated=FALSE){
 
   #' Create filename based on date
   #'
@@ -44,7 +44,7 @@ create_out_name_based_on_date<- function(date='01-01-2021', aggregated=TRUE){
   return(dest_file_name)
 }
 
-create_full_link <- function(date='01-01-2021', aggregated= TRUE) {
+create_full_link <- function(date='01-01-2021', aggregated= FALSE) {
   
   #' Create Link function
   #'
@@ -89,7 +89,7 @@ create_full_link <- function(date='01-01-2021', aggregated= TRUE) {
   return(out)
 }
 
-download_link <-function(url, aggregated= TRUE){
+download_link <-function(url, aggregated= FALSE){
     
   #' Download Link function
   #'
@@ -122,12 +122,12 @@ download_link <-function(url, aggregated= TRUE){
   return(out)
 }
 
-util_JH_general_clean <- function(dataframe, country_Region){
+util_JH_general_clean <- function(dataframe, country){
 
  dataframe <- dataframe %>%
   # format region name
   mutate(Country_Region = toupper(Country_Region)) %>%
-  dplyr::filter(Country_Region == country_Region )  %>%
+  dplyr::filter(Country_Region == country)  %>%
   
   # keep only numeric data (Confirmed - Deaths)
   dplyr::filter(is.numeric(Confirmed)) %>%
@@ -143,15 +143,15 @@ util_JH_general_clean <- function(dataframe, country_Region){
   return(dataframe)
 }
 
-clean_no_aggregation <- function(csv_file){
+clean_no_aggregation <- function(csv_file, country){
     
   #' clean_no_aggregation
   #'
   #' general clean function for J.H website gather daily data 
   #' for data not aggregated/filtered
   #' 
-  #' @param csv_file
-  #'
+  #' @param csv_file input csv_file
+  #' @param country country for which the report is issued
   #' @return None
   #' @export
   #'
@@ -177,7 +177,7 @@ clean_no_aggregation <- function(csv_file){
       ("Province_State" %in% colnames(df_r)) & 
       ("Country_Region" %in% colnames(df_r))){
     
-      df_r <- util_JH_general_clean(df_r) %>%
+      df_r <- util_JH_general_clean(df_r,country) %>%
               tidyr::separate(Admin2, c("Admin2",NA), sep = ",") %>%
               tidyr::separate(Admin2, c("Admin2",NA), sep = " County") %>%                   
               dplyr::mutate(Admin2 = stringr::str_to_title(Admin2)) %>%
@@ -221,13 +221,14 @@ clean_no_aggregation <- function(csv_file){
   }
 }
 
-clean_aggregation <- function(csv_file){
+clean_aggregation <- function(csv_file, country){
   #' clean_aggregation
   #'
   #' general clean function for J.H website gather daily data 
   #' for data already aggregated/filtered
   #' 
-  #' @param csv_file
+  #' @param csv_file input csv_file
+  #' @param country country for which the report is issued
   #'
   #' @return None
   #' @export
@@ -236,7 +237,7 @@ clean_aggregation <- function(csv_file){
   #' # Clean the dataset: "03-04-2021.csv"
   #' clean_aggregation('03-04-2021.csv')
 
-
+  df_r <- util_JH_general_clean(df_r, country)
 
   df_r <- dplyr::filter(df_r, Province_State != "Recovered")
   df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
@@ -245,7 +246,7 @@ clean_aggregation <- function(csv_file){
   return(df_r)
 }
 
-clean_data <- function(date='01-01-2021', country="US", aggregated= TRUE){
+clean_data <- function(date='01-01-2021', country, aggregated= FALSE){
     
   #' Clean_us_data
   #'

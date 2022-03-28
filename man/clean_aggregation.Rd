@@ -4,10 +4,12 @@
 \alias{clean_aggregation}
 \title{clean_aggregation}
 \usage{
-clean_aggregation(csv_file)
+clean_aggregation(csv_file, country)
 }
 \arguments{
-\item{csv_file}{}
+\item{csv_file}{input csv_file}
+
+\item{country}{country for which the report is issued}
 }
 \value{
 None

@@ -4,7 +4,7 @@
 \alias{clean_data}
 \title{Clean_us_data}
 \usage{
-clean_data(date = "01-01-2021", country = "US", aggregated = TRUE)
+clean_data(date = "01-01-2021", country, aggregated = FALSE)
 }
 \arguments{
 \item{date}{queried date for analysis}

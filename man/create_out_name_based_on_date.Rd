@@ -4,7 +4,7 @@
 \alias{create_out_name_based_on_date}
 \title{Create filename based on date}
 \usage{
-create_out_name_based_on_date(date = "01-01-2021", aggregated = TRUE)
+create_out_name_based_on_date(date = "01-01-2021", aggregated = FALSE)
 }
 \arguments{
 \item{date}{queried date for analysis}
