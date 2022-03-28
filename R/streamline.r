@@ -185,7 +185,7 @@ util_clean_no_aggregation <- function(csv_file, country){
         write.csv2(df_r, 
                   file=csv_file)
   # use df_r
-  df_r <- readr::read_csv(csv_file, sep=";")
+  df_r <- readr::read_delim(csv_file, delim=";")
 
   # if the format does not comprises (Confirmed or Deaths) -> early stop
   if (!("Deaths" %in% colnames(df_r)) | 
@@ -265,15 +265,14 @@ util_clean_aggregation <- function(csv_file, country){
   #' clean_aggregation('03-04-2021.csv')
 
   df_r <- readr::read_csv(csv_file)
-  print("from util clean aggreg")
-  print(df_r)
-  # df_r <- util_JH_general_clean(df_r, country)
+
+  df_r <- util_JH_general_clean(df_r, country)
   
 
-  # df_r <- dplyr::filter(df_r, Province_State != "Recovered")
-  # df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
-  # df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
-  # df_r <- dplyr::filter(df_r, Country_Region == country )
+  df_r <- dplyr::filter(df_r, Province_State != "Recovered")
+  df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
+  df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
+  df_r <- dplyr::filter(df_r, Country_Region == country )
   return(df_r)
 }
 
