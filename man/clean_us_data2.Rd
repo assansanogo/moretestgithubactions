@@ -4,18 +4,22 @@
 \alias{clean_us_data2}
 \title{Clean_us_data}
 \usage{
-clean_us_data2(date, aggregated = TRUE)
+clean_us_data2(date = "01-01-2021", country = "US", aggregated = TRUE)
 }
 \arguments{
-\item{date}{}
+\item{date}{queried date for analysis}
+
+\item{country}{queried country for analysis}
+
+\item{aggregated}{boolean flag to indicate whether data was already aggregated}
 }
 \value{
 None
 }
 \description{
-clean J.H website to limit correct data in the US
+clean J.H website to limit data in the US
 }
 \examples{
 # Filter the dataset to US entries: "03-04-2021.csv"
-clean_us_data('03-04-2021.csv')
+clean_us_data2('03-04-2021.csv')
 }

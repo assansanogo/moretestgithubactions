@@ -7,9 +7,9 @@
 create_full_link(date = "01-01-2021", aggregated = TRUE)
 }
 \arguments{
-\item{date.}{(date before which the data is retrieved)}
+\item{date.}{queried date for analysis}
 
-\item{aggregated.}{(data is available as already aggregated - US ONLY or raw - all countries )}
+\item{aggregated.}{boolean flag to indicate whether data was already aggregated}
 }
 \value{
 An url string - complete link
@@ -18,6 +18,6 @@ An url string - complete link
 Concatenate date and repository link
 }
 \examples{
-# Create the url based on date : 03-04-2021
+# Create the url based on date : 01-01-2021
 create_link('03-04-2021')
 }

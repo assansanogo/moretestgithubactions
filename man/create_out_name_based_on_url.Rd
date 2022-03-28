@@ -7,15 +7,17 @@
 create_out_name_based_on_url(url, aggregated = TRUE)
 }
 \arguments{
-\item{date}{}
+\item{url}{dataset url (from which is extracted the output filename)}
+
+\item{aggregated}{boolean flag to indicate whether data was already aggregated}
 }
 \value{
-None
+dest_file_name
 }
 \description{
 create the out_folder format
 }
 \examples{
-# save a file: create_out_name_based_on_url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/03-04-2021.csv")
+# create output filename: create_out_name_based_on_url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/03-04-2021.csv")
  
 }

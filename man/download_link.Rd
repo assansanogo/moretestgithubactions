@@ -7,7 +7,9 @@
 download_link(url, aggregated = TRUE)
 }
 \arguments{
-\item{url}{}
+\item{url}{dataset url}
+
+\item{aggregated}{boolean flag to indicate whether data was already aggregated}
 }
 \value{
 None
