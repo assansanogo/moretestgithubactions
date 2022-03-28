@@ -274,7 +274,7 @@ JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
   
   csv_filename = create_out_name_based_on_date(date,aggregated)
   df_r <- readr::read_csv(csv_filename)
-
+  print(df_r)
   if (aggregated){
     return(util_clean_aggregation(df_r,country))
     }

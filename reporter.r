@@ -38,6 +38,7 @@ myfirstpackage::download_link(neo_link,
 cleaned <- myfirstpackage::JH_clean_data(date_minus_1,
                                       country="US",
                                       aggregated=aggregation)
+
 # print(cleaned)
 }
 # #step 4:
