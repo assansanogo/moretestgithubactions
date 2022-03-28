@@ -294,15 +294,15 @@ JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
 
   
   csv_filename = create_out_name_based_on_date(date,aggregated)
-  print(csv_filename)
-  df_r <- readr::read_csv(csv_filename)
+  #print(csv_filename)
+  #df_r <- readr::read_csv(csv_filename)
   
   if (aggregated){
     print("aggreg clause")
-    return(util_clean_aggregation(df_r,country))
+    return(util_clean_aggregation(csv_filename,country))
     }
   else {
-    return(util_clean_no_aggregation(df_r,country))
+    return(util_clean_no_aggregation(csv_filename,country))
   }
 }
 
