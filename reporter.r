@@ -41,8 +41,8 @@ cleaned <- myfirstpackage::JH_clean_data(date_minus_1,
 print(cleaned)
 
 # step 4:
-summarized <- JH_confirmed_death_summarize(cleaned,aggregated=aggregation)
-print(summarized)
+#summarized <- JH_confirmed_death_summarize(cleaned,aggregated=aggregation)
+#print(summarized)
 
 
 
