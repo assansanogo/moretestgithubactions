@@ -143,7 +143,7 @@ util_JH_general_clean <- function(dataframe, country){
   return(dataframe)
 }
 
-clean_no_aggregation <- function(csv_file, country){
+util_clean_no_aggregation <- function(csv_file, country){
     
   #' clean_no_aggregation
   #'
@@ -221,7 +221,7 @@ clean_no_aggregation <- function(csv_file, country){
   }
 }
 
-clean_aggregation <- function(csv_file, country){
+util_clean_aggregation <- function(csv_file, country){
   #' clean_aggregation
   #'
   #' general clean function for J.H website gather daily data 
@@ -268,10 +268,10 @@ clean_data <- function(date='01-01-2021', country, aggregated= FALSE){
   df_r <- readr::read_csv(csv_filename)
 
   if (aggregated){
-    return(clean_aggregation(df_r))
+    return(util_clean_aggregation(df_r))
     }
   else {
-    return(clean_no_aggregation(df_r))
+    return(util_clean_no_aggregation(df_r))
   }
 }
 
