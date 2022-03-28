@@ -10,7 +10,7 @@ create_out_name_based_on_url<- function(url, aggregated=FALSE){
   #' 
   #' @param url dataset url (from which is extracted the output filename)
   #' @param aggregated boolean flag to indicate whether data was already aggregated 
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return dest_file_name
   #' @export
   #'
@@ -33,7 +33,7 @@ create_out_name_based_on_date<- function(date='01-01-2021', aggregated=FALSE){
   #' 
   #' @param date queried date for analysis
   #' @param aggregated boolean flag to indicate whether data was already aggregated 
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return dest_file_name
   #' @export
   #'
@@ -55,7 +55,7 @@ create_full_link <- function(date='01-01-2021', aggregated=FALSE) {
   #' 
   #' @param date. queried date for analysis
   #' @param aggregated. boolean flag to indicate whether data was already aggregated
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return An url string - complete link
   #' @export
   #'
@@ -100,7 +100,7 @@ download_link <-function(url, aggregated=FALSE){
   #' 
   #' @param url dataset url
   #' @param aggregated boolean flag to indicate whether data was already aggregated 
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return None
   #' @export
   #'
@@ -128,6 +128,23 @@ download_link <-function(url, aggregated=FALSE){
 
 
 util_JH_general_clean <- function(dataframe, country){
+
+  #' general cleaner for JH
+  #'
+  #' create a general clean
+  #' 
+  #' @param dataframe queried dataframe
+  #' @param country filtered on
+  #' @importFrom magrittr "%>%"
+  #' @return dataframe
+  #' @export
+  #'
+  #' @examples
+  #' # create output filename: create_out_name_based_on_date("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/03-04-2021.csv")
+  #'  
+
+
+
   # format region name
   dataframe <- dataframe %>%
   mutate(Country_Region = toupper(Country_Region)) %>%
@@ -157,6 +174,7 @@ util_clean_no_aggregation <- function(csv_file, country){
   #' 
   #' @param csv_file input csv_file
   #' @param country country for which the report is issued
+  #' @importFrom magrittr "%>%"
   #' @return None
   #' @export
   #'
@@ -237,7 +255,7 @@ util_clean_aggregation <- function(csv_file, country){
   #' 
   #' @param csv_file input csv_file
   #' @param country country for which the report is issued
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return None
   #' @export
   #'
@@ -263,7 +281,7 @@ JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
   #' @param date queried date for analysis
   #' @param country queried country for analysis
   #' @param aggregated boolean flag to indicate whether data was already aggregated
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return None
   #' @export
   #'
@@ -291,7 +309,7 @@ util_confirmed_death_summarize_state <- function(dataframe) {
   #' create the daily report
   #' 
   #' @param dataframe input (cleaned) dataframe - contains Admin2
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return summarized_dataframe
   #' @export
   #'
@@ -324,7 +342,7 @@ util_confirmed_death_summarize_county <- function(dataframe) {
   #' create the daily report
   #' 
   #' @param dataframe input (cleaned) dataframe - does not contain Admin2
-  #'
+  #' @importFrom magrittr "%>%"
   #' @return summarized_dataframe
   #' @export
   #'
@@ -358,7 +376,7 @@ JH_confirmed_death_summarize <- function(dataframe, aggregated=FALSE){
   #' 
   #' @param dataframe input (cleaned) dataframe
   #' @param aggregated boolean flag to indicate whether data was already aggregated
-
+  #' @importFrom magrittr "%>%"
   #' @return summarized_dataframe
   #' @export
   #'
