@@ -122,7 +122,130 @@ download_link <-function(url, aggregated= TRUE){
   return(out)
 }
 
-clean_us_data2 <- function(date='01-01-2021', country="US", aggregated= TRUE){
+util_JH_general_clean <- function(dataframe, country_Region){
+
+ dataframe <- dataframe %>%
+  # format region name
+  mutate(Country_Region = toupper(Country_Region)) %>%
+  dplyr::filter(Country_Region == country_Region )  %>%
+  
+  # keep only numeric data (Confirmed - Deaths)
+  dplyr::filter(is.numeric(Confirmed)) %>%
+  dplyr::filter(is.numeric(Deaths)) %>%  
+  dplyr::filter(Confirmed >=0) %>% 
+  dplyr::filter(Deaths >=0) %>% 
+  dplyr::filter(!grepl("Princess", Province_State)) %>%
+
+  # clean Province_ State
+  tidyr::separate(Province_State, c("Province_State", NA), sep = ",") %>%
+  tidyr::separate(Province_State, c("Province_State", NA), sep = " County") %>%
+  dplyr::mutate(Province_State = stringr::str_to_title(Province_State)) %>%
+  return(dataframe)
+}
+
+clean_no_aggregation <- function(csv_file){
+    
+  #' clean_no_aggregation
+  #'
+  #' general clean function for J.H website gather daily data 
+  #' for data not aggregated/filtered
+  #' 
+  #' @param csv_file
+  #'
+  #' @return None
+  #' @export
+  #'
+  #' @examples
+  #' # Clean the dataset : "03-04-2021.csv"
+  #' clean_no_aggregation('03-04-2021.csv')
+
+
+  df_r <- readr::read_csv(csv_file)
+
+  # if the format does not comprises (Confirmed or Deaths) -> early stop
+  if (!("Deaths" %in% colnames(df_r)) | 
+      !("Confirmed" %in% colnames(df_r))){   
+        stop("the Confirmed cases and Deaths columns are absent from the data", call.=FALSE)
+      }
+
+
+  # if the format comprises (Province_State, Country region, Admin2) -> Data refinement
+  # filter numeric data
+  # standardize columns text style
+
+  if (("Admin2" %in% colnames(df_r)) & 
+      ("Province_State" %in% colnames(df_r)) & 
+      ("Country_Region" %in% colnames(df_r))){
+    
+      df_r <- util_JH_general_clean(df_r) %>%
+              tidyr::separate(Admin2, c("Admin2",NA), sep = ",") %>%
+              tidyr::separate(Admin2, c("Admin2",NA), sep = " County") %>%                   
+              dplyr::mutate(Admin2 = stringr::str_to_title(Admin2)) %>%
+      return(df_r)
+
+  }
+
+  # in some cases (old reports) the headers are formatted with "/"
+  # clause try/catch inspired from Python
+  # filter numeric data
+  # standardize columns text style
+
+  else if (!("Admin2" %in% colnames(df_r))) {
+    
+   out <- tryCatch({
+     df_r <- df_r %>% 
+                dplyr::rename(`Country_Region` = `Country/Region`, `Province_State` = `Province/State`) %>% 
+                util_JH_general_clean(df_r) %>%
+                tidyr::separate(Admin2, c("Admin2",NA), sep = ",") %>%
+                tidyr::separate(Admin2, c("Admin2",NA), sep = " County") %>%
+                dplyr::mutate(Admin2 = stringr::str_to_title(Admin2)) %>%
+
+
+     return(df_r)},
+
+  # in case of a format with "/" in the columns names and without Admin2
+  error = function(cond){
+
+              df_r <- df_r %>% dplyr::rename(`Country_Region` = `Country/Region`, `Province_State` = `Province/State`) %>% 
+              util_JH_general_clean(df_r) %>%
+
+              return(df_r)
+      })
+  return(out)
+  }
+
+  # unsupported format
+  else{
+      stop(message("the data format is different please refer to data of: 15-25-2020 for reference"), call.=FALSE)
+      return(NA) 
+  }
+}
+
+clean_aggregation <- function(csv_file){
+  #' clean_aggregation
+  #'
+  #' general clean function for J.H website gather daily data 
+  #' for data already aggregated/filtered
+  #' 
+  #' @param csv_file
+  #'
+  #' @return None
+  #' @export
+  #'
+  #' @examples
+  #' # Clean the dataset: "03-04-2021.csv"
+  #' clean_aggregation('03-04-2021.csv')
+
+
+
+  df_r <- dplyr::filter(df_r, Province_State != "Recovered")
+  df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
+  df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
+  df_r <- dplyr::filter(df_r, Country_Region == country )
+  return(df_r)
+}
+
+clean_data <- function(date='01-01-2021', country="US", aggregated= TRUE){
     
   #' Clean_us_data
   #'
@@ -144,25 +267,10 @@ clean_us_data2 <- function(date='01-01-2021', country="US", aggregated= TRUE){
   df_r <- readr::read_csv(csv_filename)
 
   if (aggregated){
-    if ("Testing_Rate" %in% colnames(df_r)){
-      df_r <- dplyr::filter(df_r, !is.na('Testing_Rate'))
-      df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess") 
-      df_r <- dplyr::filter(df_r, Province_State != "Grand Princess") 
-      df_r <- dplyr::filter(df_r, Country_Region == country)
-    return(df_r)
+    return(clean_aggregation(df_r))
     }
-    else {
-      df_r <- dplyr::filter(df_r, Province_State != "Recovered")
-      df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
-      df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
-      df_r <- dplyr::filter(df_r, Country_Region == country )
-    return(df_r)
-    }
-  }
-
   else {
-      return("NON IMPLEMENTED")
-
+    return(clean_no_aggregation(df_r))
   }
 }
 

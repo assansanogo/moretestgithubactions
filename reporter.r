@@ -29,20 +29,21 @@ neo_link <- myfirstpackage::create_full_link(date_minus_1, aggregated=aggregatio
 print(neo_link)
 
 # step 2: download the data
-myfirstpackage::download_link(neo_link)}
+myfirstpackage::download_link(neo_link, aggregated=aggregation)
 
-#print("done")
-# # step 3: clean the data
-# cleaned <- myfirstpackage::clean_us_data2(date_minus_1, aggregated=aggregation)
-# out <- cleaned[, c("Province_State", "Country_Region", "Confirmed")]
 
-# # step 4: output the data + save locally (optional)
-# # save
-# outname <- paste("out/", date_minus_1,"_pre_aggregation_", aggregation,".csv", sep="")
-# readr::write_csv(out, file=outname)
+# step 3: clean the data
+cleaned <- myfirstpackage::clean_us_data2(date_minus_1, aggregated=aggregation)
+print(cleaned)
+out <- cleaned[, c("Province_State", "Country_Region", "Confirmed")]
 
-# # display
-# print(out, n = nrow(out))
-# message(paste(emo::ji("ok"), "the file is available (locally) under: ", outname))
-# }
+# step 4: output the data + save locally (optional)
+# save
+outname <- paste("out/", date_minus_1,"_pre_aggregation_", aggregation,".csv", sep="")
+readr::write_csv(out, file=outname)
+
+# display
+print(out, n = nrow(out))
+message(paste(emo::ji("ok"), "the file is available (locally) under: ", outname))
+}
 
