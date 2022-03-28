@@ -201,7 +201,7 @@ util_clean_no_aggregation <- function(csv_file, country){
    out <- tryCatch({
      df_r <- df_r %>% 
                 dplyr::rename(`Country_Region` = `Country/Region`, `Province_State` = `Province/State`) 
-     df_r <-  util_JH_general_clean(df_r) 
+     df_r <-  util_JH_general_clean(df_r,country) 
      df_r <-  df_r%>%
               tidyr::separate(Admin2, c("Admin2",NA), sep = ",") %>%
               tidyr::separate(Admin2, c("Admin2",NA), sep = " County") %>%
@@ -214,7 +214,7 @@ util_clean_no_aggregation <- function(csv_file, country){
   error = function(cond){
 
               df_r <- df_r %>% dplyr::rename(`Country_Region` = `Country/Region`, `Province_State` = `Province/State`) 
-              df_r <- util_JH_general_clean(df_r) 
+              df_r <- util_JH_general_clean(df_r,country) 
               df_r <- df_r%>%
 
               return(df_r)
