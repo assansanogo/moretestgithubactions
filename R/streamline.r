@@ -180,11 +180,10 @@ util_clean_no_aggregation <- function(csv_file, country){
   #' # Clean the dataset : "03-04-2021.csv"
   #' clean_no_aggregation('03-04-2021.csv')
 
-  # change separator
+  # change separator to be ";"
   df_r <- readr::read_csv(csv_file)
-  readr::write_csv(df_r, 
-                  file=csv_file,
-                  sep=";")
+  readr::write.csv2(df_r, 
+                  file=csv_file)
   # use df_r
   df_r <- readr::read_csv(csv_file, sep=";")
 
@@ -220,7 +219,7 @@ util_clean_no_aggregation <- function(csv_file, country){
     
    out <- tryCatch({
      df_r <- df_r %>% 
-                dplyr::rename(`Country_Region` = `Country/Region`, `Province_State` = `Province/State`) 
+            dplyr::rename(`Country_Region` = `Country/Region`, `Province_State` = `Province/State`) 
      df_r <-  util_JH_general_clean(df_r,country) 
      df_r <-  df_r%>%
               tidyr::separate(Admin2, c("Admin2",NA), sep = ",") %>%
