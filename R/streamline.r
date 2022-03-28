@@ -107,6 +107,7 @@ download_link <-function(url, aggregated= TRUE){
 
     out <- tryCatch({
     dest_file_name <- create_out_name_based_on_url(url, aggregated)
+    print(dest_file_name)
     download.file(url, 
                   destfile = dest_file_name, 
                   mode = "wb", quiet = FALSE)

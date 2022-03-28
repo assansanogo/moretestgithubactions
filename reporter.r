@@ -20,6 +20,8 @@ if (length(args)!=2) {
   date_minus_1 <- as.Date(date_queried, "%d-%m-%Y") -1
   date_minus_1 <- format(x=date_minus_1, format="%d-%m-%Y")
   message(paste(emo::ji("ok"), "your request will treat the data of (DAY-1): ", date_minus_1))
+}else{
+  print(NA)
 }
 
 # step 1: link creation
@@ -27,19 +29,20 @@ neo_link <- myfirstpackage::create_full_link(date_minus_1, aggregated=aggregatio
 print(neo_link)
 
 # step 2: download the data
-myfirstpackage::download_link(neo_link)
+myfirstpackage::download_link(neo_link)}
 
-# step 3: clean the data
-cleaned <- myfirstpackage::clean_us_data2(date_minus_1, aggregated=aggregation)
-out <- cleaned[, c("Province_State", "Country_Region", "Confirmed")]
+#print("done")
+# # step 3: clean the data
+# cleaned <- myfirstpackage::clean_us_data2(date_minus_1, aggregated=aggregation)
+# out <- cleaned[, c("Province_State", "Country_Region", "Confirmed")]
 
-# step 4: output the data + save locally (optional)
-# save
-outname <- paste("out/", date_minus_1,"_pre_aggregation_", aggregation,".csv", sep="")
-readr::write_csv(out, file=outname)
+# # step 4: output the data + save locally (optional)
+# # save
+# outname <- paste("out/", date_minus_1,"_pre_aggregation_", aggregation,".csv", sep="")
+# readr::write_csv(out, file=outname)
 
-# display
-print(out, n = nrow(out))
-message(paste(emo::ji("ok"), "the file is available (locally) under: ", outname))
-}
+# # display
+# print(out, n = nrow(out))
+# message(paste(emo::ji("ok"), "the file is available (locally) under: ", outname))
+# }
 
