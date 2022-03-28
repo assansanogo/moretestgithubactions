@@ -263,6 +263,7 @@ util_clean_aggregation <- function(csv_file, country){
   #' # Clean the dataset: "03-04-2021.csv"
   #' clean_aggregation('03-04-2021.csv')
 
+  df_r <- readr::read_csv(csv_file)
   df_r <- util_JH_general_clean(df_r, country)
 
   df_r <- dplyr::filter(df_r, Province_State != "Recovered")
