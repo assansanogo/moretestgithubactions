@@ -1,3 +1,6 @@
+# functions with prefix: "util" are helper functions
+# reused in main functions identified by prefix: "JH"
+
 
 create_out_name_based_on_url<- function(url, aggregated=FALSE){
 
@@ -44,7 +47,7 @@ create_out_name_based_on_date<- function(date='01-01-2021', aggregated=FALSE){
   return(dest_file_name)
 }
 
-create_full_link <- function(date='01-01-2021', aggregated= FALSE) {
+create_full_link <- function(date='01-01-2021', aggregated=FALSE) {
   
   #' Create Link function
   #'
@@ -89,7 +92,7 @@ create_full_link <- function(date='01-01-2021', aggregated= FALSE) {
   return(out)
 }
 
-download_link <-function(url, aggregated= FALSE){
+download_link <-function(url, aggregated=FALSE){
     
   #' Download Link function
   #'
@@ -121,6 +124,8 @@ download_link <-function(url, aggregated= FALSE){
   })
   return(out)
 }
+
+
 
 util_JH_general_clean <- function(dataframe, country){
 
@@ -246,7 +251,7 @@ util_clean_aggregation <- function(csv_file, country){
   return(df_r)
 }
 
-clean_data <- function(date='01-01-2021', country, aggregated= FALSE){
+JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
     
   #' Clean_us_data
   #'
@@ -275,10 +280,10 @@ clean_data <- function(date='01-01-2021', country, aggregated= FALSE){
   }
 }
 
-confirmed_death_summarize_state <- function(dataframe) {
+util_confirmed_death_summarize_state <- function(dataframe) {
 
   #' Create a report with confirmed cases and deaths
-  #' for each State
+  #' for each State (Helper function)
   #'
   #' create the daily report
   #' 
@@ -308,10 +313,10 @@ confirmed_death_summarize_state <- function(dataframe) {
   return(summarized_dataframe)
 }
 
-confirmed_death_summarize_county <- function(dataframe) {
+util_confirmed_death_summarize_county <- function(dataframe) {
 
   #' Create a report with confirmed cases and deaths
-  #' averaged over counties for each State
+  #' averaged over counties for each State (Helper function)
   #'
   #' create the daily report
   #' 
@@ -339,4 +344,28 @@ confirmed_death_summarize_county <- function(dataframe) {
   avg_deaths_state = mean(total_deaths_county, na.rm = FALSE))
 
   return(summarized_dataframe)
+}
+
+JH_confirmed_death_summarize <- function(dataframe, aggregated=FALSE){
+
+  #' Create a report with confirmed cases and deaths
+  #' averaged over counties for each State
+  #'
+  #' create the daily report
+  #' 
+  #' @param dataframe input (cleaned) dataframe
+  #' @param aggregated boolean flag to indicate whether data was already aggregated
+
+  #' @return summarized_dataframe
+  #' @export
+  #'
+  #' @examples
+  #' # create a report: confirmed_death_summarize_county(dataframe)
+  #'  
+
+  if (aggregated){
+    return(util_confirmed_death_summarize_state(dataframe))
+  } else{
+    return(util_confirmed_death_summarize_county(dataframe))
+  }
 }
