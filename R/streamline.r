@@ -128,9 +128,8 @@ download_link <-function(url, aggregated=FALSE){
 
 
 util_JH_general_clean <- function(dataframe, country){
-
- dataframe <- dataframe %>%
   # format region name
+  dataframe <- dataframe %>%
   mutate(Country_Region = toupper(Country_Region)) %>%
   dplyr::filter(Country_Region == country)  %>%
   
