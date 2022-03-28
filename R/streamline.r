@@ -147,7 +147,7 @@ util_JH_general_clean <- function(dataframe, country){
 
   # format region name
   dataframe <- dataframe %>%
-  mutate(Country_Region = toupper(Country_Region)) %>%
+  dplyr::mutate(Country_Region = toupper(Country_Region)) %>%
   dplyr::filter(Country_Region == country)  %>%
   
   # keep only numeric data (Confirmed - Deaths)
