@@ -20,6 +20,16 @@ on:
         description: "destinary email"
         default: "assansanogo.dsti.institute"
         required: True
+        
+      country:
+        type: choice
+        options:
+        - US
+        - Australia
+        - Canada
+        - France
+        - United Kingdom
+
 
 jobs:
   build:
