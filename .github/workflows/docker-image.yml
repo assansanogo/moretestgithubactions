@@ -23,12 +23,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    
+       
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag streamliner:latest
-      
-      
+       
     - name: Run Docker container (for today)
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE streamliner:latest
     
@@ -37,3 +35,19 @@ jobs:
     
     - name: Run Docker container (with inputs)
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.time}} -e AGGREGATION=${{github.event.inputs.aggregation}} streamliner:latest
+              
+    - name: Send email
+      env:
+        SENDER_EMAIL: 'assansanogo@gmail.com'
+        DEST_EMAIL: 'assansanogo@gmail.com'
+        SENDGRID_API_KEY: ${{ secrets.SENDGRID }}
+          
+      run: |
+        echo "$SENDGRID_API_KEY"
+
+        sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
+        pip3 install sendgrid pdfkit glob2
+        echo $(which wkhtmltopdf)
+
+        python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
+
