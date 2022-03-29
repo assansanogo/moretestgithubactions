@@ -2,6 +2,19 @@ name: Docker Image CI
 
 on:
   workflow_dispatch:
+    inputs:
+      time:
+        description: "date: mm-dd-yyyy (d+1)"
+        required: True
+        default: 'TODAY'
+
+  aggregation:
+    type: choice
+    required: True
+    description: Pick pre-aggregation
+    options:
+    - raw
+    - pre-aggregated
 
 jobs:
   build:
