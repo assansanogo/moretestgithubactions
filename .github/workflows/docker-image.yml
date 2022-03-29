@@ -18,7 +18,7 @@ on:
         
       dest_email:
         description: "destinary email"
-        default: "assansanogo.dsti.institute"
+        default: "assansanogo@gmail.com"
         required: True
         
       country:
