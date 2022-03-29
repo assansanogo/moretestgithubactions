@@ -14,4 +14,4 @@ jobs:
       run: docker build . --file Dockerfile --tag streamliner:latest
       
     - name: Run Docker container
-      run: docker run -it --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE streamliner:latest
+      run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE streamliner:latest
