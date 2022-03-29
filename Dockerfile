@@ -12,4 +12,4 @@ RUN install2.r --error testthat
 RUN mkdir ./temp && mkdir ./out && Rscript --vanilla requirements.r
 
 # Execute summarizing script
-ENTRYPOINT Rscript --vanilla reporter.r "$DATE" "$AGGREGATION" 
+ENTRYPOINT Rscript --vanilla reporter.r "$DATE" "$AGGREGATION" "$COUNTRY"
