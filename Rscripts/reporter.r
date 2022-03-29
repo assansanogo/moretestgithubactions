@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 #imports
-library(streamlinR)  
+library(StreamlinR)  
 library(emo)
 
 if(!interactive()){
