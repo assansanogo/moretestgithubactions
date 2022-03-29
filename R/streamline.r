@@ -1,7 +1,6 @@
 # functions with prefix: "util" are helper functions
 # reused in main functions identified by prefix: "JH"
 
-
 create_out_name_based_on_url<- function(url, aggregated=FALSE){
 
   #' Create filename based on url
