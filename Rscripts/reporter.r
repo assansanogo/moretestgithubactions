@@ -33,16 +33,16 @@ if (length(args)==2){
 }
 
 # step 1: link creation
-neo_link <- myfirstpackage::create_full_link(date_minus_1, 
+neo_link <- StreamlinR::create_full_link(date_minus_1, 
                                             aggregated=aggregation)
 print(neo_link)
 
 # step 2: download the data
-myfirstpackage::download_link(neo_link, 
+StreamlinR::download_link(neo_link, 
                               aggregated=aggregation)
 
 # step 3: clean the data
-cleaned <- myfirstpackage::JH_clean_data(date_minus_1,
+cleaned <- StreamlinR::JH_clean_data(date_minus_1,
                                       country="US",
                                       aggregated=aggregation)
 
