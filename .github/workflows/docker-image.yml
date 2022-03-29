@@ -8,13 +8,13 @@ on:
         required: True
         default: 'TODAY'
 
-  aggregation:
-    type: choice
-    required: True
-    description: Pick pre-aggregation
-    options:
-    - raw
-    - pre-aggregated
+      aggregation:
+        type: choice
+        required: True
+        description: Pick pre-aggregation
+        options:
+        - raw
+        - pre-aggregated
 
 jobs:
   build:
