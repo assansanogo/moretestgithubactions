@@ -3,7 +3,7 @@ RUN apk update && apk add git && git clone https://github.com/assansanogo/morete
 
 FROM rocker/tidyverse:latest as streaml2
 WORKDIR /app
-COPY --from=streaml1 /moretestgithubactions/Rscripts/*.r /app
+COPY --from=streaml1 /moretestgithubactions/Rscripts/*.r /app/
 
 # Install R packages (official packages)
 RUN install2.r --error testthat
