@@ -49,10 +49,14 @@ jobs:
     - name: Run Docker container (for today)
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE -e COUNTRY=US streamliner:latest
     
-    - name: Describe inputs
-      run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}} && \
-           echo "the workflow will retrieve pre-aggregated data:" ${{github.event.inputs.aggregation}} && \
-           echo "the workflow will sumamrize the country:" ${{github.event.inputs.country}} 
+    - name: "Info: Describe Date input"
+      run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}}
+      
+    - name: "Info: Describe level of aggregation"
+      run: echo "the workflow will retrieve pre-aggregated data:" ${{github.event.inputs.aggregation}}
+      
+    - name: "Info: Describe country for summarization"
+      run: echo "the workflow will sumamrize the country:" ${{github.event.inputs.country}} 
     
     - name: Run Docker container (with inputs)
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.time}} \
