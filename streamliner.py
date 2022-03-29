@@ -18,8 +18,8 @@ if __name__=='__main__':
 
 
     message = Mail(
-        from_email=sys.argv[3],
-        to_emails=sys.argv[2],
+        from_email=sys.argv2],
+        to_emails=sys.argv[3],
         subject='data report',
         html_content='<strong>Data is processed as downloadable pdf - done by streamliner</strong>'
     )
