@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       time:
-        description: "date: mm-dd-yyyy (d+1)"
+        description: "date: mm-dd-yyyy (retrieved data : d-1)"
         required: True
         default: $(date +'%m-%d-%Y')
 
