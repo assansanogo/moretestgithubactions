@@ -6,7 +6,7 @@ on:
       time:
         description: "date: mm-dd-yyyy"
         required: True
-        default: 14-04-2022
+        default: 03-04-2022
 
       aggregation:
         type: choice
@@ -15,6 +15,9 @@ on:
         options:
         - TRUE
         - FALSE
+        
+      dest_email:
+        name: assansanogo@gmail.com
 
 jobs:
   build:
@@ -39,7 +42,7 @@ jobs:
     - name: Send email
       env:
         SENDER_EMAIL: 'assansanogo@gmail.com'
-        DEST_EMAIL: 'assansanogo@gmail.com'
+        DEST_EMAIL: ${{github.event.inputs.dest_email}}
         SENDGRID_API_KEY: ${{ secrets.SENDGRID }}
           
       run: |
