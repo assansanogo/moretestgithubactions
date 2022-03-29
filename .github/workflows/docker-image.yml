@@ -23,12 +23,16 @@ on:
         
       country:
         type: choice
+        required: True
+        default: US
         options:
         - US
         - Australia
         - Canada
         - France
         - United Kingdom
+        
+        
 
 
 jobs:
