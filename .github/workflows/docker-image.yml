@@ -51,6 +51,7 @@ jobs:
         sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
         pip3 install sendgrid pdfkit glob2
         echo $(which wkhtmltopdf)
+        echo "this is a test" > ./report.csv
 
         python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
 
