@@ -43,7 +43,7 @@ jobs:
       run: docker build . --file Dockerfile --tag streamliner:latest
        
     - name: Run Docker container (for today)
-      run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE -e COUNTRY="US" streamliner:latest
+      run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE -e COUNTRY=US streamliner:latest
     
     - name: Describe inputs
       run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}} && \
