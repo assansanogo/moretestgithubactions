@@ -10,7 +10,7 @@ args = commandArgs(trailingOnly=TRUE)
 # test if there is exactly 2 arguments: 
 # if not, return an error
 
-if (length(args)==2){
+if (length(args)==3){
   # date of the day
   date_queried <- args[1]
   # pre-aggregation
