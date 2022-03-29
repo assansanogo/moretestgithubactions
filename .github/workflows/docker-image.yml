@@ -11,7 +11,7 @@ on:
       aggregation:
         type: choice
         required: True
-        description: Pick pre-aggregation (raw:FALSE, pre-aggregated:TRUE)
+        description: pre-aggregation (raw:FALSE, pre-aggregated:TRUE)
         options:
         - TRUE
         - FALSE
