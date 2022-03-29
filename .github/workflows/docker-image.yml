@@ -17,7 +17,9 @@ on:
         - FALSE
         
       dest_email:
-        name: assansanogo@gmail.com
+        description: "destinary email"
+        default: "assansanogo.dsti.institute"
+        required: True
 
 jobs:
   build:
