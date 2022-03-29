@@ -15,6 +15,9 @@ if (length(args)==2){
   date_queried <- args[1]
   # pre-aggregation
   aggregation <- args[2]
+  # country
+  queried_country <- args[3]
+  
   
   # date 24 hours before
   date_minus_1 <- as.Date(date_queried, "%m-%d-%Y") -1
@@ -43,7 +46,7 @@ StreamlinR::download_link(neo_link,
 
 # step 3: clean the data
 cleaned <- StreamlinR::JH_clean_data(date_minus_1,
-                                      country="US",
+                                      country=queried_country,
                                       aggregated=aggregation)
 
 # step 4: summary
