@@ -6,7 +6,7 @@ on:
       time:
         description: "date: mm-dd-yyyy (d+1)"
         required: True
-        default: 'TODAY'
+        default: $(date +'%m-%d-%Y')
 
       aggregation:
         type: choice
