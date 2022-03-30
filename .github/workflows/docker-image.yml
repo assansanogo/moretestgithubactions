@@ -65,6 +65,12 @@ jobs:
         path: $(pwd)/out
      
      
+    - id: checks
+      name: check dest folder
+      run: |
+        echo $(ls -l $(pwd)/out)
+
+     
     - id: dailyrun
       name: Run Docker container (for today)
       run: |
