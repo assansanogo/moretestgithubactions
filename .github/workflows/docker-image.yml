@@ -96,7 +96,7 @@ jobs:
       uses: 'google-github-actions/auth@v0'
       with:
         workload_identity_provider: 'projects/372976581437/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'my-service-account@my-training-as.iam.gserviceaccount.com'
+        service_account: 'streamliner@my-training-as.iam.gserviceaccount.com'
 
     - name: 'list-bucket'
       uses: 'google-github-actions/upload-cloud-storage@v0'
