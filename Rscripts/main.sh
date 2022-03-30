@@ -2,7 +2,7 @@
 
 Rscript --vanilla reporter.r "$DATE" "$AGGREGATION" "$COUNTRY"
 
-output_text=$(cat $(ls "./out/*.csv"))
+output_text=$(ls -l .)
 
 echo $output_text
 
