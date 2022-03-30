@@ -11,6 +11,11 @@ jobs:
       - name: Streamliner docker action
         uses: ./dockeraction # Uses an action in customaction directory
         id: hello2
+        with:
+          placeholder: ""
+          input_date: 06-03-2021
+          aggregation: FALSE
+          country: France
           
       # Use the output from the `hello2` step
       - name: Get the output time
