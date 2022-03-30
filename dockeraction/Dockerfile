@@ -1,9 +1,16 @@
-# Container image that runs your code
-FROM alpine:3.10
+FROM alpine:3.14  as streaml1
+RUN apk update && apk add git && git clone https://github.com/assansanogo/moretestgithubactions.git
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod a+x /entrypoint.sh
+FROM rocker/tidyverse:latest as streaml2
+WORKDIR /app
+COPY --from=streaml1 /moretestgithubactions/Rscripts/*.r /app/
+COPY --from=streaml1 /moretestgithubactions/Rscripts/*.sh /app/
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+# Install R packages (official packages)
+RUN install2.r --error testthat
+
+# Install R packages (devtools packages)
+RUN mkdir ./temp && mkdir ./out && Rscript --vanilla requirements.r && chmod a+x *.sh
+
+# Execute summarizing script
+ENTRYPOINT ./main.sh 
