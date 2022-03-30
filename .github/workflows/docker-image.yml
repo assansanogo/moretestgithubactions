@@ -103,13 +103,3 @@ jobs:
       with:
           path: 'report.csv'
           destination: 'streamliner-john-hopkins'
-          
-    - name: 'delete report.csv'
-      run: | 
-        gsutil rm gs://streamliner-john-hopkins/report.csv
-          
-        
-
-
-
-
