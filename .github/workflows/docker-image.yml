@@ -2,6 +2,8 @@ name: Docker Image CI
 
 on:
   workflow_dispatch:
+  
+
     inputs:
       time:
         description: "date: mm-dd-yyyy"
@@ -31,8 +33,9 @@ on:
         - Canada
         - France
         - United Kingdom
-
       
+
+    
 env:
   #GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
@@ -41,10 +44,16 @@ env:
 jobs:
   streamline:
     runs-on: ubuntu-latest
-
+    
+    outputs:
+      summarized: ${{ steps.dailyrun.outputs.summarized }} 
+    
+    
     steps:
     - uses: actions/checkout@v3
-       
+
+      
+      
     - id: imgbuilder
       name: Build the Docker image
       run: docker build . --file Dockerfile --tag streamliner:latest
@@ -52,6 +61,8 @@ jobs:
     - id: dailyrun
       name: Run Docker container (for today)
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE -e COUNTRY=US streamliner:latest
+
+        
     
     - name: "INFO: Describe the requested date"
       run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}}
@@ -67,10 +78,10 @@ jobs:
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.time}} -e COUNTRY=${{github.event.inputs.country}} -e AGGREGATION=${{github.event.inputs.aggregation}} streamliner:latest                                                   
     
     - name: outputday
-      run: echo ${{ steps.dailyrun.outputs.summarized }} 
+      run: echo ${{ streamline.outputs.summarized }} 
  
     - name: outputdate
-      run: echo ${{ steps.daterun.outputs.summarized }}
+      run: echo ${{ streamline.outputs.summarized }}
  
  
     - name: Send email
@@ -90,6 +101,8 @@ jobs:
         cat "./report.csv"
 
         python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
+      
+
         
   upload:
     runs-on: ubuntu-latest
