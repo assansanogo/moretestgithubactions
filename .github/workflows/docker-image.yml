@@ -81,7 +81,7 @@ jobs:
         
   upload:
     runs-on: ubuntu-latest
-    permissions: read-all|write-all
+    permissions: read-all
 
     
     
