@@ -94,8 +94,8 @@ jobs:
       
         
       run: | 
-        echo $(ls -l  $(pwd)/out) 
-        REPORT=$(echo $(ls -lt  $(pwd)/out) | head -1)
+        echo $(ls  $(pwd)/out) 
+        REPORT=$(echo $(ls  $(pwd)/out) | head -1)
         cp $REPORT ./report.csv
 
 
