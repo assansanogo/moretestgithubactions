@@ -12,7 +12,7 @@ jobs:
         uses: ./dockeraction # Uses an action in customaction directory
         id: hello2
         with:
-          #placeholder: ""
+          placeholder: ""
           input_date: 06-03-2021
           aggregation: FALSE
           country: France
