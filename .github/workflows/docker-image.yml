@@ -137,7 +137,7 @@ jobs:
     - name: datastore_retrieval
       uses: actions/download-artifact@v3
       with:
-        name: datastore_storage
+        name: report
 
       
     # Configure Workload Identity Federation via a credentials file.
