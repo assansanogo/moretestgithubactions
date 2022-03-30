@@ -12,8 +12,8 @@ if __name__=='__main__':
     print(sys.argv[0])
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-    report_csv = './report.csv'
-    pdfkit.from_file(report_csv, './report.pdf', configuration=config)
+    report_csv = 'custom_report.csv'
+    pdfkit.from_file(report_csv, 'custom_report.pdf', configuration=config)
 
 
     message = Mail(
