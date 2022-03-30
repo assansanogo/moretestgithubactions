@@ -62,7 +62,6 @@ jobs:
     - id: dailyrun
       name: Run Docker container (for today)
       run: |
-        rm -rf $(pwd)/out/*.csv
         docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') -e AGGREGATION=FALSE -e COUNTRY=US streamliner:latest
 
         
