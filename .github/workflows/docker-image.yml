@@ -34,7 +34,7 @@ on:
 
       
 env:
-  GCS_BUCKET: ${{ secrets.GCS_BUCKET }}
+  GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
 
 
 jobs:
@@ -99,7 +99,7 @@ jobs:
         service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
 
     - name: 'list-bucket' 
-      run: gsutil -m rsync -R output gs://$GCS_BUCKET
+      run: gsutil ls gs://$GCP_BUCKET
       
 
 
