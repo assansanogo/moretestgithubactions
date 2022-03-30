@@ -2,7 +2,7 @@
 name: 'Streamliner'
 description: 'Docker action that process data'
 inputs:
-  date:  # date of input
+  input_date:  # date of input
     description: 'date'
     required: true
     default: '02-02-2021'
@@ -24,7 +24,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.date }}
+    - ${{ inputs.input_date }}
     - ${{ inputs.aggregation }}
     - ${{ inputs.country }}
     
