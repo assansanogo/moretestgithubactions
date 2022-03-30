@@ -81,9 +81,9 @@ jobs:
         
   upload:
     runs-on: ubuntu-latest
-    permissions: read-all
-
-    
+    permissions: 
+      contents: 'read'
+      id-token: 'read-all'
     
     steps:
     - name: Checkout
