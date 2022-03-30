@@ -4,7 +4,7 @@ RUN apk update && apk add git && git clone https://github.com/assansanogo/morete
 FROM rocker/tidyverse:latest as streaml2
 WORKDIR /app
 COPY --from=streaml1 /moretestgithubactions/Rscripts/*.r /app/
-COPY --from=streaml1 /moretestgithubactions/Rscripts/*.sh /app/
+COPY --from=streaml1 /moretestgithubactions/Rscripts/main.sh /app/entrypoint.sh
 
 # Install R packages (official packages)
 RUN install2.r --error testthat
@@ -13,4 +13,4 @@ RUN install2.r --error testthat
 RUN mkdir ./temp && mkdir ./out && Rscript --vanilla requirements.r && chmod a+x *.sh
 
 # Execute summarizing script
-ENTRYPOINT ./main.sh 
+ENTRYPOINT ./entrypoint.sh 
