@@ -78,8 +78,11 @@ jobs:
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.time}} -e COUNTRY=${{github.event.inputs.country}} -e AGGREGATION=${{github.event.inputs.aggregation}} streamliner:latest                                                   
     
     - name: outputday
-      run: echo $(ls -l  $(pwd)/out)
- 
+      run: | 
+        echo $(ls -l  $(pwd)/out) 
+        report=$(ls -l  $(pwd)/out) 
+      env:
+          outputday: $report
  
     - name: Send email
     
@@ -122,5 +125,5 @@ jobs:
     - name: 'populate bucket'
       uses: 'google-github-actions/upload-cloud-storage@v0'
       with:
-          path: 'report.csv'
+          path: ${{ env.outputday  }}
           destination: 'streamliner-john-hopkins'
