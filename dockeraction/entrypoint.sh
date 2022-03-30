@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 
-Rscript --vanilla /app/reporter.r $2 $3 $4
+Rscript --vanilla /app/reporter.r "03-04-2021" TRUE US
 
 output_path=$(find ./out/*.csv)
 
