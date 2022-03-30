@@ -2,8 +2,8 @@
 
 Rscript --vanilla reporter.r "$DATE" "$AGGREGATION" "$COUNTRY"
 
-output_text=$(ls -l ./out)
+output_path=$(find ./out/*.csv)
 
-echo $output_text
+output_text = $(cat output_path)
 
 echo "::set-output name=summarized::$output_text"
