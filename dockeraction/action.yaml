@@ -6,16 +6,16 @@ inputs:
     description: 'date'
     required: true
     default: '02-02-2021'
-    
-  country:  # country of input
-    description: 'country'
-    required: true
-    default: 'US'
   
   aggregation:  # agg of input
     description: 'aggregation'
     required: true
     default: FALSE
+    
+  country:  # country of input
+    description: 'country'
+    required: true
+    default: 'US'
      
 outputs:
   summarized: # id of output
@@ -25,6 +25,6 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.date }}
-    - ${{ inputs.country }}
     - ${{ inputs.aggregation }}
+    - ${{ inputs.country }}
     
