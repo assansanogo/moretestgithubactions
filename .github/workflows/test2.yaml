@@ -1,0 +1,21 @@
+on: push
+#push
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to try streamliner
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Streamliner docker action
+        uses: ./dockeraction # Uses an action in customaction directory
+        id: hello2
+        with:
+          date: '05-03-2021'
+          country: 'US'
+          aggregation: 'TRUE'
+          
+      # Use the output from the `hello2` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello2.outputs.summarized }}"
