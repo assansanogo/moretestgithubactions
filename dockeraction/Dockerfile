@@ -13,4 +13,4 @@ RUN install2.r --error testthat
 RUN mkdir ./temp && mkdir ./out && Rscript --vanilla requirements.r && chmod a+x /app/*.sh
 
 # Execute summarizing script
-ENTRYPOINT /app/entrypoint.sh $1 $2 $3 $4
+ENTRYPOINT /app/entrypoint.sh $placeholder $input_date $aggregated $country 
