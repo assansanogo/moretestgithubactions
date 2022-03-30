@@ -15,11 +15,11 @@ print("#################")
 
 if (length(args)>2){
   # date of the day
-  date_queried <- args[2]
+  date_queried <- args[1]
   # pre-aggregation
-  aggregation <- args[3]
+  aggregation <- args[2]
   # country
-  queried_country <- args[4]
+  queried_country <- args[3]
   
   
   # date 24 hours before
