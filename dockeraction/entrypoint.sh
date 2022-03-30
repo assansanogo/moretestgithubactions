@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 
-Rscript --vanilla /app/reporter.r
+Rscript --vanilla /app/reporter.r $1 $2 $3 $4
 
 output_path=$(find ./out/*.csv)
 
