@@ -83,7 +83,7 @@ jobs:
         
       run: | 
         echo $(ls -l  $(pwd)/out) 
-        REPORT=$(echo $(ls -l  $(pwd)/out))
+        REPORT=$(echo $(ls -lt  $(pwd)/out) | head -1)
         cp $REPORT ./report.csv
 
 
