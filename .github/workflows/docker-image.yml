@@ -85,14 +85,15 @@ jobs:
         echo $(ls -l  $(pwd)/out) 
         REPORT=$(echo $(ls -l  $(pwd)/out))
         echo "REPORT=$REPORT" >> $GITHUB_ENV
-        echo ${{ env.REPORT}}
+        echo $REPORT
+        echo ${{ env.REPORT }}
 
  
     - name: Send email
     
       env:
         SENDER_EMAIL: 'assansanogo@gmail.com'
-        DEST_EMAIL: ${{github.event.inputs.dest_email}}
+        DEST_EMAIL: ${{ github.event.inputs.dest_email }}
         SENDGRID_API_KEY: ${{ secrets.SENDGRID }}
           
       run: |
