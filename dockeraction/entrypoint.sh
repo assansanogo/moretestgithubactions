@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 
-Rscript --vanilla /app/reporter.r $1 $2 $3 $4
+Rscript --vanilla /app/reporter.r $placeholder $input_date $aggregation $country 
 
 output_path=$(find ./out/*.csv)
 
