@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
   
     inputs:
-      # queried data
+      # Input 1: queried data
       time:
         description: "date: mm-dd-yyyy"
         required: True
         default: 03-04-2022
         
-      # aggregation of data (pre calculated)
+      # Input 2: aggregation of data (pre calculated)
       aggregation:
         type: choice
         required: True
@@ -19,13 +19,7 @@ on:
         - TRUE
         - FALSE
         
-      # destinatary
-      dest_email:
-        description: "destinary email"
-        default: "assansanogo@gmail.com"
-        required: True
-        
-      #  country for which results are filtered
+      # Input 3: country for which results are filtered
       country:
         type: choice
         required: True
@@ -36,6 +30,14 @@ on:
         - Canada
         - France
         - United Kingdom
+        
+      # Input 4: destinatary
+      dest_email:
+        description: "destinary email"
+        default: "assansanogo@gmail.com"
+        required: True
+        
+
     
 env:
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
