@@ -31,7 +31,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.placeholder }}
+    # - ${{ inputs.placeholder }}
     - ${{ inputs.input_date }}
     - ${{ inputs.aggregation }}
     - ${{ inputs.country }}
