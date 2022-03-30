@@ -13,4 +13,4 @@ RUN install2.r --error testthat
 RUN mkdir ./temp && mkdir ./out && Rscript --vanilla requirements.r && chmod a+x *.sh
 
 # Execute summarizing script
-ENTRYPOINT main.sh 
+ENTRYPOINT ./main.sh 
