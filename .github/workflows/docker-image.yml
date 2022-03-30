@@ -105,7 +105,8 @@ jobs:
           destination: 'streamliner-john-hopkins'
           
     - name: 'delete report.csv'
-      run: | gsutil -m rm gs://streamliner-john-hopkins/report.csv
+      run: | 
+        gsutil -m rm gs://streamliner-john-hopkins/report.csv
           
         
 
