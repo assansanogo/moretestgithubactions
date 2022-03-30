@@ -9,12 +9,12 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Streamliner docker action
-        uses: ./dockeraction # Uses an action in customaction directory
+        uses: ./dockeraction/action # Uses an action in customaction directory
         id: hello2
         with:
           input_date: 05-03-2021
           country: US
-          aggregation: TRUE
+          aggregation: FALSE
           
       # Use the output from the `hello2` step
       - name: Get the output time
