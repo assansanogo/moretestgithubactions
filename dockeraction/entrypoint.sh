@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-Rscript --vanilla reporter.r $1 $2 $3
+Rscript --vanilla /app/reporter.r $1 $2 $3
 
 output_path=$(find ./out/*.csv)
 
