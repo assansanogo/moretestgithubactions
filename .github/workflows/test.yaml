@@ -7,7 +7,13 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: assansanogo/moretestgithubactions/customaction@v0 #release
+        
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Hello world action step
+        uses: ./customaction # Uses an action in customaction directory
+        id: hello2
         with:
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
