@@ -84,7 +84,7 @@ jobs:
       run: | 
         echo $(ls -l  $(pwd)/out) 
         REPORT=$(echo $(ls -l  $(pwd)/out))
-        echo "REPORT=$REPORT" >> $GITHUB_ENV
+        echo "REPORT=cabuggueici" >> $GITHUB_ENV
         echo $REPORT
         echo ${{ env.REPORT }}
 
