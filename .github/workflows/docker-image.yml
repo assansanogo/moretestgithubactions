@@ -59,6 +59,12 @@ jobs:
       name: Build the Docker image
       run: docker build . --file Dockerfile --tag streamliner:latest
      
+    - name: Remove File
+      uses: JesseTG/rm@v1.0.2
+      with:
+        path: $(pwd)/out
+     
+     
     - id: dailyrun
       name: Run Docker container (for today)
       run: |
