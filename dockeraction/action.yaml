@@ -1,0 +1,30 @@
+# action.yml
+name: 'Streamliner'
+description: 'Docker action that process data'
+inputs:
+  date:  # date of input
+    description: 'date'
+    required: true
+    default: '02-02-2021'
+    
+  country:  # country of input
+    description: 'country'
+    required: true
+    default: 'US'
+  
+  aggregation:  # agg of input
+    description: 'aggregation'
+    required: true
+    default: FALSE
+     
+outputs:
+  summarized: # id of output
+    description: 'The summarized analysis'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.date }}
+    - ${{ inputs.country }}
+    - ${{ inputs.aggregation }}
+    
