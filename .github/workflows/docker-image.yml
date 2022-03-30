@@ -102,7 +102,7 @@ jobs:
       uses: 'google-github-actions/upload-cloud-storage@v0'
       with:
           path: 'report.csv'
-          destination: '${{ env.DEST_EMAIL }}/test.cv'
+          destination: '${{env.GCP_BUCKET}}/report.csv'
 
 
 
