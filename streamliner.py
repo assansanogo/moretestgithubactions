@@ -9,13 +9,20 @@ from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, File
 
 if __name__=='__main__':
     
-    print(sys.argv[0])
+    # sys.argv[1] : SENDGRID
+    # sys.argv[2] : sender
+    # sys.argv[3] : destinatary
+    
+    # pdfkit additional config (path tobinary wkhtmltopdf)
+    # conversion csv to pdf
+    # TODO : embellify/prettify pdf
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
     report_csv = 'custom_report.csv'
     pdfkit.from_file(report_csv, 'custom_report.pdf', configuration=config)
 
 
+    # create SENDGRID email object
     message = Mail(
         from_email=sys.argv[2],
         to_emails=sys.argv[3],
@@ -23,6 +30,9 @@ if __name__=='__main__':
         html_content='<strong>Data is processed as downloadable pdf - done by streamliner</strong>'
     )
 
+    #  create the pdf report
+    #  data must be encoded to be used by SENDGRID 
+    
     with open('custom_report.pdf', 'rb') as f:
          data = f.read()
          f.close()
@@ -30,12 +40,14 @@ if __name__=='__main__':
 
     attachedFile = Attachment(
          FileContent(encoded_file),
-         FileName('streamline - report.pdf'),
+         FileName('streamline - JH report.pdf'),
          FileType('application/pdf'),
          Disposition('attachment')
      )
+    
+    # send message with the the SENDGRID api key.
+    # passed via Github secrets
     message.attachment = attachedFile
-    print(sys.argv[1])
     sg = SendGridAPIClient(sys.argv[1])
     response = sg.send(message)
     print(response.status_code, response.body, response.headers)
