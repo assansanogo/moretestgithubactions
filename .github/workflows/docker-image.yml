@@ -78,10 +78,10 @@ jobs:
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.time}} -e COUNTRY=${{github.event.inputs.country}} -e AGGREGATION=${{github.event.inputs.aggregation}} streamliner:latest                                                   
     
     - name: outputday
-      run: echo ${{ streamline.steps.dailyrun.summarized }} 
+      run: echo ${{ steps.dailyrun.summarized }} 
  
     - name: outputdate
-      run: echo ${{ streamline.steps.daterun.summarized }}
+      run: echo ${{ steps.daterun.summarized }}
  
  
     - name: Send email
