@@ -34,7 +34,7 @@ on:
 
       
 env:
-  GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
+  #GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
 
 
