@@ -66,10 +66,13 @@ jobs:
       name: Run Docker container (with inputs)
       run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.time}} -e COUNTRY=${{github.event.inputs.country}} -e AGGREGATION=${{github.event.inputs.aggregation}} streamliner:latest                                                   
     
-    - name: outputs
-        echo ${{ steps.dailyrun.summarized }}
-        echo ${{ steps.daterun.summarized }}
-    
+    - name: outputday
+      run: echo ${{ steps.dailyrun.summarized }} 
+ 
+    - name: outputdate
+      run: echo ${{ steps.daterun.summarized }}
+ 
+ 
     - name: Send email
     
       env:
