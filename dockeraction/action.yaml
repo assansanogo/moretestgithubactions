@@ -2,6 +2,13 @@
 name: 'Streamliner'
 description: 'Docker action that process data'
 inputs:
+
+
+  placeholder:
+    description: 'dummy'
+    required: true
+    default: ""
+    
   input_date:  # date of input
     description: 'date'
     required: true
@@ -24,6 +31,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - ${{ inputs.placeholder }}
     - ${{ inputs.input_date }}
     - ${{ inputs.aggregation }}
     - ${{ inputs.country }}
