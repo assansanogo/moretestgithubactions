@@ -99,7 +99,11 @@ jobs:
         cp $(pwd)/out/$REPORT custom_report.csv
         cat custom_report.csv
 
-
+    - name: datastore_storage
+      uses: actions/upload-artifact@v3
+      with:
+          name: report
+          path: custom_report.csv
  
     - name: Send email
     
@@ -130,10 +134,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       
-    - name: check files
- 
-      run: | 
-        echo $(ls  .) 
+    - name: datastore_retrieval
+      uses: actions/download-artifact@v3
+      with:
+        name: datastore
+
       
     # Configure Workload Identity Federation via a credentials file.
     - id: 'auth'
