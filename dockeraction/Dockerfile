@@ -4,7 +4,7 @@ RUN apk update && apk add git && git clone https://github.com/assansanogo/morete
 FROM rocker/tidyverse:latest as streaml2
 WORKDIR /app
 COPY --from=streaml1 /moretestgithubactions/Rscripts/*.r /app/
-COPY --from=streaml1 /moretestgithubactions/dockeractions/entrypoint.sh ./entrypoint.sh
+COPY --from=streaml1 /moretestgithubactions/dockeraction/entrypoint.sh ./entrypoint.sh
 
 # Install R packages (official packages)
 RUN install2.r --error testthat
