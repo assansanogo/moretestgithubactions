@@ -119,6 +119,7 @@ jobs:
 
         
   upload:
+    needs: streamline
     runs-on: ubuntu-latest
     permissions: 
       contents: 'read'
