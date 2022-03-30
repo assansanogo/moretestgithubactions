@@ -9,6 +9,9 @@ args = commandArgs(trailingOnly=TRUE)
 
 # test if there is exactly 2 arguments: 
 # if not, return an error
+  
+print(length(args))
+print("#################")
 
 if (length(args)==3){
   # date of the day
