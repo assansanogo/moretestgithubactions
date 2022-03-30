@@ -39,6 +39,7 @@ on:
 env:
   #GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  outputday: ""
 
 
 jobs:
@@ -80,9 +81,8 @@ jobs:
     - name: outputday
       run: | 
         echo $(ls -l  $(pwd)/out) 
-        report=$(ls -l  $(pwd)/out) 
-      env:
-          outputday: $report
+        ${{ env.report}}=$(ls -l  $(pwd)/out) 
+
  
     - name: Send email
     
@@ -97,9 +97,9 @@ jobs:
         sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
         pip3 install sendgrid pdfkit glob2
         echo $(which wkhtmltopdf)
-        #cp $report ./report.csv
-        cat "./report.csv"
-        echo ${{ report }}
+
+                
+        echo ${{ env.report}}
 
         python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
       
