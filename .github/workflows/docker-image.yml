@@ -97,6 +97,7 @@ jobs:
         echo $(ls  $(pwd)/out) 
         REPORT=$(echo $(ls  $(pwd)/out) | head -1)
         cp $(pwd)/out/$REPORT custom_report.csv
+        cat custom_report.csv
 
 
  
