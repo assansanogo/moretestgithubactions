@@ -99,7 +99,7 @@ jobs:
         echo $(which wkhtmltopdf)
         cp $report ./report.csv
         cat "./report.csv"
-        echo $report
+        echo ${{ report }}
 
         python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }}
       
