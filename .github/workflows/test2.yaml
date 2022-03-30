@@ -12,7 +12,7 @@ jobs:
         uses: ./dockeraction # Uses an action in customaction directory
         id: hello2
         with:
-          date: '05-03-2021'
+          input_date: '05-03-2021'
           country: 'US'
           aggregation: 'TRUE'
           
