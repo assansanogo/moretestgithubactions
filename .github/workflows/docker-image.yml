@@ -53,7 +53,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-      
+         
+    - id: checks
+      name: check dest folder
+      run: |
+        echo $(ls -l $(pwd)/out)
       
     - id: imgbuilder
       name: Build the Docker image
@@ -64,11 +68,7 @@ jobs:
       with:
         path: $(pwd)/out
      
-     
-    - id: checks
-      name: check dest folder
-      run: |
-        echo $(ls -l $(pwd)/out)
+
 
      
     - id: dailyrun
