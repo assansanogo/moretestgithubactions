@@ -7,19 +7,19 @@ library(emo)
 if(!interactive()){
 args = commandArgs(trailingOnly=TRUE)
 
-# test if there is exactly 2 arguments: 
+# test if there is 3: 
 # if not, return an error
   
 print(args)
 print("#################")
 
-if (length(args)==3){
+if (length(args)>2){
   # date of the day
-  date_queried <- args[1]
+  date_queried <- args[2]
   # pre-aggregation
-  aggregation <- args[2]
+  aggregation <- args[3]
   # country
-  queried_country <- args[3]
+  queried_country <- args[4]
   
   
   # date 24 hours before
