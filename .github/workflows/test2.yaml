@@ -12,9 +12,10 @@ jobs:
         uses: ./dockeraction # Uses an action in customaction directory
         id: hello2
         with:
+          place_holder: ""
           input_date: 06-03-2021
-          country: US
           aggregation: FALSE
+          country: US
           
       # Use the output from the `hello2` step
       - name: Get the output time
