@@ -96,7 +96,7 @@ jobs:
       run: | 
         echo $(ls  $(pwd)/out) 
         REPORT=$(echo $(ls  $(pwd)/out) | head -1)
-        cp $REPORT ./report.csv
+        cp $(pwd)/out/$REPORT ./report.csv
 
 
  
