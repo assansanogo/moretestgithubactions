@@ -127,7 +127,7 @@ jobs:
     - id: 'img_builder'
       name: 4. Docker image construction
       run: docker build . --file Dockerfile --tag streamliner:latest
-     
+
      
     - id: 'docker_runner'
       name: 4. Docker container execution
@@ -136,9 +136,9 @@ jobs:
         -e DATE=$(date +'%m-%d-%Y') \
         -e AGGREGATION=FALSE \
         -e COUNTRY=US streamliner:latest \
-        -e PROCCESSED_REPORT=out/data/${{github.event.inputs.country}}/report.csv \
-        -e TOTAL_REPORT=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
-        -e TOTAL_REPORT=out/data/${{github.event.inputs.country}}/to_upload.csv
+        -e PROCCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/report.csv \
+        -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
+        -e OUTPUT_REPORT_PATH=out/data/${{github.event.inputs.country}}/to_upload.csv
         
     - name: 5. INFO - Describe the requested date
       run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}}
