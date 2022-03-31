@@ -6,7 +6,7 @@ library(emo)
 
 if(!interactive()){
     args = commandArgs(trailingOnly=TRUE)
-
+    
     concatener <- function(){
         
     deaths_confirmed <- read.delim(args[1], sep=',')
@@ -36,7 +36,7 @@ if(!interactive()){
             })
     return(out)
     }
-
+    print(args[1])
     res = concatener()
     readr::write_csv(res, 
                 file=args[3])
