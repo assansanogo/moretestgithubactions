@@ -136,7 +136,7 @@ jobs:
         -e DATE=$(date +'%m-%d-%Y') \
         -e AGGREGATION=FALSE \
         -e COUNTRY=US streamliner:latest \
-        -e PROCCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/report.csv \
+        -e PROCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/report.csv \
         -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
         -e OUTPUT_REPORT_PATH=out/data/${{github.event.inputs.country}}/to_upload.csv
         
