@@ -165,8 +165,9 @@ jobs:
         
         
   merge:
-    runs-on: ubuntu/latest
-    needs: streamline
+    needs: upload
+    runs-on: ubuntu-latest
+    
     env:
       PROCCESSED_REPORT: "custom_report.csv"
       TOTAL_REPORT: "total_report_${{inputs.country}}.csv"
