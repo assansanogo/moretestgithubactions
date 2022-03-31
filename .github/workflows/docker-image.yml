@@ -94,8 +94,8 @@ jobs:
     - name: datastore for cumulative report
       uses: actions/upload-artifact@v3
       with:
-          name: cumulative_report
-          path: $(pwd)/out/data/${{github.event.inputs.country}}/hiddenfile.csv
+        name: cumulative_report
+        path: $(pwd)/out/data/${{github.event.inputs.country}}/hiddenfile.csv
 
 
   STEP2_streamline:
