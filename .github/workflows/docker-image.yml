@@ -166,7 +166,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: report
-          path: $(pwd)/out/data/${{github.event.inputs.country}}/to_upload.csv
+          path: out/data/${{github.event.inputs.country}}/to_upload.csv
  
     - name: 9. Send email through SendGrid (gmail only)
       env:
