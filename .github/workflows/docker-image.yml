@@ -198,7 +198,7 @@ jobs:
         args: ls gs://streamliner-john-hopkins > hiddenfile.csv
         cli:  gsutil
         
-    - name:
-        run:|
+    - name: last check
+      run: |
         cat  hiddenfile.csv
         
