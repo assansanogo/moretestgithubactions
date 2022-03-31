@@ -382,8 +382,11 @@ util_confirmed_death_summarize_county <- function(dataframe, date='01-01-2021') 
   # & averaging per county
   dplyr::group_by(Province_State) %>%
   dplyr::summarize(col_avg_confirmed_state=mean(col_tot_death_county, na.rm = FALSE),
-                   col_avg_death_state=mean(col_tot_death_county, na.rm = FALSE))
-
+                   col_avg_death_state=mean(col_tot_death_county, na.rm = FALSE)) %>%
+  dplyr::rename(
+    !!col_avg_confirmed_state = col_avg_confirmed_state,
+    !!col_avg_death_state = col_avg_death_state
+    )
   return(summarized_dataframe)
 }
 
