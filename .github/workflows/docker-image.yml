@@ -162,3 +162,10 @@ jobs:
       with:
         args: cp custom_report.csv gs://streamliner-john-hopkins/custom_report2.csv
         cli: gsutil
+        
+        
+  merge:
+    runs-on: rocker/tidyverse:latest
+    env:
+        PROCCESSED_REPORT: ''
+        TOTAL_REPORT:''
