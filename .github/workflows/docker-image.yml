@@ -166,6 +166,7 @@ jobs:
         
   merge:
     runs-on: rocker/tidyverse:latest
+    needs: streamline
     env:
       PROCCESSED_REPORT: "custom_report.csv"
       TOTAL_REPORT: "total_report_${{inputs.country}}.csv"
