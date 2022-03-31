@@ -48,7 +48,7 @@ StreamlinR::download_link(url=neo_link,
                           aggregated=aggregation)
 
 # step 3: clean the data
-cleaned <- StreamlinR::JH_clean_data(dataframe=date_minus_1,
+cleaned <- StreamlinR::JH_clean_data(date=date_minus_1,
                                     country=queried_country,
                                     aggregated=aggregation)
 

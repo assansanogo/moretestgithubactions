@@ -4,7 +4,7 @@
 \alias{util_clean_aggregation}
 \title{clean_aggregation}
 \usage{
-util_clean_aggregation(csv_file, country)
+util_clean_aggregation(csv_file, country = "US")
 }
 \arguments{
 \item{csv_file}{input csv_file}

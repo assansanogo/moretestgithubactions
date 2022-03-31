@@ -4,7 +4,7 @@
 \alias{util_JH_general_clean}
 \title{general cleaner for JH}
 \usage{
-util_JH_general_clean(dataframe, country)
+util_JH_general_clean(dataframe, country = "US")
 }
 \arguments{
 \item{dataframe}{queried dataframe}
