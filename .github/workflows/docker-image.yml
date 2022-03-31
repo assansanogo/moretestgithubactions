@@ -47,7 +47,6 @@ env:
 
 jobs:
 
-
   STEP1_synchronization:
     runs-on: ubuntu-latest
     permissions: 
@@ -60,11 +59,11 @@ jobs:
     
     steps: 
     
-    - name: checkout
+    - name: 1. Branch checkout
       uses: actions/checkout@v3
       
     # Configure Workload Identity Federation via a credentials file.
-    - id: 'auth'
+    - id: 2. Authentication to GCP
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v0'
       with:
@@ -72,12 +71,12 @@ jobs:
         service_account: 'streamliner@my-training-as.iam.gserviceaccount.com'
         
         
-    - name: prepare the folders before syncing
+    - name: 3. Folder creation before syncing
       id: 'folders'
       run: |
         mkdir -p $(pwd)/out/data/${{github.event.inputs.country}}
       
-    - name: sync with remote bucket  
+    - name: 4. Sync with remote bucket  
       uses: actions-hub/gcloud@master
       id: 'out'
       env:
@@ -87,11 +86,11 @@ jobs:
         args: rsync -r  gs://streamliner-john-hopkins/${{ github.event.inputs.country }} $(pwd)/out/data/${{ github.event.inputs.country }}
         cli:  gsutil
         
-    - name: last check
+    - name: 5. Safety check (for debug)
       run: |
         cat  $(pwd)/out/data/${{github.event.inputs.country}}/hiddenfile.csv
     
-    - name: datastore for cumulative report
+    - name: 6. Temporary datastore (artifact)
       uses: actions/upload-artifact@v3
       with:
         name: cumulative_report
@@ -105,49 +104,50 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: prepare the folders before syncing
+    - name: 1. Folder creation before syncing
       id: 'folders'
       run: |
         mkdir -p $(pwd)/out/data/${{github.event.inputs.country}}
         
-    - name: datastore_retrieval
+    - name: 2. Data retrieval for previously fetched cumulative report (artifact from previous step)
       uses: actions/download-artifact@v3
       with:
         name: cumulative_report
 
+    - name: 3. Mapped directory cleanup
+      uses: JesseTG/rm@v1.0.2
+      with:
+        path: $(pwd)/out
          
     #- id: checks
     #  name: check dest folder
     #  run: |
     #    echo $(ls -l $(pwd)/out)
       
-    - id: imgbuilder
-      name: Build the Docker image
+    - id: imgBuilder
+      name: 4. Docker image construction
       run: docker build . --file Dockerfile --tag streamliner:latest
      
-    - name: Remove File
-      uses: JesseTG/rm@v1.0.2
-      with:
-        path: $(pwd)/out
      
-    - id: dailyrun
-      name: Run Docker container (for today)
+    - id: 4. Docker container execution
+      name: Run Docker container for the given date
       run: |
-        docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=$(date +'%m-%d-%Y') 
-        -e AGGREGATION=FALSE 
-        -e COUNTRY=US streamliner:latest 
-        -e PROCCESSED_REPORT=./data/${{github.event.inputs.country}}/report.csv
-        -e TOTAL_REPORT= ./data/${{github.event.inputs.country}}/hiddenfile.csv
-        -e TOTAL_REPORT=./data/${{github.event.inputs.country}}/to_upload.csv
+        docker run -t --rm -v $(pwd)/out:/app/out  \
+        -e DATE=$(date +'%m-%d-%Y') \
+        -e AGGREGATION=FALSE \
+        -e COUNTRY=US streamliner:latest \
+        -e PROCCESSED_REPORT=out/data/${{github.event.inputs.country}}/report.csv \
+        -e TOTAL_REPORT=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
+        -e TOTAL_REPORT=out/data/${{github.event.inputs.country}}/to_upload.csv
         
-    - name: "INFO: Describe the requested date"
+    - name: 5. INFO - Describe the requested date
       run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}}
       
-    - name: "INFO: Describe the level of aggregation"
+    - name: 6. INFO - Describe the level of aggregation
       run: echo "the workflow will retrieve pre-aggregated data:" ${{github.event.inputs.aggregation}}
       
-    - name: "INFO: Describe the country for summarization"
-      run: echo "the workflow will sumamrize the country:" ${{github.event.inputs.country}} 
+    - name: 7 INFO - Describe the chosen country for summarization
+      run: echo "the workflow will summarize the chosen country:" ${{github.event.inputs.country}} 
     
     #- id: daterun
     #  name: Run Docker container (with inputs)
@@ -162,13 +162,13 @@ jobs:
     #    cp $(pwd)/out/$REPORT custom_report.csv
     #    cat custom_report.csv
 
-    - name: datastore_storage
+    - name: 8. Data storage for final report (artifact)
       uses: actions/upload-artifact@v3
       with:
           name: report
           path: $(pwd)/out/data/${{github.event.inputs.country}}/to_upload.csv
  
-    - name: Send email
+    - name: 9. Send email through SendGrid (gmail only)
     
       env:
         SENDER_EMAIL: 'assansanogo@gmail.com'
@@ -192,29 +192,28 @@ jobs:
       id-token: 'write'
           
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      
-    - name: datastore_retrieval
+    - uses: actions/checkout@v3
+  
+    - name: 1. Data retrieval for final report (artifact)
       uses: actions/download-artifact@v3
       with:
         name: report
-
+    
     # Configure Workload Identity Federation via a credentials file.
     - id: 'auth'
-      name: 'Authenticate to Google Cloud'
+      name: 2. Authenticate to GCP
       uses: 'google-github-actions/auth@v0'
-      with:
+      with: 
         workload_identity_provider: 'projects/372976581437/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
         service_account: 'streamliner@my-training-as.iam.gserviceaccount.com'
 
-    - name: 'populate bucket'
+    - name: 3. bucket upload
       uses: 'google-github-actions/upload-cloud-storage@v0'
       with:
           path: $(pwd)/out/data/${{github.event.inputs.country}}/to_upload.csv
           destination: 'streamliner-john-hopkins'
           
-    - name: read from bucket  
+    - name: 4. safety check (debug)  
       uses: actions-hub/gcloud@master
       env:
         PROJECT_ID: my-training-as
