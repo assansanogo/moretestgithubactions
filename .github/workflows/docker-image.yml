@@ -134,10 +134,11 @@ jobs:
         docker run -t --rm -v $(pwd)/out:/app/out  \
         -e DATE=$(date +'%m-%d-%Y') \
         -e AGGREGATION=FALSE \
-        -e COUNTRY=US streamliner:latest \
+        -e COUNTRY=US  \
         -e PROCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_preaggregation_FALSE.report.csv \
         -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
-        -e OUTPUT_REPORT_PATH=out/data/${{github.event.inputs.country}}/to_upload.csv
+        -e OUTPUT_REPORT_PATH=out/data/${{github.event.inputs.country}}/to_upload.csv \
+        streamliner:latest
         
     - name: 5. INFO - Describe the requested date
       run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}}
