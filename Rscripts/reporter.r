@@ -58,8 +58,9 @@ summarized_report <- JH_confirmed_death_summarize(dataframe=cleaned,
                                           aggregated=aggregation)
 
 # step 5: save locally (optional)
-outname <- paste("out/",
-                queried_country, 
+outname <- paste("out/data/",
+                queried_country,
+                 "/", 
                 date_minus_1,
                 "_pre_aggregation_",
                 aggregation,
