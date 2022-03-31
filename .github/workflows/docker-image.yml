@@ -29,7 +29,7 @@ on:
         - Australia
         - Canada
         - France
-        - United Kingdom
+
         
       # Input 4: destinatary
       dest_email:
@@ -187,6 +187,13 @@ jobs:
       with:
         workload_identity_provider: 'projects/372976581437/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
         service_account: 'streamliner@my-training-as.iam.gserviceaccount.com'
+        
+    - name: read from bucket  
+      id: 'folders'
+      run: |
+        mkdir data/${{inputs.country}}
+      
+
  
     - name: read from bucket  
       uses: actions-hub/gcloud@master
@@ -195,10 +202,10 @@ jobs:
         PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: ls gs://streamliner-john-hopkins > hiddenfile.csv
+        args: rsync data/${{ inputs.country }} gs://streamliner-john-hopkins/${{ inputs.country }}
         cli:  gsutil
         
     - name: last check
       run: |
-        cat  hiddenfile.csv
+        cat  data/${{inputs.country}}/hiddenfile.csv
         
