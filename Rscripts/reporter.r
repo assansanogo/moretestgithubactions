@@ -27,7 +27,7 @@ if (length(args)>2){
   date_minus_1 <- format(x=date_minus_1, format="%m-%d-%Y")
   
   message(paste(emo::ji("ok"), 
-                "your request will treat the data of (DAY-1): ", 
+                "your request will retrieve the data of (DAY-1): ", 
                 date_minus_1))
 } else{
   error_string <- "Please supply the correct arguments: \n
@@ -39,21 +39,22 @@ if (length(args)>2){
 }
 
 # step 1: link creation
-neo_link <- StreamlinR::create_full_link(date_minus_1, 
-                                            aggregated=aggregation)
+neo_link <- StreamlinR::create_full_link(date=date_minus_1, 
+                                        aggregated=aggregation)
 print(neo_link)
 
 # step 2: download the data
-StreamlinR::download_link(neo_link, 
-                              aggregated=aggregation)
+StreamlinR::download_link(url=neo_link, 
+                          aggregated=aggregation)
 
 # step 3: clean the data
-cleaned <- StreamlinR::JH_clean_data(date_minus_1,
-                                      country=queried_country,
-                                      aggregated=aggregation)
+cleaned <- StreamlinR::JH_clean_data(dataframe=date_minus_1,
+                                    country=queried_country,
+                                    aggregated=aggregation)
 
 # step 4: summary
-summarized_report <- JH_confirmed_death_summarize(cleaned,
+summarized_report <- JH_confirmed_death_summarize(dataframe=cleaned,
+                                          date=date_minus_1,
                                           aggregated=aggregation)
 
 # step 5: save locally (optional)
@@ -73,5 +74,7 @@ message(paste(emo::ji("ok"),
 
 # step 6: output the data
 # display the results
-print(summarized_report, n = nrow(summarized_report))
+print(summarized_report, 
+      n=nrow(summarized_report))
 }
+ 

@@ -124,7 +124,7 @@ download_link <-function(url, aggregated=FALSE){
   return(out)
 }
 
-util_JH_general_clean <- function(dataframe, country){
+util_JH_general_clean <- function(dataframe, country="US"){
 
   #' general cleaner for JH
   #'
@@ -162,7 +162,7 @@ util_JH_general_clean <- function(dataframe, country){
   return(dataframe)
 }
 
-util_clean_no_aggregation <- function(csv_file, country){
+util_clean_no_aggregation <- function(csv_file, country="US"){
     
   #' clean_no_aggregation
   #'
@@ -247,7 +247,7 @@ util_clean_no_aggregation <- function(csv_file, country){
   }
 }
 
-util_clean_aggregation <- function(csv_file, country){
+util_clean_aggregation <- function(csv_file, country="US"){
   #' clean_aggregation
   #'
   #' general clean function for J.H website gather daily data 
@@ -306,7 +306,7 @@ JH_clean_data <- function(date='01-01-2021', country="US", aggregated=FALSE){
   }
 }
 
-util_confirmed_death_summarize_state <- function(dataframe,date='01-01-2021') {
+util_confirmed_death_summarize_state <- function(dataframe, date='01-01-2021') {
 
   #' Create a report with confirmed cases and deaths
   #' for each State (Helper function)
@@ -344,7 +344,7 @@ util_confirmed_death_summarize_state <- function(dataframe,date='01-01-2021') {
   return(summarized_dataframe)
 }
 
-util_confirmed_death_summarize_county <- function(dataframe,date='01-01-2021') {
+util_confirmed_death_summarize_county <- function(dataframe, date='01-01-2021') {
 
   #' Create a report with confirmed cases and deaths
   #' averaged over counties for each State (Helper function)
