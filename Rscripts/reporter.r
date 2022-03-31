@@ -64,6 +64,7 @@ outname <- paste("out/data/",
                 date_minus_1,
                 "_pre_aggregation_",
                 aggregation,
+                "report",
                 ".csv",
                 sep="")
 
