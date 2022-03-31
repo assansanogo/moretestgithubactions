@@ -167,5 +167,15 @@ jobs:
   merge:
     runs-on: rocker/tidyverse:latest
     env:
-      PROCCESSED_REPORT: ''
-      TOTAL_REPORT: ''
+      PROCCESSED_REPORT: "custom_report.csv"
+      TOTAL_REPORT: "total_report_${{inputs.country}}.csv"
+    
+    steps:
+    - name: read from bucket  
+      uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: my-training-as
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      with:
+        args: cp  gs://streamliner-john-hopkins/custom_report3.csv custom_report3.csv
+        cli: gsutil
