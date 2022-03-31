@@ -336,14 +336,14 @@ util_confirmed_death_summarize_state <- function(dataframe, date='01-01-2021') {
   dplyr::summarize(!!col_tot_confirmed_state:=sum(Confirmed, na.rm = FALSE),
                    !!col_tot_death_state:=sum(Deaths, na.rm = FALSE)) %>%
 
-  print(summarized_dataframe, n=10)
+  #print(summarized_dataframe, n=10)
 
-  summarized_dataframe <-summarized_dataframe %>%
+  # summarized_dataframe <-summarized_dataframe %>%
 
-  # we can then group by State averaging Deaths & Confirmed cases
-  dplyr::group_by(Province_State) %>%
-  dplyr::summarize(!!col_avg_confirmed_state:=mean(rlang::as_string(col_tot_confirmed_state), na.rm = FALSE),
-                   !!col_avg_death_state:=mean(rlang::as_string(col_tot_death_state), na.rm = FALSE))
+  # # we can then group by State averaging Deaths & Confirmed cases
+  # dplyr::group_by(Province_State) %>%
+  # dplyr::summarize(!!col_avg_confirmed_state:=mean(rlang::as_string(col_tot_confirmed_state), na.rm = FALSE),
+  #                  !!col_avg_death_state:=mean(rlang::as_string(col_tot_death_state), na.rm = FALSE))
 
   return(summarized_dataframe)
 }
