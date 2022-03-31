@@ -180,7 +180,7 @@ jobs:
         pip3 install sendgrid pdfkit glob2
 
         PREVIOUS_DAY_CSV= $(echo ls $(pwd)/out/data/${{github.event.inputs.country}}/*aggregation*.csv)
-        python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }} $PREVIOUS_DAY_CSV
+        python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }} "$PREVIOUS_DAY_CSV"
       
   STEP3_upload:
     needs: STEP2_streamline
