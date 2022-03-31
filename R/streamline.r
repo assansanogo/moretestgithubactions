@@ -321,25 +321,30 @@ util_confirmed_death_summarize_state <- function(dataframe) {
   #' @examples
   #' # create a report: confirmed_death_summarize_county(dataframe)
   #'  
-    
+  
+  
+  col_tot_confirmed_state<-stringr::str_interp("total_confirmed_state_${date}")
+  col_tot_death_state<-stringr::str_interp("total_deaths_state_${date}")
+  col_avg_confirmed_state<-stringr::str_interp("total_confirmed_state_${date}")
+  col_avg_death_state<-stringr::str_interp("total_deaths_state_${date}")
+  
   summarized_dataframe <- dataframe %>% 
-  # In case there are k>1 entry per county
-  # need to sum values for the same county
+  # In case there are k>1 entry per state
+  # need to sum values for the same state
 
   dplyr::group_by(Province_State) %>%
-  dplyr::summarize(total_confirmed_state = sum(Confirmed, na.rm = FALSE),
-                  total_deaths_state = sum(Deaths, na.rm = FALSE)) %>%
+  dplyr::summarize(col_tot_confirmed_state = sum(Confirmed, na.rm = FALSE),
+                   col_tot_death_state = sum(Deaths, na.rm = FALSE)) %>%
 
   # we can then group by State averaging Deaths & Confirmed cases
-  # & averaging per county
   dplyr::group_by(Province_State) %>%
-  dplyr::summarize(avg_confirmed_state = mean(total_confirmed_state, na.rm = FALSE),
-  avg_deaths_state = mean(total_deaths_state, na.rm = FALSE))
+  dplyr::summarize(col_avg_confirmed_state = mean(col_tot_confirmed_state, na.rm = FALSE),
+                   col_avg_death_state = mean(col_tot_death_state, na.rm = FALSE))
 
   return(summarized_dataframe)
 }
 
-util_confirmed_death_summarize_county <- function(dataframe) {
+util_confirmed_death_summarize_county <- function(dataframe,date) {
 
   #' Create a report with confirmed cases and deaths
   #' averaged over counties for each State (Helper function)
@@ -354,20 +359,26 @@ util_confirmed_death_summarize_county <- function(dataframe) {
   #' @examples
   #' # create a report: confirmed_death_summarize_county(dataframe)
   #'  
-    
+   
+  
+  col_tot_confirmed_county<-stringr::str_interp("total_confirmed_county_${date}")
+  col_tot_death_county<-stringr::str_interp("total_deaths_county_${date}")
+  col_avg_confirmed_state<-stringr::str_interp("total_confirmed_state_${date}")
+  col_avg_death_state<-stringr::str_interp("total_deaths_state_${date}")
+  
   summarized_dataframe <- dataframe %>% 
   # In case there are k>1 entry per county
   # need to sum values for the same county
 
   dplyr::group_by(Admin2, Province_State) %>%
-  dplyr::summarize(total_confirmed_county = sum(Confirmed, na.rm = FALSE),
-                  total_deaths_county = sum(Deaths, na.rm = FALSE)) %>%
+  dplyr::summarize(col_tot_confirmed_county = sum(Confirmed, na.rm = FALSE),
+                   col_tot_death_county = sum(Deaths, na.rm = FALSE)) %>%
 
   # we can then group by State averaging Deaths & Confirmed cases
   # & averaging per county
   dplyr::group_by(Province_State) %>%
-  dplyr::summarize(avg_confirmed_state = mean(total_confirmed_county, na.rm = FALSE),
-                  avg_deaths_state = mean(total_deaths_county, na.rm = FALSE))
+  dplyr::summarize(col_avg_confirmed_state = mean(col_tot_death_county, na.rm = FALSE),
+                   col_avg_death_state = mean(col_tot_death_county, na.rm = FALSE))
 
   return(summarized_dataframe)
 }
