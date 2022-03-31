@@ -180,7 +180,7 @@ jobs:
         sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
         pip3 install sendgrid pdfkit glob2
         echo $(which wkhtmltopdf)
-        TO_UPLOAD_CSV="out/data/${{github.event.inputs.country}}/to_upload.csv"
+        TO_UPLOAD_CSV= $(echo ls $(pwd)/out/*aggregation*.csv
         python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }} $TO_UPLOAD_CSV
       
   STEP3_upload:
