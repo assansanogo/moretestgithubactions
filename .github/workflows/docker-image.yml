@@ -202,7 +202,7 @@ jobs:
         PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: rsync data/${{ github.event.inputs.country }} gs://streamliner-john-hopkins/${{ github.event.inputs.country }}
+        args: rsync -r data/${{ github.event.inputs.country }} gs://streamliner-john-hopkins/${{ github.event.inputs.country }}
         cli:  gsutil
         
     - name: last check
