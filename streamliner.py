@@ -12,14 +12,20 @@ if __name__=='__main__':
     # sys.argv[1] : SENDGRID
     # sys.argv[2] : sender
     # sys.argv[3] : destinatary
+    # sys.argv[4] : daily report computed by streamline
     
     # pdfkit additional config (path tobinary wkhtmltopdf)
     # conversion csv to pdf
-    # TODO : embellify/prettify pdf
+    # TODO : embellify/prettify pdf use argparse
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-    report_csv = 'custom_report.csv'
-    pdfkit.from_file(report_csv, 'custom_report.pdf', configuration=config)
+    report_csv_filename = sys.argv[4]
+    report_pdf_filename = 'custom_report.pdf'
+   
+    # pdf creation (from csv)
+    pdfkit.from_file(report_csv_filename, 
+                     report_pdf_filename , 
+                     configuration=config)
 
 
     # create SENDGRID email object
