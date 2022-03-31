@@ -135,7 +135,7 @@ jobs:
         -e DATE=$(date +'%m-%d-%Y') \
         -e AGGREGATION=FALSE \
         -e COUNTRY=US  \
-        -e PROCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_preaggregation_FALSE_report.csv \
+        -e PROCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_pre_aggregation_FALSE_report.csv \
         -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
         -e OUTPUT_REPORT_PATH=out/data/${{github.event.inputs.country}}/to_upload.csv \
         streamliner:latest
