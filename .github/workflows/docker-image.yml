@@ -190,9 +190,10 @@ jobs:
  
     - name: read from bucket  
       uses: actions-hub/gcloud@master
+      id: 'out'
       env:
         PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: cp gs://streamliner-john-hopkins/hiddenfile.csv hidden_file.csv
-        cli: gsutil
+        args: ls gs://streamliner-john-hopkins/hiddenfile.csv
+        cli:  gsutil
