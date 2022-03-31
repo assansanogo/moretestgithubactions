@@ -5,7 +5,7 @@
 \title{Create a report with confirmed cases and deaths
 averaged over counties for each State (Helper function)}
 \usage{
-util_confirmed_death_summarize_county(dataframe)
+util_confirmed_death_summarize_county(dataframe, date = "01-01-2021")
 }
 \arguments{
 \item{dataframe}{input (cleaned) dataframe - does not contain Admin2}

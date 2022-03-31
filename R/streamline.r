@@ -275,7 +275,7 @@ util_clean_aggregation <- function(csv_file, country){
   return(df_r)
 }
 
-JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
+JH_clean_data <- function(date='01-01-2021', country="US", aggregated=FALSE){
     
   #' Clean_us_data
   #'
@@ -306,7 +306,7 @@ JH_clean_data <- function(date='01-01-2021', country, aggregated=FALSE){
   }
 }
 
-util_confirmed_death_summarize_state <- function(dataframe) {
+util_confirmed_death_summarize_state <- function(dataframe,date='01-01-2021') {
 
   #' Create a report with confirmed cases and deaths
   #' for each State (Helper function)
@@ -344,7 +344,7 @@ util_confirmed_death_summarize_state <- function(dataframe) {
   return(summarized_dataframe)
 }
 
-util_confirmed_death_summarize_county <- function(dataframe,date) {
+util_confirmed_death_summarize_county <- function(dataframe,date='01-01-2021') {
 
   #' Create a report with confirmed cases and deaths
   #' averaged over counties for each State (Helper function)
@@ -360,7 +360,7 @@ util_confirmed_death_summarize_county <- function(dataframe,date) {
   #' # create a report: confirmed_death_summarize_county(dataframe)
   #'  
    
-  
+  # we define new columns names for export
   col_tot_confirmed_county<-stringr::str_interp("total_confirmed_county_${date}")
   col_tot_death_county<-stringr::str_interp("total_deaths_county_${date}")
   col_avg_confirmed_state<-stringr::str_interp("total_confirmed_state_${date}")
@@ -383,7 +383,7 @@ util_confirmed_death_summarize_county <- function(dataframe,date) {
   return(summarized_dataframe)
 }
 
-JH_confirmed_death_summarize <- function(dataframe, aggregated=FALSE){
+JH_confirmed_death_summarize <- function(dataframe, date='01-01-2021',aggregated=FALSE){
 
   #' Create a report with confirmed cases and deaths
   #' averaged over counties for each State
@@ -401,8 +401,8 @@ JH_confirmed_death_summarize <- function(dataframe, aggregated=FALSE){
   #'  
 
   if (aggregated){
-    return(util_confirmed_death_summarize_state(dataframe))
+    return(util_confirmed_death_summarize_state(dataframe,date))
   } else{
-    return(util_confirmed_death_summarize_county(dataframe))
+    return(util_confirmed_death_summarize_county(dataframe,date))
   }
 }

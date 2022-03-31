@@ -5,7 +5,11 @@
 \title{Create a report with confirmed cases and deaths
 averaged over counties for each State}
 \usage{
-JH_confirmed_death_summarize(dataframe, aggregated = FALSE)
+JH_confirmed_death_summarize(
+  dataframe,
+  date = "01-01-2021",
+  aggregated = FALSE
+)
 }
 \arguments{
 \item{dataframe}{input (cleaned) dataframe}
