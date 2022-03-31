@@ -191,7 +191,7 @@ jobs:
     - name: read from bucket  
       id: 'folders'
       run: |
-        mkdir data/${{github.event.inputs.country}}
+        mkdir -p data/${{github.event.inputs.country}}
       
 
  
