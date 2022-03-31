@@ -194,5 +194,5 @@ jobs:
         PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: list gs://streamliner-john-hopkins 
+        args: cp gs://streamliner-john-hopkins/hiddenfile.csv hidden_file.csv
         cli: gsutil
