@@ -153,3 +153,12 @@ jobs:
       with:
           path: custom_report.csv
           destination: 'streamliner-john-hopkins'
+          
+    - name: read from bucket  
+      uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: test
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      with:
+        args: cp custom_report.csv gs://streamliner-john-hopkins/custom_report2.csv
+        cli: gsutil
