@@ -157,7 +157,7 @@ jobs:
     - name: read from bucket  
       uses: actions-hub/gcloud@master
       env:
-        PROJECT_ID: test
+        PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
         args: cp custom_report.csv gs://streamliner-john-hopkins/custom_report2.csv
