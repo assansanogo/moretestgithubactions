@@ -20,7 +20,7 @@ if __name__=='__main__':
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
     report_csv_filename = sys.argv[4]
-    report_pdf_filename = 'custom_report.pdf'
+    report_pdf_filename = report_csv_filename.replace(".csv",".pdf")
    
     # pdf creation (from csv)
     pdfkit.from_file(report_csv_filename, 
