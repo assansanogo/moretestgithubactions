@@ -165,18 +165,20 @@ jobs:
         
         
   merge:
-    needs: upload
+    needs: streamline
     runs-on: ubuntu-latest
     permissions: 
       contents: 'read'
       id-token: 'write'
+      
     env:
       PROCCESSED_REPORT: "custom_report.csv"
       TOTAL_REPORT: "total_report_${{inputs.country}}.csv"
     
+    
     steps: 
     
-    - name: Checkout
+    - name: checkout
       uses: actions/checkout@v3
       
     # Configure Workload Identity Federation via a credentials file.
@@ -188,14 +190,12 @@ jobs:
         workload_identity_provider: 'projects/372976581437/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
         service_account: 'streamliner@my-training-as.iam.gserviceaccount.com'
         
-    - name: read from bucket  
+    - name: prepare the folders before syncing
       id: 'folders'
       run: |
         mkdir -p data/${{github.event.inputs.country}}
       
-
- 
-    - name: read from bucket  
+    - name: sync with remote bucket  
       uses: actions-hub/gcloud@master
       id: 'out'
       env:
