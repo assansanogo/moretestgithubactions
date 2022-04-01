@@ -30,6 +30,7 @@ concatener <- function(args){
                                         by = "Province_State",
                                         all.x = TRUE, 
                                         all.y = FALSE)
+      
 
         # Columns names of the current report  
         new_cols <- colnames(std_deaths_confirmed)
