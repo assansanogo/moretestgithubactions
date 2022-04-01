@@ -8,14 +8,14 @@ library(emo)
 
 concatener <- function(args){
     # current report    
-    deaths_confirmed <- read.delim(args[1], sep=',')
+    deaths_confirmed <- read.delim(args[1], sep=',', header=TRUE)
     
     # external dependency (list of countries)
     csv_countries_filename<-system.file("extdata", "total_countries.csv", package = "StreamlinR")
     dataframe_countries<-read.delim(csv_countries_filename, sep=',',header=TRUE)
 
     # running report
-    total_deaths_confirmed <- read.delim(args[2], sep=';')
+    total_deaths_confirmed <- read.delim(args[2], sep=';',header=TRUE)
     
     out <- tryCatch({ 
         #debug
