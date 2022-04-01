@@ -1,18 +1,237 @@
-name: Docker Image CI
+name: Custom Streamline CI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+  
+    inputs:
+      # Input 1: queried data
+      date:
+        description: "date: mm-dd-yyyy"
+        required: True
+        default: 03-04-2022
+        
+      # Input 2: aggregation of data (pre calculated)
+      aggregation:
+        type: choice
+        required: True
+        description: pre-aggregation
+        options:
+        - TRUE
+        - FALSE
+        
+      # Input 3: country for which results are filtered
+      country:
+        type: choice
+        required: True
+        default: US
+        options:
+        - US
+        # - Australia
+        # - Canada
+        # - France
 
+        
+      # Input 4: destinatary
+      dest_email:
+        description: "destinary email"
+        default: "assansanogo@gmail.com"
+        required: True
+          
+env:
+  GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+ 
 jobs:
 
-  build:
-
+  STEP1_synchronization:
     runs-on: ubuntu-latest
+    permissions: 
+      contents: 'read'
+      id-token: 'write'
+      
+    env:
+      PROCESSED_REPORT: "custom_report.csv"
+      TOTAL_REPORT: "$(pwd)/out/data/total_report_${{inputs.country}}.csv"
+    
+    steps: 
+    
+    - name: 1. Branch checkout
+      uses: actions/checkout@v3
+      
+    # Configure Workload Identity Federation via a credentials file.
+    - id: 'auth'
+      name: 2. Authentication to GCP
+      uses: 'google-github-actions/auth@v0'
+      with:
+        workload_identity_provider: 'projects/372976581437/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: 'streamliner@my-training-as.iam.gserviceaccount.com'
+        
+        
+    - id: 'folders_structure'
+      name: 3. Folder creation before syncing
+      run: |
+        mkdir -p $(pwd)/out/data/${{github.event.inputs.country}}
+      
+    - id: 'sync'
+      name: 4. Sync with remote bucket  
+      uses: actions-hub/gcloud@master 
+      env:
+        PROJECT_ID: my-training-as
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      with:
+        args: rsync -r  gs://streamliner-john-hopkins/${{ github.event.inputs.country }} $(pwd)/out/data/${{ github.event.inputs.country }}
+        cli:  gsutil
+        
+    - name: 5. Safety check (debug checkpoint)
+      run: |
+        cat  $(pwd)/out/data/${{github.event.inputs.country}}/consolidated.csv
+    
+    - name: 6. Temporary datastore (artifact)
+      uses: actions/upload-artifact@v3
+      with:
+        name: previous_reports
+        path: out/data/${{github.event.inputs.country}}/consolidated.csv
 
+
+  STEP2_streamline:
+    runs-on: ubuntu-latest
+    needs: STEP1_synchronization
+    
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    
+    - name: 1. Folder creation before syncing
+      run: |
+        mkdir -p $(pwd)/out/data/${{github.event.inputs.country}}
+        
+   # - name: 2. Dynamic environment variable setting (DATE)
+   #   run: |
+   #     mkdir -p $(pwd)/out/data/${{github.event.inputs.country}}
+   #     echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
+        
+    - name: 3. Data retrieval for previously fetched cumulative report (artifact from previous step)
+      uses: actions/download-artifact@v3
+      with:
+        name: previous_reports
+
+    - name: 4. check destination folder of the artifact
+      run: |
+        echo $(ls /home/runner/work/moretestgithubactions/moretestgithubactions/*)
+        cp /home/runner/work/moretestgithubactions/moretestgithubactions/consolidated.csv  \
+          $(pwd)/out/data/${{github.event.inputs.country}}/consolidated.csv
+      
+    - name: 5. Docker image construction
+      run: docker build . --file Dockerfile --tag streamliner:latest
+     
+    - name: 6. Docker container execution
+      run: |
+        docker run -t --rm -v $(pwd)/out:/app/out  \
+        -e DATE=${{github.event.inputs.date}} \
+        -e AGGREGATION=${{github.event.inputs.aggregation}} \
+        -e COUNTRY=${{github.event.inputs.country}}  \
+        -e PROCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/${{github.event.inputs.date}}_pre_aggregation_${{github.event.inputs.aggregation}}_report.csv \
+        -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/consolidated.csv \
+        -e OUTPUT_REPORT_PATH="out/data/${{github.event.inputs.country}}/${{github.event.inputs.date}}_to_upload.csv" \
+        streamliner:latest
+        
+    #- name: 5. INFO - Describe the requested date
+    #  run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}}
+      
+    #- name: 6. INFO - Describe the level of aggregation
+    #  run: echo "the workflow will retrieve pre-aggregated data:" ${{github.event.inputs.aggregation}}
+      
+    #- name: 7 INFO - Describe the chosen country for summarization
+    #  run: echo "the workflow will summarize the chosen country:" ${{github.event.inputs.country}} 
+    
+    #- id: daterun
+    #  name: Run Docker container (with inputs)
+    #  run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.date}} -e COUNTRY=${{github.event.inputs.country}} -e AGGREGATION=${{github.event.inputs.aggregation}} streamliner:latest                                                   
+    
+    #- name: outputday
+      
+        
+    #  run: | 
+    #    echo $(ls  $(pwd)/out) 
+    #    REPORT=$(echo $(ls  $(pwd)/out) | head -1)
+    #    cp $(pwd)/out/$REPORT custom_report.csv
+    #    cat custom_report.csv
+
+    - name: 7. Data storage for final report (artifact)
+      uses: actions/upload-artifact@v3
+      with:
+          name: consolidated_report_${{github.event.inputs.date}}
+          path: "out/data/${{github.event.inputs.country}}/${{github.event.inputs.date}}_to_upload.csv"
+ 
+    - name: 8. Send email through SendGrid (gmail only)
+      env:
+        SENDER_EMAIL: 'assansanogo@gmail.com'
+        DEST_EMAIL: ${{ github.event.inputs.dest_email }}
+        SENDGRID_API_KEY: ${{ secrets.SENDGRID }}
+
+          
+      run: |
+        echo "$SENDGRID_API_KEY"
+        sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
+        pip3 install sendgrid pdfkit glob2
+        echo ls $(pwd)/out/data/${{github.event.inputs.country}}/*aggregation*.csv
+        PREVIOUS_DAY_CSV=$(echo ls $(pwd)/out/data/${{github.event.inputs.country}}/*aggregation*.csv)
+        
+        python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }} "$PREVIOUS_DAY_CSV"
+      
+  STEP3_upload:
+  
+    needs: STEP2_streamline
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: 'read'
+      id-token: 'write'
+          
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: 1. Set environment
+      run: |
+        echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
+        mkdir -p out/data/${{github.event.inputs.country}}
+        
+    - name: 2. Data retrieval for final report (artifact)
+      uses: actions/download-artifact@v3
+      with:
+        name: consolidated_report_${{env.DATE}}
+    
+    - name: 3. Authenticate to GCP (Auth through Workload Identity Federation - Method 1)
+      uses: 'google-github-actions/auth@v0'
+      with: 
+        workload_identity_provider: 'projects/372976581437/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: 'streamliner@my-training-as.iam.gserviceaccount.com'
+        
+    - id: 'list_file'
+      name: 1. Set environment
+      run: |
+        ls /home/runner/work/moretestgithubactions/moretestgithubactions
+        cp /home/runner/work/moretestgithubactions/moretestgithubactions/04-01-2022_to_upload.csv out/data/consolidated.csv
+ 
+
+    #- name: 4. bucket upload
+    #  uses: 'google-github-actions/upload-cloud-storage@v0'
+    #  with:
+    #      path: "/home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv"
+    #      destination: 'streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv'
+          
+    - name: 5. Authenticate to GCP & Copy consolidated file with gsutil (Auth through Workload Identity Federation - Method 2) 
+      uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: my-training-as
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      with:
+        args: cp out/data/consolidated.csv gs://streamliner-john-hopkins/${{github.event.inputs.country}}
+        cli: gsutil
+          
+    - name: 6. safety check upload verification (debug)  (Auth through Workload Identity Federation - Method 2) 
+      uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: my-training-as
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      with:
+        args: list gs://streamliner-john-hopkins/${{github.event.inputs.country}}
+        cli: gsutil
