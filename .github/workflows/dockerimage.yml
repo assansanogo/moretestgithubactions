@@ -191,13 +191,13 @@ jobs:
 
     - name: 1. Set environment
       run: |
-        echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
+        #echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
         mkdir -p out/data/${{github.event.inputs.country}}
         
     - name: 2. Data retrieval for final report (artifact)
       uses: actions/download-artifact@v3
       with:
-        name: consolidated_report_${{env.DATE}}
+        name: consolidated_report_${{github.event.inputs.date}}
     
     - name: 3. Authenticate to GCP (Auth through Workload Identity Federation - Method 1)
       uses: 'google-github-actions/auth@v0'
@@ -209,13 +209,13 @@ jobs:
       name: 1. Set environment
       run: |
         ls /home/runner/work/moretestgithubactions/moretestgithubactions
-        cp /home/runner/work/moretestgithubactions/moretestgithubactions/04-01-2022_to_upload.csv out/data/consolidated.csv
+        cp /home/runner/work/moretestgithubactions/moretestgithubactions/${{github.event.inputs.date}}_to_upload.csv out/data/consolidated.csv
  
 
     #- name: 4. bucket upload
     #  uses: 'google-github-actions/upload-cloud-storage@v0'
     #  with:
-    #      path: "/home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv"
+    #      path: "/home/runner/work/moretestgithubactions/moretestgithubactions/${{github.event.inputs.date}}_to_upload.csv"
     #      destination: 'streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv'
           
     - name: 5. Authenticate to GCP & Copy consolidated file with gsutil (Auth through Workload Identity Federation - Method 2) 
