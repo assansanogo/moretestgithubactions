@@ -230,7 +230,7 @@ jobs:
         PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: cp "/home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv" gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv
+        args: cp /home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv gs://streamliner-john-hopkins/${{github.event.inputs.country}}
         cli: gsutil
           
     - name: 6. safety check (debug)  
