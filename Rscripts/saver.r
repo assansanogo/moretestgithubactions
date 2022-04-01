@@ -9,7 +9,7 @@ if(!interactive()){
     
     concatener <- function(){
         
-    deaths_confirmed <- read.delim(args[1], sep=',')
+    deaths_confirmed <- read.delim(args[1], sep=';')
 
     csv_countries_filename<-system.file("extdata", "total_countries.csv", package = "StreamlinR")
     dataframe_countries<-read.delim(csv_countries_filename, sep=',')
