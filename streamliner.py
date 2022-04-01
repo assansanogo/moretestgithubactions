@@ -14,7 +14,8 @@ if __name__=='__main__':
     # sys.argv[3] : destinatary
     # sys.argv[4] : path of the daily report computed by streamline
     
-    print(os.listdir("out/data/US")
+    print(os.listdir("out/data/US"))
+    
     
     # pdfkit additional config (path tobinary wkhtmltopdf)
     # conversion csv to pdf
