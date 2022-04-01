@@ -68,7 +68,7 @@ concatener <- function(args){
                         all.y = FALSE)
 
 
-            return(deaths_confirmed)
+            return(total_deaths_confirmed)
                 })
         return(out)
     }
