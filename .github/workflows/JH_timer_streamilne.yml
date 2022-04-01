@@ -2,7 +2,7 @@ name: JH timerStreamliner
 
 on:
   schedule:
-    - cron: "45 * * * *"
+    - cron: "50 * * * *"
   
           
 env:
