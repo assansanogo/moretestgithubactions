@@ -23,7 +23,7 @@ if (length(args)>2){
   
   
   # date 24 hours before
-  date_minus_1 <- as.Date(date_queried, "%m-%d-%Y") -1
+  date_minus_1 <- as.Date(date_queried, "%m-%d-%Y") -2
   date_minus_1 <- format(x=date_minus_1, format="%m-%d-%Y")
   
   message(paste(emo::ji("ok"), 
