@@ -13,7 +13,7 @@ The challenges (in decreasing priority):
 
 The solution has been designed with the focus on the 4 points :
 
-### Target tools:
+### :writing_hand: Target tools:
 * GCP
 * R
 * GitHub actions
