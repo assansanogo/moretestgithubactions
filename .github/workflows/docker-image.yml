@@ -88,13 +88,13 @@ jobs:
         
     - name: 5. Safety check (for debug)
       run: |
-        cat  $(pwd)/out/data/${{github.event.inputs.country}}/hiddenfile.csv
+        cat  $(pwd)/out/data/${{github.event.inputs.country}}/consolidated.csv
     
     - name: 6. Temporary datastore (artifact)
       uses: actions/upload-artifact@v3
       with:
         name: cumulative_report
-        path: out/data/${{github.event.inputs.country}}/hiddenfile.csv
+        path: out/data/${{github.event.inputs.country}}/consolidated.csv
 
 
   STEP2_streamline:
@@ -119,7 +119,7 @@ jobs:
       name: check dest folder
       run: |
         echo $(ls /home/runner/work/moretestgithubactions/moretestgithubactions/*)
-        cp /home/runner/work/moretestgithubactions/moretestgithubactions/hiddenfile.csv  $(pwd)/out/data/${{github.event.inputs.country}}/hiddenfile.csv
+        cp /home/runner/work/moretestgithubactions/moretestgithubactions/consolidated.csv  $(pwd)/out/data/${{github.event.inputs.country}}/consolidated.csv
       
     - id: 'img_builder'
       name: 4. Docker image construction
@@ -133,7 +133,7 @@ jobs:
         -e AGGREGATION=FALSE \
         -e COUNTRY=US  \
         -e PROCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_pre_aggregation_FALSE_report.csv \
-        -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
+        -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/consolidated.csv \
         -e OUTPUT_REPORT_PATH="out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_to_upload.csv" \
         streamliner:latest
         
@@ -222,7 +222,7 @@ jobs:
       uses: 'google-github-actions/upload-cloud-storage@v0'
       with:
           path: "/home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv"
-          destination: 'streamliner-john-hopkins/${{github.event.inputs.country}}'
+          destination: 'streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv'
           
     - name: 5. safety check (debug)  
       uses: actions-hub/gcloud@master
