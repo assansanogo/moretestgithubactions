@@ -13,7 +13,7 @@ args = commandArgs(trailingOnly=TRUE)
 print(args)
 
 
-if (length(args)==4){
+if (length(args)==3){
   # date of the day
   date_queried <- args[1]
   # pre-aggregation
