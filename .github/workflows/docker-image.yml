@@ -114,11 +114,6 @@ jobs:
       with:
         name: cumulative_report
 
-    - name: 3. Mapped directory cleanup
-      uses: JesseTG/rm@v1.0.2
-      with:
-        path: $(pwd)/out
-         
     #- id: checks
     #  name: check dest folder
     #  run: |
