@@ -115,10 +115,10 @@ jobs:
       with:
         name: cumulative_report
 
-    #- id: checks
-    #  name: check dest folder
-    #  run: |
-    #    echo $(ls -l $(pwd)/out)
+    - id: checks
+      name: check dest folder
+      run: |
+        echo $(ls /home/runner/work/moretestgithubactions/moretestgithubactions/*)
       
     - id: 'img_builder'
       name: 4. Docker image construction
