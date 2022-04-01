@@ -21,6 +21,7 @@ concatener <- function(args){
         #debug
         print(colnames(total_deaths_confirmed ))
         print(colnames(deaths_confirmed))
+        print(colnames(csv_countries_filename))
 
         # Left join (to make sure to always have the same number of columns) 
         std_deaths_confirmed <- merge(csv_countries_filename,
