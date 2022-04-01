@@ -218,13 +218,22 @@ jobs:
         ls /home/runner/work/moretestgithubactions/moretestgithubactions
  
 
-    - name: 4. bucket upload
-      uses: 'google-github-actions/upload-cloud-storage@v0'
-      with:
-          path: "/home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv"
-          destination: 'streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv'
+    #- name: 4. bucket upload
+    #  uses: 'google-github-actions/upload-cloud-storage@v0'
+    #  with:
+    #      path: "/home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv"
+    #      destination: 'streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv'
           
     - name: 5. safety check (debug)  
+      uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: my-training-as
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      with:
+        args: cp "/home/runner/work/moretestgithubactions/moretestgithubactions/${{env.DATE}}_to_upload.csv" gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv
+        cli: gsutil
+          
+    - name: 6. safety check (debug)  
       uses: actions-hub/gcloud@master
       env:
         PROJECT_ID: my-training-as
