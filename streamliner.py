@@ -23,6 +23,8 @@ if __name__=='__main__':
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
     report_csv_filename = os.path.join("out/data", ("/").join(sys.argv[4].split("/")[-3:]))
+    
+    print(report_csv_filename)
     report_pdf_filename = report_csv_filename.replace(".csv",".pdf")
    
     # pdf creation (from csv)
