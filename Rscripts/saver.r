@@ -42,7 +42,7 @@ concatener <- function(args){
         total_deaths_confirmed[!duplicated_names]
 
         # Combination with previous runs
-        if !(total_deaths_confirmed.columns.isin(new_cols).any()){
+        if (!total_deaths_confirmed.columns.isin(new_cols).any()){
             total_deaths_confirmed <- cbind(total_deaths_confirmed, std_deaths_confirmed, check) 
             cols_ <- colnames(total_deaths_confirmed )
             message(paste("the columns are:", cols_) )
