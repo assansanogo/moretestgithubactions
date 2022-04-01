@@ -40,7 +40,7 @@ concatener <- function(args){
         total_deaths_confirmed <- total_deaths_confirmed[,unique_names]
 
         # Combination with previous runs
-        unique_names <- subset(unique_names, !isin(unique_names, new_cols, ordered = TRUE))
+        unique_names <- subset(unique_names, !prob::isin(unique_names, new_cols, ordered = TRUE))
         total_deaths_confirmed <- total_deaths_confirmed[,unique_names]
 
         total_deaths_confirmed <- cbind(total_deaths_confirmed, std_deaths_confirmed) 
