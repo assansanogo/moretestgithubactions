@@ -191,15 +191,17 @@ jobs:
     steps:
     - uses: actions/checkout@v3
   
-    - name: 1. Data retrieval for final report (artifact)
+        
+    - id: 'set_env'
+      name: 1. Set environment
+      run: |
+        echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
+        mkdir /out/data/${{github.event.inputs.country}}
+        
+    - name: 2. Data retrieval for final report (artifact)
       uses: actions/download-artifact@v3
       with:
         name: report
-        
-    - id: 'set_env'
-      name: 2. Set environment
-      run: |
-        echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
     
     # Configure Workload Identity Federation via a credentials file.
     - id: 'auth'
