@@ -45,8 +45,8 @@ concatener <- function(args){
         total_deaths_confirmed <- cbind(total_deaths_confirmed, std_deaths_confirmed) 
        
         cols_ <- colnames(total_deaths_confirmed )
-        message(paste("the columns are:", cols_) )
-            }
+        message(paste(c("the columns are:", cols_)))
+       
 
         return(total_deaths_confirmed)
         },
@@ -60,7 +60,7 @@ concatener <- function(args){
             message("Original error message:",cond)
             
             # Merge with the reference file with country names
-           total_deaths_confirmed <- merge(dataframe_countries, 
+            total_deaths_confirmed <- merge(dataframe_countries, 
                         deaths_confirmed, 
                         by = "Province_State", 
                         all.x = TRUE, 
