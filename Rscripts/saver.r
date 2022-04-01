@@ -41,7 +41,7 @@ if(!interactive()){
         
                total_deaths_confirmed <- merge(dataframe_countries, 
                             deaths_confirmed, 
-                            by.x = "Province_State", 
+                            by = "Province_State", 
                             all.x = TRUE, 
                             all.y = FALSE)
         
