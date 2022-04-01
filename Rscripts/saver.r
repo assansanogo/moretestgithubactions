@@ -37,11 +37,9 @@ concatener <- function(args){
         # Find Duplicate Column Names
         # Remove Duplicate Column Names
 
-        unique_names <- !duplicated(colnames(total_deaths_confirmed))
-        total_deaths_confirmed <- total_deaths_confirmed[,unique_names]
 
         # Combination with previous runs
-        total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::filter(!col_name %in% new_cols)
+        total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::filter(!col_name %in% new_cols) %>%
         
         total_deaths_confirmed <- cbind(total_deaths_confirmed, std_deaths_confirmed) 
        
