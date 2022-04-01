@@ -36,7 +36,7 @@ concatener <- function(args){
         # Remove Duplicate Column Names
 
         duplicated_names <- duplicated(colnames(total_deaths_confirmed))
-        total_deaths_confirmed[!duplicated_names]
+        total_deaths_confirmed <- total_deaths_confirmed[!duplicated_names]
 
         # Combination with previous runs
         if (total_deaths_confirmed.columns.isin(new_cols).any()){
