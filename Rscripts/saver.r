@@ -15,7 +15,7 @@ concatener <- function(args){
     dataframe_countries<-read.delim(csv_countries_filename, sep=',')
 
     # running report
-    total_deaths_confirmed <- read.delim(args[2], sep=',')
+    total_deaths_confirmed <- read.delim(args[2], sep=',' ,header=FALSE)
     
     out <- tryCatch({ 
         #debug
