@@ -13,17 +13,17 @@ The challenges (in decreasing priority):
 
 The solution has been designed with the focus on the 4 points :
 
-### :writing_hand: Target tools:
+### :toolbox: Target tools:
 * GCP
 * R
 * GitHub actions
 
-### Security:
+### :lock: Security:
 * Github secrets
 * Federated authentication
 * multi steps Docker image
 
-### Automation/Customization:
+### :rocket: Automation/Customization:
 * 3 variants of the same Workflow 
   - daily report (auto)
   - manual trigger
@@ -31,10 +31,10 @@ The solution has been designed with the focus on the 4 points :
  
 * Auto email (only tested with gmail)
 
-### Reliability/Durability:
+### :cloud: Reliability/Durability:
 * Google cloud storage (upload after each run - to circumvent handling GitHub artifact lifetime/lifecycle)
 
-# 2. Improvements:
+# 2. :writing_hand: Improvements:
 
 * extensive testing (with US and other countries)
   - package testing
