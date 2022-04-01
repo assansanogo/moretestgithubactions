@@ -126,6 +126,14 @@ jobs:
     #    REPORT=$(echo $(ls  $(pwd)/out) | head -1)
     #    cp $(pwd)/out/$REPORT custom_report.csv
     #    cat custom_report.csv
+    
+    
+    - name: 6. INFO - Describe the paths & files
+      run: |
+        echo $(ls .)
+        echo $(ls out/data)
+        echo $(ls out/data/US)
+      
 
     - name: 7. Data storage for final report (artifact)
       uses: actions/upload-artifact@v3
