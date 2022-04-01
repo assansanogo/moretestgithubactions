@@ -2,7 +2,7 @@
 
 # 1. Challenges
 
-I designed the solutions with a stack of tools which are the closest to Streamline stack.
+I designed the solutions with a stack of tools which are the closest to Streamline stack.<br>
 (in contrast to my current mastered stack: Python, AWS)
 
 The challenges (in decreasing priority):
