@@ -214,7 +214,7 @@ jobs:
     - id: 'list_file'
       name: 1. Set environment
       run: |
-        echo $(ls out/data/*)
+        ls out/data/
 
     - name: 4. bucket upload
       uses: 'google-github-actions/upload-cloud-storage@v0'
