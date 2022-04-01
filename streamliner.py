@@ -22,7 +22,7 @@ if __name__=='__main__':
     # TODO : embellify/prettify pdf use argparse
     
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-    report_csv_filename = sys.argv[4]
+    report_csv_filename = os.path.join("out/data", ("/").join(sys.argv[4].split("/")[-3:]))
     report_pdf_filename = report_csv_filename.replace(".csv",".pdf")
    
     # pdf creation (from csv)
