@@ -216,7 +216,7 @@ jobs:
       name: 1. Set environment
       run: |
         ls /home/runner/work/moretestgithubactions/moretestgithubactions
-        cp /home/runner/work/moretestgithubactions/moretestgithubactions/04-01-2022_to_upload.csv /out/data/consolidated.sv
+        cp /home/runner/work/moretestgithubactions/moretestgithubactions/04-01-2022_to_upload.csv /out/data/consolidated.csv
  
 
     #- name: 4. bucket upload
