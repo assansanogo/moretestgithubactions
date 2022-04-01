@@ -18,12 +18,9 @@ concatener <- function(args){
     total_deaths_confirmed <- read.delim(args[2], sep=',')
     
     out <- tryCatch({ 
-        
-
+        #debug
         print(colnames(total_deaths_confirmed ))
         print(colnames(deaths_confirmed))
-
-
 
         # Left join (to make sure to always have the same number of columns) 
         std_deaths_confirmed <- merge(csv_countries_filename,
@@ -42,12 +39,12 @@ concatener <- function(args){
         total_deaths_confirmed[!duplicated_names]
 
         # Combination with previous runs
-        if (!total_deaths_confirmed.columns.isin(new_cols).any()){
+        if (total_deaths_confirmed.columns.isin(new_cols).any()){
+            message("the columns already exist")
+            } else {
             total_deaths_confirmed <- cbind(total_deaths_confirmed, std_deaths_confirmed, check) 
             cols_ <- colnames(total_deaths_confirmed )
             message(paste("the columns are:", cols_) )
-            } else {
-            message("the columns already exist")
             }
 
         return(total_deaths_confirmed)
