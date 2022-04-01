@@ -34,12 +34,17 @@ The solution has been designed with the focus on the 4 points :
 ### :cloud: Reliability/Durability:
 * Google cloud storage (upload after each run - to circumvent handling GitHub artifact lifetime/lifecycle)
 
-# 2. :writing_hand: Improvements:
+# 2. Improvements:
 
-* extensive testing (with US and other countries)
-  - package testing
+* extensive testing (code logic)
+  - spelling
+  - units
+  - outliers
+
+ * package testing
   - unit testing for the workflow
   - functional testing
+  
 * add logs (even though the logging is done in GitHub actions)
 
 # 3. Further cleaning
