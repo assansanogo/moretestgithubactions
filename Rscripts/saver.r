@@ -3,6 +3,7 @@
 #imports
 library(StreamlinR)  
 library(emo)
+library(dplyr)
 
 
 
@@ -12,10 +13,10 @@ concatener <- function(args){
     
     # external dependency (list of countries)
     csv_states_filename<-system.file("extdata", "total_countries.csv", package = "StreamlinR")
-    ref_dataframe_states<-read.delim(csv_states_filename, sep=',',header=TRUE)
+    ref_dataframe_states<-read.delim(csv_states_filename, sep=',', header=TRUE)
 
     # running report
-    total_deaths_confirmed <- read.delim(args[2], sep=';',header=TRUE)
+    total_deaths_confirmed <- read.delim(args[2], sep=';', header=TRUE)
     
     out <- tryCatch({ 
         #debug
@@ -40,7 +41,7 @@ concatener <- function(args){
         total_deaths_confirmed <- total_deaths_confirmed[,unique_names]
 
         # Combination with previous runs
-        total_deaths_confirmed <- total_deaths_confirmed %>% filter(!col_name %in% new_cols)
+        total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::filter(!col_name %in% new_cols)
         
         total_deaths_confirmed <- cbind(total_deaths_confirmed, std_deaths_confirmed) 
        
