@@ -14,8 +14,7 @@ if __name__=='__main__':
     # sys.argv[3] : destinatary
     # sys.argv[4] : path of the daily report computed by streamline
     
-    print(os.listdir("out/data/US"))
-    print(sys.argv)
+
     
     
     # pdfkit additional config (path tobinary wkhtmltopdf)
@@ -45,7 +44,7 @@ if __name__=='__main__':
     #  create the pdf report
     #  data must be encoded to be used by SENDGRID 
     
-    with open('custom_report.pdf', 'rb') as f:
+    with open(report_pdf_filename, 'rb') as f:
          data = f.read()
          f.close()
     encoded_file = base64.b64encode(data).decode()
