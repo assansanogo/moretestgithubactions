@@ -12,7 +12,9 @@ if __name__=='__main__':
     # sys.argv[1] : SENDGRID
     # sys.argv[2] : sender
     # sys.argv[3] : destinatary
-    # sys.argv[4] : daily report computed by streamline
+    # sys.argv[4] : path of the daily report computed by streamline
+    
+    print(os.listdir("out/data/US")
     
     # pdfkit additional config (path tobinary wkhtmltopdf)
     # conversion csv to pdf
