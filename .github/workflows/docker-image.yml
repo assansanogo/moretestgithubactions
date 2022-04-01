@@ -227,7 +227,7 @@ jobs:
         args: cp out/data/consolidated.csv gs://streamliner-john-hopkins/${{github.event.inputs.country}}
         cli: gsutil
           
-    - name: 6. safety check upload verification (debug)  
+    - name: 6. safety check upload verification (debug)  (Auth through Workload Identity Federation - Method 2) 
       uses: actions-hub/gcloud@master
       env:
         PROJECT_ID: my-training-as
@@ -236,11 +236,11 @@ jobs:
         args: list gs://streamliner-john-hopkins/${{github.event.inputs.country}}
         cli: gsutil
          
-    - name: 7. Generate pre-signed url 
+    - name: 7. Generate pre-signed url (Auth through Workload Identity Federation - Method 2) 
       uses: actions-hub/gcloud@master
       env:
         PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: signurl -d 10m -u  gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv
+        args: signurl -d 10m gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv
         cli: gsutil
