@@ -101,8 +101,8 @@ jobs:
         -e AGGREGATION=FALSE \
         -e COUNTRY=US  \
         -e PROCESSED_REPORT_PATH=out/data/${{ env.COUNTRY }}/${{ env.DATE }}_pre_aggregation_${{ env.PRE_AGGREGATION }}_report.csv \
-        -e TOTAL_REPORT_PATH=out/data/${{ env.COUNTRY }}/consolidated.csv \
-        -e OUTPUT_REPORT_PATH="out/data/${{ env.COUNTRY }}/${{ env.DATE }}_to_upload.csv" \
+        -e TOTAL_REPORT_PATH=./out/data/${{ env.COUNTRY }}/consolidated.csv \
+        -e OUTPUT_REPORT_PATH="./out/data/${{ env.COUNTRY }}/${{ env.DATE }}_to_upload.csv" \
         streamliner:latest
         
     #- name: 5. INFO - Describe the requested date
