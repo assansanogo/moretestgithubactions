@@ -11,9 +11,9 @@ args = commandArgs(trailingOnly=TRUE)
 # if not, return an error
   
 print(args)
-print("#################")
 
-if (length(args)>2){
+
+if (length(args)!=4){
   # date of the day
   date_queried <- args[1]
   # pre-aggregation
@@ -22,14 +22,15 @@ if (length(args)>2){
   queried_country <- args[3]
   
   
-  # date 24 hours before
-  date_minus_1 <- as.Date(date_queried, "%m-%d-%Y") -2
+  # date 24 hours before (date formatting: mm-dd-yyyy)
+  date_minus_1 <- as.Date(date_queried, "%m-%d-%Y") - 1
   date_minus_1 <- format(x=date_minus_1, format="%m-%d-%Y")
   
   message(paste(emo::ji("ok"), 
                 "your request will retrieve the data of (DAY-1): ", 
                 date_minus_1))
 } else{
+  
   error_string <- "Please supply the correct arguments: \n
   * Date (format : mm-dd-yyyy) for which you want to see the results @ D-1\n
   * Aggregation whether you want already aggregated data : TRUE or raw : FALSE"
@@ -38,7 +39,7 @@ if (length(args)>2){
               call.=FALSE)
 }
 
-# step 1: link creation
+# step 1: url/link creation
 neo_link <- StreamlinR::create_full_link(date=date_minus_1, 
                                         aggregated=aggregation)
 print(neo_link)
