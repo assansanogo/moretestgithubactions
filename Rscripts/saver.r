@@ -22,8 +22,7 @@ if(!interactive()){
     #left join
     total_deaths_confirmed <- merge(total_deaths_confirmed, 
                                     deaths_confirmed, 
-                                    by.x = "Province_State", 
-                                    by.y = "Province_State", 
+                                    by = "Province_State", 
                                     all.x = TRUE, 
                                     all.y = FALSE)
     return(total_deaths_confirmed)
@@ -43,7 +42,6 @@ if(!interactive()){
                total_deaths_confirmed <- merge(dataframe_countries, 
                             deaths_confirmed, 
                             by.x = "Province_State", 
-                            by.y = "Province_State", 
                             all.x = TRUE, 
                             all.y = FALSE)
         
