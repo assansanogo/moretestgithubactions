@@ -132,7 +132,7 @@ jobs:
         -e COUNTRY=US  \
         -e PROCESSED_REPORT_PATH=out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_pre_aggregation_FALSE_report.csv \
         -e TOTAL_REPORT_PATH=out/data/${{github.event.inputs.country}}/hiddenfile.csv \
-        -e OUTPUT_REPORT_PATH=out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_to_upload.csv \
+        -e OUTPUT_REPORT_PATH="out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_to_upload.csv" \
         streamliner:latest
         
     - name: 5. INFO - Describe the requested date
@@ -161,7 +161,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: report
-          path: out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_to_upload.csv
+          path: "out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_to_upload.csv"
  
     - name: 9. Send email through SendGrid (gmail only)
       env:
@@ -205,7 +205,7 @@ jobs:
     - name: 3. bucket upload
       uses: 'google-github-actions/upload-cloud-storage@v0'
       with:
-          path: out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_to_upload.csv
+          path: "out/data/${{github.event.inputs.country}}/$(date +'%m-%d-%Y')_to_upload.csv"
           destination: 'streamliner-john-hopkins'
           
     - name: 4. safety check (debug)  
