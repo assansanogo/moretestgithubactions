@@ -41,7 +41,7 @@ concatener <- function(args){
         # Combination with previous runs
         total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::filter(!col_name %in% new_cols) %>%
         
-        total_deaths_confirmed <- cbind(total_deaths_confirmed, std_deaths_confirmed) 
+        total_deaths_confirmed <- cbind(std_deaths_confirmed,total_deaths_confirmed) 
        
         cols_ <- colnames(total_deaths_confirmed )
         message(paste(c("the columns are:", cols_)))
