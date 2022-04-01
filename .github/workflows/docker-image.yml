@@ -196,7 +196,7 @@ jobs:
       name: 1. Set environment
       run: |
         echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
-        mkdir /out/data/${{github.event.inputs.country}}
+        mkdir -p /out/data/${{github.event.inputs.country}}
         
     - name: 2. Data retrieval for final report (artifact)
       uses: actions/download-artifact@v3
