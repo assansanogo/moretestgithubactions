@@ -11,8 +11,8 @@ concatener <- function(args){
     deaths_confirmed <- read.delim(args[1], sep=',', header=TRUE)
     
     # external dependency (list of countries)
-    csv_countries_filename<-system.file("extdata", "total_countries.csv", package = "StreamlinR")
-    dataframe_countries<-read.delim(csv_countries_filename, sep=',',header=TRUE)
+    csv_states_filename<-system.file("extdata", "total_countries.csv", package = "StreamlinR")
+    ref_dataframe_states<-read.delim(csv_states_filename, sep=',',header=TRUE)
 
     # running report
     total_deaths_confirmed <- read.delim(args[2], sep=';',header=TRUE)
@@ -21,10 +21,10 @@ concatener <- function(args){
         #debug
         print(colnames(total_deaths_confirmed ))
         print(colnames(deaths_confirmed))
-        print(colnames(csv_countries_filename))
+        print(colnames(ref_dataframe_states))
 
         # Left join (to make sure to always have the same number of columns) 
-        std_deaths_confirmed <- merge(csv_countries_filename,
+        std_deaths_confirmed <- merge(ref_dataframe_states,
                                         deaths_confirmed, 
                                         by = "Province_State",
                                         all.x = TRUE, 
