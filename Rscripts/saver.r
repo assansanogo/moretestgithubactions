@@ -39,6 +39,7 @@ concatener <- function(args){
         # Remove Duplicate Column Names
         print(new_cols)
         print(old_cols)
+        print(!(old_cols %in% new_cols))
 
         # Combination with previous runs
         total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::select(old_cols[!(old_cols %in% new_cols)]) %>%
