@@ -1,4 +1,4 @@
-name: Custom Streamline CI
+name: JH Custom Streamline CI
 
 on:
   workflow_dispatch:
