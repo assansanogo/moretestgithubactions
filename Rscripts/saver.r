@@ -16,7 +16,7 @@ if(!interactive()){
 
 
     out <- tryCatch({ 
-    total_deaths_confirmed <- read.delim(args[2], sep=';')
+    total_deaths_confirmed <- read.delim(args[2], sep=',')
 
     print(colnames(total_deaths_confirmed ))
     print(colnames(deaths_confirmed))
