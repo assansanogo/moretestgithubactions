@@ -89,7 +89,7 @@ jobs:
     - name: 6. Temporary datastore (artifact)
       uses: actions/upload-artifact@v3
       with:
-        name: cumulative_report
+        name: previous_reports
         path: out/data/${{github.event.inputs.country}}/consolidated.csv
 
 
@@ -112,7 +112,7 @@ jobs:
     - name: 3. Data retrieval for previously fetched cumulative report (artifact from previous step)
       uses: actions/download-artifact@v3
       with:
-        name: cumulative_report
+        name: previous_reports
 
     - name: 4. check destination folder of the artifact
       run: |
@@ -159,7 +159,7 @@ jobs:
     - name: 7. Data storage for final report (artifact)
       uses: actions/upload-artifact@v3
       with:
-          name: consolidated_report
+          name: consolidated_report_${{env.DATE}}
           path: "out/data/${{github.event.inputs.country}}/${{env.DATE}}_to_upload.csv"
  
     - name: 8. Send email through SendGrid (gmail only)
@@ -197,7 +197,7 @@ jobs:
     - name: 2. Data retrieval for final report (artifact)
       uses: actions/download-artifact@v3
       with:
-        name: consolidated_report
+        name: consolidated_report_${{env.DATE}}
     
     - name: 3. Authenticate to GCP (Auth through Workload Identity Federation - Method 1)
       uses: 'google-github-actions/auth@v0'
@@ -235,12 +235,14 @@ jobs:
       with:
         args: list gs://streamliner-john-hopkins/${{github.event.inputs.country}}
         cli: gsutil
-         
-    - name: 7. Generate pre-signed url (Auth through Workload Identity Federation - Method 2) 
-      uses: actions-hub/gcloud@master
-      env:
-        PROJECT_ID: my-training-as
-        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-      with:
-        args: signurl -d 10m -u gs://streamliner-john-hopkins/US/consolidated.csv
-        cli: gsutil
+
+  STEP4_signed_url:
+    needs: STEP3_upload
+    runs-on: google/cloud-sdk:latest 
+    steps:
+     - name: 7. Generate pre-signed url (Auth through Workload Identity Federation - Method 2) 
+        run:|
+        gsutil signurl -d 10m ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated
+
+
+ 
