@@ -215,6 +215,7 @@ jobs:
       name: 1. Set environment
       run: |
         ls out/data/US/*.csv
+        ls .
 
     - name: 4. bucket upload
       uses: 'google-github-actions/upload-cloud-storage@v0'
