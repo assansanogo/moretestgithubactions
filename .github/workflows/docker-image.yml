@@ -236,13 +236,4 @@ jobs:
         args: list gs://streamliner-john-hopkins/${{github.event.inputs.country}}
         cli: gsutil
 
-  STEP4_signed_url:
-    needs: STEP3_upload
-    runs-on: google/cloud-sdk:latest 
-    steps:
-     - name: 7. Generate pre-signed url (Auth through Workload Identity Federation - Method 2) 
-       run: |
-          gsutil signurl -d 10m ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated
-
-
- 
+  
