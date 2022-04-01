@@ -173,8 +173,9 @@ jobs:
         echo "$SENDGRID_API_KEY"
         sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
         pip3 install sendgrid pdfkit glob2
-
+        echo ls $(pwd)/out/data/${{github.event.inputs.country}}/*aggregation*.csv
         PREVIOUS_DAY_CSV= $(echo ls $(pwd)/out/data/${{github.event.inputs.country}}/*aggregation*.csv)
+        
         python3 ./streamliner.py "$SENDGRID_API_KEY" ${{ env.SENDER_EMAIL }} ${{ env.DEST_EMAIL }} "$PREVIOUS_DAY_CSV"
       
   STEP3_upload:
