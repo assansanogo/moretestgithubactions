@@ -242,5 +242,5 @@ jobs:
         PROJECT_ID: my-training-as
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: lsignurl -d 10m -u  gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv
+        args: signurl -d 10m -u  gs://streamliner-john-hopkins/${{github.event.inputs.country}}/consolidated.csv
         cli: gsutil
