@@ -45,7 +45,7 @@ concatener <- function(args){
         # Combination with previous runs
         
 
-        total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::select(-one_of(old_cols[(old_cols %in% new_cols)])) %>%
+        total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::select(setdiff(old_cols, new_cols))
         
         total_deaths_confirmed <- cbind(std_deaths_confirmed,total_deaths_confirmed) 
        
