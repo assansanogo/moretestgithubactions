@@ -18,7 +18,11 @@ if(!interactive()){
     out <- tryCatch({ 
     total_deaths_confirmed <- read.delim(args[2], sep=',')
 
-
+    print(colnames(total_deaths_confirmed ))
+    print(colnames(deaths_confirmed))
+        
+        
+        
     #left join
     total_deaths_confirmed <- merge(total_deaths_confirmed, 
                                     deaths_confirmed, 
