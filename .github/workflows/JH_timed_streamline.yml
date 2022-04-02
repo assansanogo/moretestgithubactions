@@ -2,7 +2,7 @@ name: JH timed Streamline
 
 on:
   schedule:
-    - cron: "19 * * * *"
+    - cron: "30 * * * *"
   
           
 env:
