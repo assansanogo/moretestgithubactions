@@ -3,7 +3,7 @@
 
 In this repository :
 you can see 2 contributors (both accounts are mine) 
-<br> :point_right: [url](https://storage.googleapis.com/streamliner-john-hopkins/SIREN_SIRET.jpg)
+<br> :point_right: [url](https://storage.googleapis.com/streamliner-john-hopkins/admin/SIREN_SIRET.jpg)
 
 The code belonging to the R package:
 * under the `R` folder
@@ -67,6 +67,7 @@ The solution has been designed with the focus on the 4 points :
 
 ### :cloud: Reliability/Durability:
 * Google cloud storage (upload after each run - to circumvent handling GitHub artifact lifetime/lifecycle)
+:point_right: [url](https://storage.googleapis.com/streamliner-john-hopkins/admin/JH_GCP.png)
 
 # 2. Improvements:
 
