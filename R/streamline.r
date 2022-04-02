@@ -110,7 +110,7 @@ download_link <-function(url, aggregated=FALSE){
 
     out <- tryCatch({
     dest_file_name <- create_out_name_based_on_url(url, aggregated)
-    print(dest_file_name)
+    
     download.file(url, 
                   destfile = dest_file_name, 
                   mode = "wb", quiet = FALSE)
@@ -296,11 +296,8 @@ JH_clean_data <- function(date='01-01-2021', country="US", aggregated=FALSE){
 
   
   csv_filename = create_out_name_based_on_date(date, aggregated)
-  #print(csv_filename)
-  #df_r <- readr::read_csv(csv_filename)
-  
+
   if (aggregated){
-    print("aggreg clause")
     return(util_clean_aggregation(csv_filename, country))
     }
   else {
@@ -338,14 +335,6 @@ util_confirmed_death_summarize_state <- function(dataframe, date='01-01-2021') {
   dplyr::summarize(col_tot_confirmed_state=sum(Confirmed, na.rm = FALSE),
                    col_tot_death_state=sum(Deaths, na.rm = FALSE)) %>%
 
-  #print(summarized_dataframe, n=10)
-
-  # summarized_dataframe <-summarized_dataframe %>%
-
-  # # we can then group by State averaging Deaths & Confirmed cases
-  # dplyr::group_by(Province_State) %>%
-  # dplyr::summarize(!!col_avg_confirmed_state:=mean(rlang::as_string(col_tot_confirmed_state), na.rm = FALSE),
-  #                  !!col_avg_death_state:=mean(rlang::as_string(col_tot_death_state), na.rm = FALSE))
 
   return(summarized_dataframe)
 }
