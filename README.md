@@ -1,15 +1,33 @@
 # moretestgithubactions
 
 
-In this repository  you will find the code for the R package
-under the `R` folder
-the scripts called by the Docker image under `Rscript` folder
+In this repository :
+
+The code belonging to the R package:
+* under the `R` folder
+
+The scripts called by the Docker container:
+* under `Rscript` folder
+
+The Github actions workflows:
+* under `.github``
+
+* There are 3 workflows (because of the semantic uncertainty: they fulfill different use-cases)
+  * JH_timer_streamline.yml (daily runner - cron job)
+  * JH_auto_streamline.yml  (daily run - manual trigger)
+  * JH_custom_streamline.yml (finer-grain customisation - manual trigger) 
+    - date
+    - aggregation
+    - country
+    - dest email 
 
 
 # 1. Challenges
 
-I designed the solutions with a stack of tools which are the closest to Streamline stack.<br>
-(in contrast to my current mastered stack: Python, AWS)
+I designed the solution with a stack of tools which are the closest to Streamline stack.<br>
+(in contrast to my current mastered stack: Python, AWS). 
+I added some points like automatic mail sendout.
+It allowed me to identify differences in support for such a feature. AWS **natively** supports it when GCP does not.
 
 The challenges (in decreasing priority):
 
