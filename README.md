@@ -23,7 +23,7 @@ The Github actions workflows:
 
 * There are 3 workflows *(match slightly different use-cases)*
   * JH_timed_streamline.yml *(daily runner - cron job)*
-  * JH_auto_streamline.yml  *(daily run - manual trigger)*
+  * JH_auto_streamline.yml  *(current day  - manual trigger)*
   * JH_custom_streamline.yml *(finer-grain customisation - manual trigger)*
     - Params:
      - date (before which the results are queried
@@ -45,7 +45,6 @@ The challenges (in decreasing priority):
 - unfamiliarity with GCP (need further training)
 - github actions/workflow
   * the cron job seems not to be 100% reliable: :point_right: [url](https://github.community/t/no-assurance-on-scheduled-jobs/133753)
-   
 
 
 Nevertheless, the solution has been designed with the focus on the 4 points below:
