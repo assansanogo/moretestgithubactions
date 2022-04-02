@@ -32,6 +32,9 @@ The Github actions workflows:
      - dest email (the recipient email) # only works with gmail
    * the last workflow is to check the functionality of Github scheduled workflow (debug)
 
+* in the root folder you will find streamliner.py
+ - attempt to use R for data wrangling and python to interact with APIS and other services (here: SendGrid). 
+
 # 1. Challenges
 
 I designed the solution with a stack of tools which are the closest to Streamline stack.<br>
