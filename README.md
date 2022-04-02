@@ -82,6 +82,9 @@ Nevertheless, the solution has been designed with the focus on the 4 points belo
  * package testing
   - unit testing for the workflow
   - functional testing
+
+ * refactoring
+  - better errors handling + logging
   
 * add logs (even though the logging is done in GitHub actions)
 
