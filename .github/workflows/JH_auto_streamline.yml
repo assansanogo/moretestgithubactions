@@ -111,20 +111,20 @@ jobs:
         -e OUTPUT_REPORT_PATH="./out/data/${{ env.COUNTRY }}/${{ env.DATE }}_to_upload.csv" \
         streamliner:latest
 
-    - name: 6. INFO - Describe the paths & files
+    - name: 8. INFO - Describe the paths & files
       run: |
         echo $(ls .)
         echo $(ls out/data)
         echo $(ls out/data/US)
       
 
-    - name: 7. Data storage for final report (artifact)
+    - name: 9. Data storage for final report (artifact)
       uses: actions/upload-artifact@v3
       with:
           name: consolidated_report_${{ env.DATE }}
           path: "out/data/${{ env.COUNTRY }}/${{ env.DATE }}_to_upload.csv"
  
-    - name: 8. Send email through SendGrid (gmail only - can modify directly in the top environment variables)
+    - name: 10. Send email through SendGrid (gmail only - can modify directly in the top environment variables)
 
       run: |
         echo "$SENDGRID_API_KEY"
