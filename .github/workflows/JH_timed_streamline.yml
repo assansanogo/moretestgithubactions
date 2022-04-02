@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: "50 * * * *"
   
+  workflow_dispatch:
           
 env:
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
