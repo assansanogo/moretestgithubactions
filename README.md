@@ -25,10 +25,11 @@ The Github actions workflows:
   * JH_timed_streamline.yml *(daily runner - cron job)*
   * JH_auto_streamline.yml  *(daily run - manual trigger)*
   * JH_custom_streamline.yml *(finer-grain customisation - manual trigger)*
-    - date (before which the results are queried
-    - aggregation (there are 2 url : one with already aggregated data and the other without) (not extensively tested)
-    - country (country for which you which to filter)  (currently limited to US)
-    - dest email (the recipient email) # only works with gmail
+    - Params:
+     - date (before which the results are queried
+     - aggregation (there are 2 url : one with already aggregated data and the other without) (not extensively tested)
+     - country (country for which you which to filter)  (currently limited to US)
+     - dest email (the recipient email) # only works with gmail
 
 # 1. Challenges
 
