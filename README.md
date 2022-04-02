@@ -10,6 +10,12 @@ The scripts called by the Docker container:
 * under `Rscript` folder
 
 The Github actions workflows:
+
+[![JH AutoStreamliner](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_auto_streamline.yml/badge.svg)](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_auto_streamline.yml)
+
+[![JH Custom Streamline](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_custom_streamline.yml/badge.svg)](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_custom_streamline.yml)
+
+
 * under `.github`
 
 * There are 3 workflows *(match slightly different use-cases)*
