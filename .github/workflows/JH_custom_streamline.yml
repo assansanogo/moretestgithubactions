@@ -17,7 +17,7 @@ on:
         description: pre-aggregation
         default: 'FALSE'
         options:
-        - 'TRUE'
+        #- 'TRUE'
         - 'FALSE'
         
       # Input 3: country for which results are filtered
