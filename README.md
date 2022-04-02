@@ -40,7 +40,7 @@ The Github actions workflows:
 I designed the solution with a stack of tools which are the closest to Streamline stack.<br>
 (in contrast to my current mastered stack: Python, AWS). 
 I added some points like automatic mail sendout.
-It allowed me to identify differences in support for such a feature. AWS **natively** supports it when GCP does not.
+It allowed me to identify differences in support for such a feature. AWS **natively** supports it when GCP **does not.**
 
 The challenges (in decreasing priority):
 
@@ -53,14 +53,16 @@ The challenges (in decreasing priority):
 Nevertheless, the solution has been designed with the focus on the 4 points below:
 
 ### :toolbox: Target tools:
-* GCP
-* R
-* GitHub actions
+* stack:
+ - GCP
+ - R
+ - GitHub actions
 
 ### :lock: Security:
-* Github secrets
-* Federated authentication
-* multi steps Docker image
+* Good practices:
+ - Github secrets
+ - Federated authentication
+ - multi steps Docker image
 
 ### :rocket: Automation/Customization:
 * 3 variants of the same Workflow 
