@@ -35,6 +35,8 @@ The Github actions workflows:
 * in the root folder you will find streamliner.py
  - attempt to use R for data wrangling and python to interact with APIS and other services (here: SendGrid). 
 
+At tehend of each run, you can download the `consolidated report` (which include previous runs)
+
 # 1. Challenges
 
 I designed the solution with a stack of tools which are the closest to Streamline stack.<br>
