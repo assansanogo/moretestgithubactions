@@ -79,7 +79,7 @@ jobs:
     - name: 2. set_timezone (LA by default)
       uses: szenius/set-timezone@v1.0
       with:
-          timezoneLinux: "America/Los Angeles"
+          timezoneLinux: "America/Los_Angeles"
           
     - name: 3. Dynamic environment variable setting (DATE)
       run: |
