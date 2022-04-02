@@ -27,6 +27,7 @@ jobs:
   
     steps: 
     
+    
     - name: 1. Branch checkout
       uses: actions/checkout@v3
       
@@ -75,26 +76,31 @@ jobs:
       run: |
         mkdir -p $(pwd)/out/data/${{env.COUNTRY}}
         
-    - name: 2. Dynamic environment variable setting (DATE)
+    - name: 2. set_timezone (LA by default)
+      uses: szenius/set-timezone@v1.0
+      with:
+          timezoneLinux: "America/Los Angeles"
+          
+    - name: 3. Dynamic environment variable setting (DATE)
       run: |
         mkdir -p $(pwd)/out/data/${{ env.COUNTRY }}
         echo "DATE=$(date +'%m-%d-%Y')" >> $GITHUB_ENV
         
-    - name: 3. Data retrieval for previously fetched cumulative report (artifact from previous step)
+    - name: 4. Data retrieval for previously fetched cumulative report (artifact from previous step)
       uses: actions/download-artifact@v3
       with:
         name: previous_reports
 
-    - name: 4. check destination folder of the artifact
+    - name: 5. check destination folder of the artifact
       run: |
         echo $(ls /home/runner/work/moretestgithubactions/moretestgithubactions/*)
         cp /home/runner/work/moretestgithubactions/moretestgithubactions/consolidated.csv  \
           $(pwd)/out/data/${{ env.COUNTRY }}/consolidated.csv
       
-    - name: 5. Docker image construction
+    - name: 6. Docker image construction
       run: docker build . --file Dockerfile --tag streamliner:latest
      
-    - name: 6. Docker container execution
+    - name: 7. Docker container execution
       run: |
         docker run -t --rm -v $(pwd)/out:/app/out  \
         -e DATE=${{ env.DATE }} \
@@ -104,30 +110,7 @@ jobs:
         -e TOTAL_REPORT_PATH=./out/data/${{ env.COUNTRY }}/consolidated.csv \
         -e OUTPUT_REPORT_PATH="./out/data/${{ env.COUNTRY }}/${{ env.DATE }}_to_upload.csv" \
         streamliner:latest
-        
-    #- name: 5. INFO - Describe the requested date
-    #  run: echo "the workflow will retrieve data before:" ${{github.event.inputs.time}}
-      
-    #- name: 6. INFO - Describe the level of aggregation
-    #  run: echo "the workflow will retrieve pre-aggregated data:" ${{github.event.inputs.aggregation}}
-      
-    #- name: 7 INFO - Describe the chosen country for summarization
-    #  run: echo "the workflow will summarize the chosen country:" ${{github.event.inputs.country}} 
-    
-    #- id: daterun
-    #  name: Run Docker container (with inputs)
-    #  run: docker run -t --rm -v $(pwd)/out:/app/out  -e DATE=${{github.event.inputs.time}} -e COUNTRY=${{github.event.inputs.country}} -e AGGREGATION=${{github.event.inputs.aggregation}} streamliner:latest                                                   
-    
-    #- name: outputday
-      
-        
-    #  run: | 
-    #    echo $(ls  $(pwd)/out) 
-    #    REPORT=$(echo $(ls  $(pwd)/out) | head -1)
-    #    cp $(pwd)/out/$REPORT custom_report.csv
-    #    cat custom_report.csv
-    
-    
+
     - name: 6. INFO - Describe the paths & files
       run: |
         echo $(ls .)
@@ -143,8 +126,6 @@ jobs:
  
     - name: 8. Send email through SendGrid (gmail only)
 
-
-          
       run: |
         echo "$SENDGRID_API_KEY"
         sudo apt-get update && sudo apt-get install python3-pip wkhtmltopdf
@@ -206,5 +187,3 @@ jobs:
       with:
         args: list gs://streamliner-john-hopkins/${{ env.COUNTRY }}
         cli: gsutil
-
-  
