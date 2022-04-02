@@ -71,9 +71,9 @@ The solution has been designed with the focus on the 4 points :
 # 2. Improvements:
 
 * extensive testing (code logic)
-  - spelling
-  - units
-  - outliers
+  - spelling/mispellings
+  - unit testing
+  - filter outliers
 
  * package testing
   - unit testing for the workflow
