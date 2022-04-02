@@ -10,7 +10,7 @@ The scripts called by the Docker container:
 * under `Rscript` folder
 
 The Github actions workflows:
-* under `.github``
+* under `.github`
 
 * There are 3 workflows *(because of the semantic uncertainty: they fulfill different use-cases)*
   * JH_timer_streamline.yml *(daily runner - cron job)*
