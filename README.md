@@ -17,6 +17,7 @@ The Github actions workflows:
 
 [![JH Custom Streamline](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_custom_streamline.yml/badge.svg)](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_custom_streamline.yml)
 
+[![JH timed Streamline](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_timed_streamline.yml/badge.svg)](https://github.com/assansanogo/moretestgithubactions/actions/workflows/JH_timed_streamline.yml)
 
 * under `.github`
 
