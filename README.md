@@ -12,7 +12,7 @@ The scripts called by the Docker container:
 The Github actions workflows:
 * under `.github`
 
-* There are 3 workflows *(because of the semantic uncertainty: they fulfill different use-cases)*
+* There are 3 workflows *(match slightly different use-cases)*
   * JH_timer_streamline.yml *(daily runner - cron job)*
   * JH_auto_streamline.yml  *(daily run - manual trigger)*
   * JH_custom_streamline.yml *(finer-grain customisation - manual trigger)*
