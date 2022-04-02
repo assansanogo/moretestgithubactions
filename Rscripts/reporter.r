@@ -7,11 +7,9 @@ library(emo)
 if(!interactive()){
 args = commandArgs(trailingOnly=TRUE)
 
-# test if there is 3: 
+# test if there is 3 arguments: 
 # if not, return an error
   
-print(args)
-
 
 if (length(args)==3){
   # date of the day
