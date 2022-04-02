@@ -5,7 +5,7 @@ In this repository :
 you can see 2 contributors (both accounts are mine) 
 <br> :point_right: [url](https://storage.googleapis.com/streamliner-john-hopkins/admin/SIREN_SIRET.png)
 
-The code belonging to the R package:
+The code belonging to the developped R package:
 * under the `R` folder
 
 The scripts called by the Docker container:
@@ -44,8 +44,8 @@ It allowed me to identify differences in support for such a feature. AWS **nativ
 
 The challenges (in decreasing priority):
 
-- unfamiliarity with R  (need further training)
-- unfamiliarity with GCP (need further training)
+- unfamiliarity with R and package building  (needs further training if onboarded)
+- unfamiliarity with GCP (need further training if onboarded)
 - github actions/workflow
   * the cron job seems not to be 100% reliable: :point_right: [url](https://github.community/t/no-assurance-on-scheduled-jobs/133753)
 
