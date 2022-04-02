@@ -84,6 +84,9 @@ Nevertheless, the solution has been designed with the focus on the 4 points belo
 
  * refactoring
   - better errors handling + logging
+  - have one subfolder in the repository (with main/branch etc.) 
+    to develop with best practices
+  - use the workflow to manage branches (need further training)
   
 * add logs (even though the logging is done in GitHub actions)
 
