@@ -2,6 +2,7 @@
 
 
 In this repository :
+you can see 2 contributors (both accounts are mine)
 
 The code belonging to the R package:
 * under the `R` folder
