@@ -42,6 +42,8 @@ The challenges (in decreasing priority):
 - unfamiliarity with R  (need further training)
 - unfamiliarity with GCP (need further training)
 - github actions/workflow
+  * the cron job seems not to be 100% reliable: :point_right: [url](https://github.community/t/no-assurance-on-scheduled-jobs/133753)
+   
 
 The solution has been designed with the focus on the 4 points :
 
