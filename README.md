@@ -1,5 +1,11 @@
 # moretestgithubactions
 
+
+In this repository  you will find the code for the R package
+under the `R` folder
+the scripts called by the Docker image under `Rscript` folder
+
+
 # 1. Challenges
 
 I designed the solutions with a stack of tools which are the closest to Streamline stack.<br>
