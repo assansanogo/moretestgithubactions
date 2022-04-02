@@ -2,7 +2,7 @@
 
 
 In this repository :
-you can see 2 contributors (both accounts are mine)
+you can see 2 contributors (both accounts are mine)[document](https://storage.googleapis.com/streamliner-john-hopkins/SIREN_SIRET.jpg)
 
 The code belonging to the R package:
 * under the `R` folder
