@@ -3,7 +3,7 @@
 
 In this repository :
 you can see 2 contributors (both accounts are mine) 
-<br> :point_right:[url](https://storage.googleapis.com/streamliner-john-hopkins/SIREN_SIRET.jpg)
+<br> :point_right: [url](https://storage.googleapis.com/streamliner-john-hopkins/SIREN_SIRET.jpg)
 
 The code belonging to the R package:
 * under the `R` folder
