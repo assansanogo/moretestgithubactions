@@ -78,16 +78,17 @@ Nevertheless, the solution has been designed with the focus on the 4 points belo
 
 # 2. Improvements:
 
+
 * extensive testing (code logic)
   - spelling/mispellings
   - unit testing
   - filter outliers
 
- * package testing
+* package testing
   - unit testing for the workflow
   - functional testing
 
- * refactoring
+* refactoring
   - better errors handling + logging
   - have one subfolder in the repository (with main/branch etc.) 
     to develop with best practices
@@ -98,7 +99,7 @@ Nevertheless, the solution has been designed with the focus on the 4 points belo
 # 3. Further cleaning
 
 * Define an official list all countries - territories (already done for the US by itterating over all values of states
-* the format of the data has changed (early 2020 vs current)
+* The format of the data has changed (early 2020 vs current) `Admin2` is absent from some tables
 * define a policy for handling unconventional data (Princess, Recovered, NA, Unknown, etc.)
-* data has counties and burrows
+* Define the *level* of averaging: data has `counties` and `burrows`
   - match data with a list of identified counties (In progress) 
