@@ -46,7 +46,8 @@ The challenges (in decreasing priority):
   * the cron job seems not to be 100% reliable: :point_right: [url](https://github.community/t/no-assurance-on-scheduled-jobs/133753)
    
 
-The solution has been designed with the focus on the 4 points :
+
+Nevertheless, the solution has been designed with the focus on the 4 points below:
 
 ### :toolbox: Target tools:
 * GCP
