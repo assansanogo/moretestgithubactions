@@ -8,27 +8,30 @@ library(dplyr)
 
 concatener <- function(args){
     
+    #' Create the consolidated report (daily runs appended to file)
+    #'
+    #' 
+    #' 
+    #' @param args (from which is extracted the path of previous report,current report & output path)
+    #' 
+    #' @importFrom magrittr "%>%"
+    #' @return dest_file_name
+    #' @export
+    #'
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     # current report (for the queried date)
-    
+
     deaths_confirmed <- read.delim(args[1], sep=',', header=TRUE)
-    
+
     # reference file shipped with R package
     # external dependency (list of countries)
     csv_states_filename<-system.file("extdata", 
                                      "total_states_US.csv", 
                                      package = "StreamlinR")
+    
     ref_dataframe_states<-read.delim(csv_states_filename, 
                                      sep=',', 
                                      header=TRUE)
@@ -37,7 +40,7 @@ concatener <- function(args){
     total_deaths_confirmed <- read.delim(args[2], 
                                          sep=',', 
                                          header=TRUE)
-    
+
     out <- tryCatch({ 
         # Left join (to make sure to always have the same number of columns) 
         std_deaths_confirmed <- merge(ref_dataframe_states,
@@ -45,7 +48,7 @@ concatener <- function(args){
                                         by = "Province_State",
                                         all.x = TRUE, 
                                         all.y = FALSE)
-      
+
 
         # Columns names of the current report  
         new_cols <- colnames(std_deaths_confirmed)
@@ -60,24 +63,24 @@ concatener <- function(args){
         # Combination with previous runs
         # The columns must be checked for appending the day results only once.
         difference_in_cols <- old_cols[setdiff(old_cols, new_cols)]
-        
+
         if (!rlang::is_empty(difference_in_cols)){
-            
+
         total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::select(difference_in_cols)
         } else {
             message("the pipeline was previously computed for this day - will overwrite the previous data")
             total_deaths_confirmed <- total_deaths_confirmed %>% dplyr::select(-one_of(new_cols))
             }
-        
+
         total_deaths_confirmed <- cbind(std_deaths_confirmed, total_deaths_confirmed) 
-       
+
         cols_ <- colnames(total_deaths_confirmed )
         message(paste(c("the columns are:", cols_)))
-       
+
         return(total_deaths_confirmed)
         },
         error=function(cond) {
-            
+
             # reference file shipped with R package
             # referrence states dataframe
             csv_states_filename<-system.file("extdata", 
@@ -90,10 +93,10 @@ concatener <- function(args){
                           "1. The file (consolidated) you are trying to merge with, may not exist",
                           "2. The file (consolidated) might have the wrong type of separator",
                           sep="\n"))
-            
+
             message("Original error message:", cond)
-            
-            # Merge with the reference file with country names
+
+            # Merge with the reference file with states names
             total_deaths_confirmed <- merge(ref_dataframe_states, 
                                             deaths_confirmed, 
                                             by = "Province_State", 
