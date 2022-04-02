@@ -271,6 +271,7 @@ util_clean_aggregation <- function(csv_file, country="US"){
   df_r <- dplyr::filter(df_r, Province_State != "Recovered")
   df_r <- dplyr::filter(df_r, Province_State != "Diamond Princess")  
   df_r <- dplyr::filter(df_r, Province_State != "Grand Princess")
+  df_r <- dplyr::filter(df_r, Province_State != "Unknown")
   df_r <- dplyr::filter(df_r, Country_Region == country )
   return(df_r)
 }
