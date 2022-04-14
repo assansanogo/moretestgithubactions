@@ -1,9 +1,8 @@
 # moretestgithubactions
 
-@ icon-iconName
+
 📈 RStudio Cloud (workspace):
 [workspace-RStudio Cloud](https://rstudio.cloud/project/3906034)
-
 
 
 🖥️ In this repository :
