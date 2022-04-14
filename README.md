@@ -1,10 +1,11 @@
 # moretestgithubactions
 
+📈 RStudio Cloud (workspace):
+[workspace-RStudio Cloud](https://rstudio.cloud/project/3906034)
 
-In this repository :
-you can see 2 contributors (both accounts are mine) 
-<br> :point_right: [url](https://storage.googleapis.com/streamliner-john-hopkins/admin/SIREN_SIRET.png)
 
+
+🖥️ In this repository :
 The code belonging to the developped R package:
 * under the `R` folder
 
