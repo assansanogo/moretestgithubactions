@@ -1,7 +1,6 @@
 # functions with prefix: "util" are helper functions
 # reused in main functions identified by prefix: "JH"
 
-create_out_name_based_on_url<- function(url, aggregated=FALSE){
 
   #' Create filename based on url
   #'
@@ -16,15 +15,15 @@ create_out_name_based_on_url<- function(url, aggregated=FALSE){
   #' @examples
   #' # create_out_name_based_on_url: create_out_name_based_on_url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/03-04-2021.csv")
   #'  
-    
-    
+
+create_out_name_based_on_url<- function(url, aggregated=FALSE){
+
   out_name <- sub('\\.csv$', '', basename(url))
   suffix = paste("_pre_aggregation_", aggregated, sep="")
   dest_file_name = paste("./temp/", out_name, suffix,".csv", sep="")
   return(dest_file_name)
 }
 
-create_out_name_based_on_date<- function(date='01-01-2021', aggregated=FALSE){
 
   #' Create filename based on date
   #'
@@ -41,14 +40,13 @@ create_out_name_based_on_date<- function(date='01-01-2021', aggregated=FALSE){
   #' create_out_name_based_on_date: create_out_name_based_on_date('01-01-2021')  
   #'  
 
+create_out_name_based_on_date<- function(date='01-01-2021', aggregated=FALSE){
 
   suffix = paste("_pre_aggregation_", aggregated, sep="")
   dest_file_name = paste("./temp/", date, suffix,".csv", sep="")
   return(dest_file_name)
 }
 
-create_full_link <- function(date='01-01-2021', aggregated=FALSE) {
-  
   #' Create Link function
   #'
   #' Concatenate date and repository link
@@ -63,6 +61,7 @@ create_full_link <- function(date='01-01-2021', aggregated=FALSE) {
   #' # Create the url based on date : 01-01-2021 & non aggregated
   #' create_full_link('03-04-2021')
 
+create_full_link <- function(date='01-01-2021', aggregated=FALSE) {
   
   if (aggregated){
       root <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/"
@@ -92,8 +91,6 @@ create_full_link <- function(date='01-01-2021', aggregated=FALSE) {
   return(out)
 }
 
-download_link <-function(url, aggregated=FALSE){
-    
   #' Download Link function
   #'
   #' Download link available on J.H website 
@@ -108,6 +105,8 @@ download_link <-function(url, aggregated=FALSE){
   #' # Download the url for aggregated data: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/03-04-2021.csv"
   #' download_link( "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/03-04-2021.csv",TRUE)
 
+download_link <-function(url, aggregated=FALSE){
+    
     out <- tryCatch({
     dest_file_name <- create_out_name_based_on_url(url, aggregated)
     
@@ -125,8 +124,6 @@ download_link <-function(url, aggregated=FALSE){
   return(out)
 }
 
-util_JH_general_clean <- function(dataframe, country="US"){
-
   #' general cleaner for JH
   #'
   #' create a general clean
@@ -141,7 +138,7 @@ util_JH_general_clean <- function(dataframe, country="US"){
   #' # create output filename: 
   #'  util_JH_general_clean(dataframe,"US")
 
-
+util_JH_general_clean <- function(dataframe, country="US"){
 
   # format region name
   dataframe <- dataframe %>%
@@ -163,8 +160,6 @@ util_JH_general_clean <- function(dataframe, country="US"){
   return(dataframe)
 }
 
-util_clean_no_aggregation <- function(csv_file, country="US"){
-    
   #' clean_no_aggregation
   #'
   #' general clean function for J.H website gather daily data 
@@ -179,6 +174,8 @@ util_clean_no_aggregation <- function(csv_file, country="US"){
   #' @examples
   #' # Clean the dataset : "03-04-2021.csv" for the "US"
   #' util_clean_no_aggregation('03-04-2021.csv','US')
+
+util_clean_no_aggregation <- function(csv_file, country="US"){
 
   # change separator to be ";"
   df_r <- readr::read_csv(csv_file)
@@ -248,7 +245,6 @@ util_clean_no_aggregation <- function(csv_file, country="US"){
   }
 }
 
-util_clean_aggregation <- function(csv_file, country="US"){
   #' clean_aggregation
   #'
   #' general clean function for J.H website gather daily data 
@@ -264,6 +260,9 @@ util_clean_aggregation <- function(csv_file, country="US"){
   #' # Clean the dataset: "03-04-2021.csv"
   #' util_clean_aggregation('03-04-2021.csv','US')
 
+util_clean_aggregation <- function(csv_file, country="US"){
+
+
   df_r <- readr::read_csv(csv_file)
 
   df_r <- util_JH_general_clean(df_r, country)
@@ -277,8 +276,6 @@ util_clean_aggregation <- function(csv_file, country="US"){
   return(df_r)
 }
 
-JH_clean_data <- function(date='01-01-2021', country="US", aggregated=FALSE){
-    
   #' Clean_us_data
   #'
   #' clean J.H website to limit data in the US 
@@ -294,6 +291,8 @@ JH_clean_data <- function(date='01-01-2021', country="US", aggregated=FALSE){
   #' # Filter the dataset to US entries: "03-04-2021.csv"
   #' clean_us_data2('03-04-2021.csv')
 
+JH_clean_data <- function(date='01-01-2021', country="US", aggregated=FALSE){
+    
   
   csv_filename = create_out_name_based_on_date(date, aggregated)
 
@@ -305,7 +304,6 @@ JH_clean_data <- function(date='01-01-2021', country="US", aggregated=FALSE){
   }
 }
 
-util_confirmed_death_summarize_state <- function(dataframe, date='01-01-2021') {
 
   #' Create a report with confirmed cases and deaths
   #' for each State (Helper function)
@@ -320,7 +318,8 @@ util_confirmed_death_summarize_state <- function(dataframe, date='01-01-2021') {
   #' @examples
   #' # create a report: confirmed_death_summarize_county(dataframe)
   #'  
-  
+
+util_confirmed_death_summarize_state <- function(dataframe, date='01-01-2021') {  
   
   col_tot_confirmed_state<-stringr::str_interp("total_confirmed_state_${date}")
   col_tot_death_state<-stringr::str_interp("total_deaths_state_${date}")
@@ -339,8 +338,6 @@ util_confirmed_death_summarize_state <- function(dataframe, date='01-01-2021') {
   return(summarized_dataframe)
 }
 
-util_confirmed_death_summarize_county <- function(dataframe, date='01-01-2021') {
-
   #' Create a report with confirmed cases and deaths
   #' averaged over counties for each State (Helper function)
   #'
@@ -354,7 +351,9 @@ util_confirmed_death_summarize_county <- function(dataframe, date='01-01-2021') 
   #' @examples
   #' # create a report per county: 
   #' # util_confirmed_death_summarize_county (dataframe)
-   
+
+util_confirmed_death_summarize_county <- function(dataframe, date='01-01-2021') {
+
   # we define new columns names for export
   col_tot_confirmed_county<-stringr::str_interp("total_confirmed_county_${date}")
   col_tot_death_county<-stringr::str_interp("total_deaths_county_${date}")
@@ -383,8 +382,6 @@ util_confirmed_death_summarize_county <- function(dataframe, date='01-01-2021') 
   return(summarized_dataframe)
 }
 
-JH_confirmed_death_summarize <- function(dataframe, date='01-01-2021',aggregated=FALSE){
-
   #' Create a report with confirmed cases and deaths
   #' averaged over counties for each State
   #'
@@ -399,6 +396,9 @@ JH_confirmed_death_summarize <- function(dataframe, date='01-01-2021',aggregated
   #' @examples
   #' # create a report: results of 01-01-2021 without aggregation
   #'  confirmed_death_summarize_county(dataframe,'01-01-2021',FALSE)
+
+JH_confirmed_death_summarize <- function(dataframe, date='01-01-2021',aggregated=FALSE){
+
 
   if (aggregated){
     return(util_confirmed_death_summarize_state(dataframe,date))
