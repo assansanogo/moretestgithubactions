@@ -151,8 +151,8 @@ util_JH_general_clean <- function(dataframe, country="US"){
   # keep only numeric data (Confirmed - Deaths)
   dplyr::filter(is.numeric(Confirmed)) %>%
   dplyr::filter(is.numeric(Deaths)) %>%  
-  dplyr::filter(Confirmed >=0) %>% 
-  dplyr::filter(Deaths >=0) %>% 
+  dplyr::filter(!is.na(Confirmed)) %>% 
+  dplyr::filter(!is.na(Deaths)) %>% 
   dplyr::filter(!grepl("Princess", Province_State)) %>%
 
   # clean Province_ State
